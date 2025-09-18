@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router';
-import { Header } from '../shared/components';
+import { Header } from '../features/shared/components';
 
 export function App() {
   return (

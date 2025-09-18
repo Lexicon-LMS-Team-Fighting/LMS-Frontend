@@ -1,5 +1,5 @@
 import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router';
-import { App } from '../features/app';
+import { App } from '../app';
 import { Login } from '../features/auth/components';
 import { requireAuthLoader } from '../features/auth/loaders';
 import { Companies, Company } from '../features/companies/components';
