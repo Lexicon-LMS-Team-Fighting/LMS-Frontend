@@ -36,6 +36,19 @@ export function Login(): ReactElement {
             type="password"
             value={password}
           />
+          <div className="role-container">
+            <label className="role-label">Välj roll</label>
+            <div className="role-input-container">
+              <label className="student-role-label">
+                <input className="role-input" type="radio" name="role" value="student" />
+                <span>Elev</span>
+              </label>
+              <label className="teacher-role-label">
+                <input className="role-input" type="radio" name="role" value="teacher" />
+                <span>Lärare</span>
+              </label>
+            </div>
+          </div>
           <button className="btn btn-primary login-btn" type="submit">
             <span className="material-symbols-outlined">login</span> Logga in
           </button>
