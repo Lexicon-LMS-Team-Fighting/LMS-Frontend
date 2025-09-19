@@ -40,4 +40,19 @@ input#email:focus,
 input#password:focus {
   border-color: blue;
 }
+
+.login-btn.btn {
+  display: flex;
+  align-items: center;
+
+  font-weight: bold;
+
+  gap: 0.5rem;
+}
+
+.book-icon {
+  font-size: 52px;
+
+  color: var(--main-blue);
+}
 }
