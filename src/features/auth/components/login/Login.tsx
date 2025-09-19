@@ -43,7 +43,6 @@ export function Login(): ReactElement {
             <label className="role-label">Välj roll</label>
             <div className="role-input-container">
               <label className="student-role-label">
-                <input className="role-input" type="radio" name="role" value="student" />
                 <input
                   className="role-input"
                   type="radio"
@@ -55,7 +54,14 @@ export function Login(): ReactElement {
                 <span>Elev</span>
               </label>
               <label className="teacher-role-label">
-                <input className="role-input" type="radio" name="role" value="teacher" />
+                <input
+                  className="role-input"
+                  type="radio"
+                  name="role"
+                  value="teacher"
+                  checked={role === "teacher"}
+                  onChange={() => setRole("teacher")}
+                />
                 <span>Lärare</span>
               </label>
             </div>
