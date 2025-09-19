@@ -55,4 +55,9 @@ input#password:focus {
 
   color: var(--main-blue);
 }
+
+.email-label,
+.password-label,
+.role-label {
+  font-weight: bold;
 }
