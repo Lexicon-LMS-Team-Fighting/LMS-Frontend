@@ -1,10 +1,10 @@
-import { createBrowserRouter, createRoutesFromElements, Route } from "react-router";
-import { App } from "../features/app";
-import { Login } from "../features/auth/components/login";
-import { requireAuthLoader } from "../features/auth/loaders";
-import { Companies, Company } from "../features/companies/components";
-import { companiesLoader, companyLoader } from "../features/companies/loaders";
-import { TestArea } from "../features/testarea";
+import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router';
+import { App } from '.';
+import { Login } from '../pages/login';
+import { requireAuthLoader } from '../features/auth/loaders';
+import { Companies, Company } from '../features/companies/components';
+import { companiesLoader, companyLoader } from '../features/companies/loaders';
+import {TestArea} from '../pages/testarea';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
