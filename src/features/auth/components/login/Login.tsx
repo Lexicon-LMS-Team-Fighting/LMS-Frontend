@@ -6,6 +6,7 @@ export function Login(): ReactElement {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [searchParams] = useSearchParams();
+  const [role, setRole] = useState<string>("student");
   const { login } = useAuthContext();
   const navigate = useNavigate();
 
