@@ -4,6 +4,16 @@
   flex-direction: column;
 
   padding-block: 2rem;
+#login-page .login-form {
+  width: 450px;
+  height: 550px;
+
+  background-color: white;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  border-radius: 0.5rem;
+
+  padding-block: 2rem;
+  padding-inline: 1.5rem;
 }
 
 #login-page .login-form fieldset {
