@@ -13,6 +13,7 @@ export function Login(): ReactElement {
   const handleOnSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
 
+    //Add role here when it's implemented
     await login(email, password);
 
     const redirectTo = searchParams.get("redirectTo") || "/";
@@ -70,9 +71,10 @@ export function Login(): ReactElement {
             <span className="material-symbols-outlined">login</span> Logga in
           </button>
         </fieldset>
+        <a className="forgot-password-link" href="#">
+          Glömt lösenord?
+        </a>
       </form>
-      {/* Add the following a tag when/if needed */}
-      {/* <a className="forgot-password-link" href="#">Glömt lösenord?</a> */}
     </main>
   );
 }
