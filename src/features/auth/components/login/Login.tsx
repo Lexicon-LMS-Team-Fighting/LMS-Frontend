@@ -31,7 +31,7 @@ export function Login(): ReactElement {
           </label>
           <input id="email" onChange={(e) => setEmail(e.target.value)} type="email" value={email} />
           <label className="password-label" htmlFor="password">
-            Password
+            Lösenord
           </label>
           <input
             id="password"
