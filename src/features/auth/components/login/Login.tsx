@@ -22,8 +22,10 @@ export function Login(): ReactElement {
   return (
     <main id="login-page" className="g-container">
       <form className="login-form" onSubmit={handleOnSubmit}>
+        <span className="material-symbols-outlined book-icon">menu_book</span>
+        <h1 className="login-form-h1">Lexicon LMS</h1>
         <fieldset>
-          <legend>Login</legend>
+          {/* <legend>Login</legend> */}
           <label className="email-label" htmlFor="email">
             E-postadress
           </label>
