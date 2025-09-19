@@ -24,7 +24,7 @@ export function Login(): ReactElement {
       <form className="login-form" onSubmit={handleOnSubmit}>
         <span className="material-symbols-outlined book-icon">menu_book</span>
         <h1 className="login-form-h1">Lexicon LMS</h1>
-        <fieldset>
+        <fieldset className="form-fieldset">
           {/* <legend>Login</legend> */}
           <label className="email-label" htmlFor="email">
             E-postadress
@@ -57,6 +57,8 @@ export function Login(): ReactElement {
           </button>
         </fieldset>
       </form>
+      {/* Add the following a tag when/if needed */}
+      {/* <a className="forgot-password-link" href="#">Glömt lösenord?</a> */}
     </main>
   );
 }
