@@ -36,8 +36,8 @@ export function Login(): ReactElement {
             type="password"
             value={password}
           />
-          <button className="btn btn-primary" type="submit">
-            Login
+          <button className="btn btn-primary login-btn" type="submit">
+            <span className="material-symbols-outlined">login</span> Logga in
           </button>
         </fieldset>
       </form>
