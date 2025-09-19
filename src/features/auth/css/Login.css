@@ -57,8 +57,8 @@ input#password {
 
 input#email:focus,
 input#password:focus {
-  border: 1px solid rgba(255, 255, 255, 0);
-  box-shadow: 0 0 5px var(--blue-500);
+  box-shadow: 0 0 4px var(--blue-500);
+  outline: var(--blue-500);
 }
 
 .login-form-h1 {
