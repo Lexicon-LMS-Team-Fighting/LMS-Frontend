@@ -44,6 +44,14 @@ export function Login(): ReactElement {
             <div className="role-input-container">
               <label className="student-role-label">
                 <input className="role-input" type="radio" name="role" value="student" />
+                <input
+                  className="role-input"
+                  type="radio"
+                  name="role"
+                  value="student"
+                  checked={role === "student"}
+                  onChange={() => setRole("student")}
+                />
                 <span>Elev</span>
               </label>
               <label className="teacher-role-label">
