@@ -1,7 +1,7 @@
 import './css/index.css';
 
 import { createRoot } from 'react-dom/client';
-import { router } from './router';
+import { router } from './app';
 import { AuthProvider } from './features/auth/context/authProvider';
 import { RouterProvider } from 'react-router';
 import 'bootstrap/dist/css/bootstrap.min.css';
