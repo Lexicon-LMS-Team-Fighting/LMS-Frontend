@@ -23,33 +23,6 @@ export function Login(): ReactElement {
 
   return (
     <main id="login-page" className="g-container">
-          <div className="role-container">
-            <label className="role-label">Välj roll</label>
-            <div className="role-input-container">
-              <label className="student-role-label">
-                <input
-                  className="role-input"
-                  type="radio"
-                  name="role"
-                  value="student"
-                  checked={role === "student"}
-                  onChange={() => setRole("student")}
-                />
-                <span>Elev</span>
-              </label>
-              <label className="teacher-role-label">
-                <input
-                  className="role-input"
-                  type="radio"
-                  name="role"
-                  value="teacher"
-                  checked={role === "teacher"}
-                  onChange={() => setRole("teacher")}
-                />
-                <span>Lärare</span>
-              </label>
-            </div>
-          </div>
           <button className="btn btn-primary login-btn" type="submit">
             <span className="material-symbols-outlined">login</span> Logga in
           </button>
