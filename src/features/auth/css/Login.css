@@ -11,32 +11,6 @@
 
   background-color: var(--main-gray);
 }
-
-input#email,
-input#password {
-  width: 100%;
-
-  border: 1px solid var(--gray-300);
-  border-radius: 0.375rem;
-
-  padding-block: 0.5rem;
-  padding-inline: 0.75rem;
-}
-
-input#email:focus,
-input#password:focus {
-  box-shadow: 0 0 4px var(--blue-500);
-  outline: var(--blue-500);
-}
-
-
-.email-label,
-.password-label,
-.role-label {
-  font-size: 14px;
-  font-weight: bold;
-}
-
 .role-container {
   display: flex;
   flex-direction: column;
