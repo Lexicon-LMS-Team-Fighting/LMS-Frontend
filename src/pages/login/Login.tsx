@@ -23,19 +23,6 @@ export function Login(): ReactElement {
 
   return (
     <main id="login-page" className="g-container">
-          <label className="email-label" htmlFor="email">
-            E-postadress
-          </label>
-          <input id="email" onChange={(e) => setEmail(e.target.value)} type="email" value={email} />
-          <label className="password-label" htmlFor="password">
-            Lösenord
-          </label>
-          <input
-            id="password"
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
-            value={password}
-          />
           <div className="role-container">
             <label className="role-label">Välj roll</label>
             <div className="role-input-container">
