@@ -1,2 +1,7 @@
 :root {
+  /* Colors */
+  --main-blue: rgb(21, 93, 251);
+  --main-gray: rgb(243, 244, 246);
+  --gray-300: rgb(209, 213, 219);
+  --blue-500: rgb(43, 127, 255);
 }
