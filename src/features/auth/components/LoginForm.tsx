@@ -43,6 +43,8 @@ export function LoginForm({
           onChange={onPasswordChange}
           labelStyle="password-label"
         />
+
+        <RoleSelector role={role} onRoleChange={onRoleChange} />
       </fieldset>
 
       <a className="forgot-password-link" href="#">
