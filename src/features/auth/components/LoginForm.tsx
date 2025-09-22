@@ -27,6 +27,22 @@ export function LoginForm({
       <span className="material-symbols-outlined book-icon">menu_book</span>
       <h1 className="login-form-h1">Lexicon LMS</h1>
       <fieldset className="form-fieldset">
+        <TextInput
+          id="email"
+          label="E-postadress"
+          type="email"
+          value={email}
+          onChange={onEmailChange}
+          labelStyle="email-label"
+        />
+        <TextInput
+          id="password"
+          label="Lösenord"
+          type="password"
+          value={password}
+          onChange={onPasswordChange}
+          labelStyle="password-label"
+        />
       </fieldset>
 
       <a className="forgot-password-link" href="#">
