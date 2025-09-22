@@ -23,9 +23,6 @@ export function Login(): ReactElement {
 
   return (
     <main id="login-page" className="g-container">
-          <button className="btn btn-primary login-btn" type="submit">
-            <span className="material-symbols-outlined">login</span> Logga in
-          </button>
       <LoginForm
         email={email}
         password={password}
