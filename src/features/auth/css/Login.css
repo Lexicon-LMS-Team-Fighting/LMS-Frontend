@@ -10,12 +10,6 @@
   font-family: sans-serif;
 
   background-color: var(--main-gray);
-
-  /* Custom colors as variable, should be moved to global :root later*/
-  --main-blue: rgb(21, 93, 251);
-  --main-gray: rgb(243, 244, 246);
-  --gray-300: rgb(209, 213, 219);
-  --blue-500: rgb(43, 127, 255);
 }
 
 #login-page .login-form {
