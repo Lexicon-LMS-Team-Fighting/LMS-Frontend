@@ -1,6 +1,7 @@
 import { FormEventHandler, ReactElement, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 import { useAuthContext } from "../../features/auth/hooks/useAuthContext";
+import { LoginForm } from "../../features/auth/components/LoginForm";
 
 export function Login(): ReactElement {
   const [email, setEmail] = useState<string>("");
@@ -22,11 +23,6 @@ export function Login(): ReactElement {
 
   return (
     <main id="login-page" className="g-container">
-      <form className="login-form" onSubmit={handleOnSubmit}>
-        <span className="material-symbols-outlined book-icon">menu_book</span>
-        <h1 className="login-form-h1">Lexicon LMS</h1>
-        <fieldset className="form-fieldset">
-          {/* <legend>Login</legend> */}
           <label className="email-label" htmlFor="email">
             E-postadress
           </label>
@@ -70,11 +66,15 @@ export function Login(): ReactElement {
           <button className="btn btn-primary login-btn" type="submit">
             <span className="material-symbols-outlined">login</span> Logga in
           </button>
-        </fieldset>
-        <a className="forgot-password-link" href="#">
-          Glömt lösenord?
-        </a>
-      </form>
+      <LoginForm
+        email={email}
+        password={password}
+        role={role}
+        onEmailChange={setEmail}
+        onPasswordChange={setPassword}
+        onRoleChange={setRole}
+        onSubmit={handleOnSubmit}
+      />
     </main>
   );
 }
