@@ -45,6 +45,8 @@ export function LoginForm({
         />
 
         <RoleSelector role={role} onRoleChange={onRoleChange} />
+
+        <IconButton icon="login" name=" Logga in" addStyle="login-btn" />
       </fieldset>
 
       <a className="forgot-password-link" href="#">
