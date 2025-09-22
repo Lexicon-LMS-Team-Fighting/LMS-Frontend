@@ -12,32 +12,6 @@
   background-color: var(--main-gray);
 }
 
-#login-page .login-form {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: column;
-
-  width: 450px;
-  height: 550px;
-
-  background-color: white;
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  border-radius: 0.5rem;
-
-  padding-block: 2rem;
-  padding-inline: 1.5rem;
-}
-
-#login-page .login-form fieldset {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-
-  gap: 0.5rem;
-  width: 100%;
-}
-
 input#email,
 input#password {
   width: 100%;
@@ -55,27 +29,6 @@ input#password:focus {
   outline: var(--blue-500);
 }
 
-.login-form-h1 {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.login-btn.btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-weight: bold;
-
-  gap: 0.5rem;
-  width: 100%;
-}
-
-.book-icon {
-  font-size: 52px;
-
-  color: var(--main-blue);
-}
 
 .email-label,
 .password-label,
@@ -105,7 +58,3 @@ input#password:focus {
   gap: 0.5rem;
 }
 
-.forgot-password-link {
-  font-size: 14px;
-  text-decoration: none;
-}
