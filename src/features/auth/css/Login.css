@@ -11,24 +11,3 @@
 
   background-color: var(--main-gray);
 }
-.role-container {
-  display: flex;
-  flex-direction: column;
-
-  gap: 0.5rem;
-  padding-block: 1rem;
-}
-
-.role-input-container {
-  display: flex;
-
-  gap: 1rem;
-}
-
-.teacher-role-label,
-.student-role-label {
-  display: flex;
-
-  gap: 0.5rem;
-}
-
