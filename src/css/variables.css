@@ -4,4 +4,12 @@
   --main-gray: rgb(243, 244, 246);
   --gray-300: rgb(209, 213, 219);
   --blue-500: rgb(43, 127, 255);
+
+  /* Fonts */
+  --main-font: sans-serif;
+
+  /* Border-Radius */
+  --standard-radius: 0.5rem;
+  --medium-radius: 0.375rem;
+  --small-radius: 0.25rem;
 }
