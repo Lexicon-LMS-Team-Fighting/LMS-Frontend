@@ -42,12 +42,7 @@ const modules: IModule[] = [
   },
 ];
 
-// TODO: Refactor these
-const total = 4;
-const completed = 1;
-const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
-
-export const ModuleList: React.FC = (courseName) => {
+export const ModuleList: React.FC = () => {
   return (
     // TODO: delete the main tag before PR
     <main className="module-page">
@@ -68,12 +63,7 @@ export const ModuleList: React.FC = (courseName) => {
                   </div>
                 </div>
               </div>
-              <div className="progress-bar-container">
-                <span className="progress-bar-text">{percentage}% avklarat</span>
-                <div className="progress-bar">
-                  <div className="current-progress" style={{ width: `${percentage}%` }} />
-                </div>
-              </div>
+              <ProgressBar total={4} completed={1} />
             </li>
           ))}
         </ul>
