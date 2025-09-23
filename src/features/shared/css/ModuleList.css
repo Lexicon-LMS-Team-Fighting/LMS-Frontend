@@ -1,0 +1,63 @@
+/* TODO: Delete this class when deleting main tag and before PR */
+.module-page {
+  display: flex;
+  justify-content: center;
+  background-color: var(--main-gray);
+
+  min-height: 100vh;
+}
+
+.module-list-container {
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid black;
+  border-radius: var(--standard-radius);
+
+  width: 90%;
+  height: 100%;
+}
+
+.module-item-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  gap: 2rem;
+}
+
+.module-list-item.list-group-item {
+  display: flex;
+  align-items: center;
+
+  justify-content: space-between;
+
+  width: 100%;
+}
+
+.title-date-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.module-list-item.list-group-item:hover {
+  background-color: rgba(255, 255, 255, 0);
+  cursor: pointer;
+}
+
+.module-title {
+  font-weight: bold;
+}
+
+.module-date-container {
+  display: flex;
+  flex-direction: row;
+
+  color: rgba(0, 0, 0, 0.6);
+
+  font-size: 14px;
+
+  gap: 0.5rem;
+}
