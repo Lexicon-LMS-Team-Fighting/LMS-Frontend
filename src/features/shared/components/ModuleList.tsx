@@ -57,12 +57,13 @@ export const ModuleList: React.FC = () => {
                   <p className="module-title">{mod.title}</p>
                   <div className="module-date-container">
                     <span className="material-symbols-outlined">calendar_today</span>
-                    <p>
+                    <p className="module-date">
                       {mod.startDate} - {mod.endDate}
                     </p>
                   </div>
                 </div>
               </div>
+              {/* TODO: change these values to props where total= totalActivities and completed = completedActivities */}
               <ProgressBar total={4} completed={1} />
             </li>
           ))}
