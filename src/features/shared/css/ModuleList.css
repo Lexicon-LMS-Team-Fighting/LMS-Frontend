@@ -11,9 +11,6 @@
   display: flex;
   flex-direction: column;
 
-  border: 1px solid black;
-  border-radius: var(--standard-radius);
-
   width: 90%;
   height: 100%;
 }
@@ -34,6 +31,8 @@
   justify-content: space-between;
 
   width: 100%;
+  padding-inline: 1.5rem;
+  padding-block: 1rem;
 }
 
 .title-date-container {
@@ -47,13 +46,20 @@
   cursor: pointer;
 }
 
-.module-title {
+p.module-title {
   font-weight: bold;
+  margin: 0;
+}
+
+p.module-date {
+  margin: 0;
 }
 
 .module-date-container {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
 
   color: rgba(0, 0, 0, 0.6);
 
