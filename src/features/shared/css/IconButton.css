@@ -1,0 +1,10 @@
+.btn.btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: bold;
+
+  gap: 0.5rem;
+  width: 100%;
+}

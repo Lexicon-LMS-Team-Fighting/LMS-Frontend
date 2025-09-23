@@ -1,0 +1,18 @@
+nav div button.btn-link{
+    text-decoration: none;
+}
+
+nav div button.book-logo span{
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 40;
+
+  font-size: 40px;
+  color:   var(--main-blue);
+}
+
+nav div h1{
+    color: black;
+}

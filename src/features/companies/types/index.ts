@@ -13,3 +13,4 @@ export interface ICompaniesLoader {
 export interface ICompanyLoader {
   company: Promise<ICompany>;
 }
+
