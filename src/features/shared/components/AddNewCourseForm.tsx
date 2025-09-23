@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import { CourseDraft } from './CourseCreatePage'; 
-import "../../../features/auth/css/NewCourseForm.css"
+import "../css/NewCourseForm.css"
 
 type Props = {
   value: CourseDraft;
