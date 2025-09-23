@@ -1,0 +1,22 @@
+.dashboard-nav {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    gap:1rem;
+    border-bottom: 1px solid rgba(107,114,128, 0.2);
+
+}
+
+.dashboard-nav-button {
+    border: none;
+    border-bottom: 2px solid transparent;
+    background-color: transparent;
+    color: rgb(107 114 128);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.dashboard-nav-button.is-active {
+    color: rgb(37, 99, 235);
+    border-bottom: 2px solid rgb(37, 99, 235);
+}
