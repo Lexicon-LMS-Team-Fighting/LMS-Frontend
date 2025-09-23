@@ -1,5 +1,6 @@
 import { ReactElement } from 'react';
 import { CourseDraft } from './CourseCreatePage'; 
+import "../../../features/auth/css/NewCourseForm.css"
 
 type Props = {
   value: CourseDraft;
@@ -15,18 +16,15 @@ export default function AddNewCourseForm({
   const set = (patch: Partial<CourseDraft>) => onChange({ ...value, ...patch });
 
   return (
-    <div className="container my-4 border-0">
-      <div className="row justify-content-center">
-        <div className="col-12 col-lg-10 col-xxl-8">
-          <div className="card shadow-sm border-0">
-            <div className="card-header bg-white border-0">
-              <h2 className="h4 mb-0">Skapa ny kurs</h2>
-            </div>
+    <section className="form-wrapper shadow-sm">
+           
+              <h2 className="fs-5 mb-4">Skapa ny kurs</h2>
+         
 
-            <div className="card-body">
+            
               <form onSubmit={(e) => { e.preventDefault(); onSubmit(); }}>
                 <div className="mb-3">
-                  <label htmlFor="courseName" className="form-label">Kursnamn</label>
+                  <label htmlFor="courseName" className="form-label-bold mb-1">Kursnamn</label>
                   <input
                     id="courseName"
                     type="text"
@@ -37,8 +35,8 @@ export default function AddNewCourseForm({
                   />
                 </div>
 
-                <div className="mb-3">
-                  <label htmlFor="courseDesc" className="form-label">Kursbeskrivning</label>
+                
+                  <label htmlFor="courseDesc" className="form-label-bold mb-1">Kursbeskrivning</label>
                   <textarea
                     id="courseDesc"
                     className="form-control"
@@ -47,38 +45,36 @@ export default function AddNewCourseForm({
                     value={value.description ?? ''}
                     onChange={(e) => set({ description: e.target.value || undefined })}
                   />
-                </div>
+               
 
-                <div className="row g-3">
-                  <div className="col-12 col-md-6">
-                    <label htmlFor="startDate" className="form-label">Startdatum</label>
+                <div className="form-input-row mt-3">
+                  <div className="input-label-column">
+                    <label htmlFor="startDate" className="form-label-bold mb-1">Startdatum</label>
                     <input
                       id="startDate"
                       type="date"
-                      className="form-control"
+                      className="form-control date-input"
                       value={value.startDate}
                       onChange={(e) => set({ startDate: e.target.value })}
                     />
                   </div>
 
-                  <div className="col-12 col-md-6">
-                    <label htmlFor="endDate" className="form-label">Slutdatum</label>
+                  <div className="input-label-column">
+                    <label htmlFor="endDate" className="form-label-bold mb-1">Slutdatum</label>
                     <input
                       id="endDate"
                       type="date"
-                      className="form-control"
+                      className="form-control date-input"
                       value={value.endDate}
                       onChange={(e) => set({ endDate: e.target.value })}
                     />
                   </div>
+                  </div>
+                <div className="create-course-button-wrapper">
+                  <button className="create-course-button">Skapa kurs</button>
                 </div>
-
-                
               </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+            
+    </section>
   );
 }
