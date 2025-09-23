@@ -5,9 +5,15 @@
   flex-direction: column;
 
   padding-block: 2rem;
-  height: 100vh;
+  min-height: 100vh;
 
   font-family: sans-serif;
 
   background-color: var(--main-gray);
+}
+
+@media screen and (max-width: 480px) {
+  #login-page.g-container {
+    padding-inline: 0;
+  }
 }
