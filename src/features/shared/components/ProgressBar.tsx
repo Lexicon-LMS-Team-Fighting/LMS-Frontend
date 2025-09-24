@@ -1,11 +1,9 @@
-import React from "react";
-
 interface ProgressBarProps {
   total: number;
   completed: number;
 }
 
-const ProgressBar: React.FC<ProgressBarProps> = ({ total, completed }) => {
+export const ProgressBar: React.FC<ProgressBarProps> = ({ total, completed }) => {
   const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
 
   return (
