@@ -5,4 +5,7 @@ export interface IModule {
   description?: string;
   startDate: string;
   endDate: string;
+  // Placeholders, should get removed when these are provided along with the implementation of Activity component.
+  totalActivities?: number;
+  completedActivities?: number;
 }
