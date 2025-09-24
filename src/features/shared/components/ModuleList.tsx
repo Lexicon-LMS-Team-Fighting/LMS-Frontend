@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ProgressBar } from "./ProgressBar";
 import { IModule } from "../types/types";
+import { TitleDate } from "./TitleDate";
 
 interface IModuleListProps {
   modules: IModule[];
@@ -32,15 +33,13 @@ export const ModuleList: React.FC<IModuleListProps> = ({ modules }) => {
                   <div className="icon-wrapper">
                     <span className="material-symbols-outlined ">menu_book</span>
                   </div>
-                  <div className="title-date-container">
-                    <p className="module-name">{mod.name}</p>
-                    <div className="module-date-container">
-                      <span className="material-symbols-outlined">calendar_today</span>
-                      <p className="module-date">
-                        {mod.startDate} - {mod.endDate}
-                      </p>
-                    </div>
-                  </div>
+
+                  <TitleDate
+                    title={mod.name}
+                    startDate={mod.startDate}
+                    endDate={mod.endDate}
+                    // activityType="Föreläsning"
+                  />
                 </div>
                 {/* TODO: change these values to props where total= totalActivities and completed = completedActivities when Activities component and interface is implemented*/}
                 <div className="progress-arrow-container">
