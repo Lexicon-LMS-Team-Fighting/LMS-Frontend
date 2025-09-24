@@ -5,7 +5,8 @@ import { requireAuthLoader } from "../features/auth/loaders";
 import { Companies, Company } from "../features/companies/components";
 import { companiesLoader, companyLoader } from "../features/companies/loaders";
 import { TestArea } from "../pages/testarea";
-import { ModuleList, modules } from "../features/shared/components";
+import { ModuleList } from "../features/shared/components";
+import { modules } from "../features/shared/dummydata";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
