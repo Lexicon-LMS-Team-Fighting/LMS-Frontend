@@ -1,18 +1,11 @@
-/* TODO: Delete this class when deleting main tag and before PR */
-.module-page {
-  display: flex;
-  justify-content: center;
-  background-color: var(--main-gray);
-
-  min-height: 100vh;
-}
-
 .module-list-container {
   display: flex;
   flex-direction: column;
 
-  width: 90%;
+  width: 100%;
   height: 100%;
+
+  padding: 1rem;
 }
 
 .module-item-container {
@@ -46,8 +39,6 @@
   background-color: rgba(255, 255, 255, 0);
   cursor: pointer;
 }
-
-
 
 .module-button-container {
   display: flex;
