@@ -42,38 +42,12 @@
   padding-block: 1rem;
 }
 
-.title-date-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .module-button-item.list-group-item:hover {
   background-color: rgba(255, 255, 255, 0);
   cursor: pointer;
 }
 
-p.module-name {
-  font-weight: bold;
-  margin: 0;
-}
 
-p.module-date {
-  margin: 0;
-}
-
-.module-date-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-
-  color: rgba(0, 0, 0, 0.6);
-
-  font-size: 14px;
-
-  gap: 0.5rem;
-}
 
 .module-button-container {
   display: flex;
