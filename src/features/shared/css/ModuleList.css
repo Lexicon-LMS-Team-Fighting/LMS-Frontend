@@ -25,6 +25,13 @@
 }
 
 .module-list-item.list-group-item {
+  padding: 0;
+  border: 0;
+
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.module-button-item.list-group-item {
   display: flex;
   align-items: center;
 
@@ -41,7 +48,7 @@
   align-items: center;
 }
 
-.module-list-item.list-group-item:hover {
+.module-button-item.list-group-item:hover {
   background-color: rgba(255, 255, 255, 0);
   cursor: pointer;
 }
@@ -66,4 +73,18 @@ p.module-date {
   font-size: 14px;
 
   gap: 0.5rem;
+}
+
+.module-button-container {
+  display: flex;
+
+  width: 100%;
+}
+
+.progress-arrow-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  gap: 1rem;
 }
