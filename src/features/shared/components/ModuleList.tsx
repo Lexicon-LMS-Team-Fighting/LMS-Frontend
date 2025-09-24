@@ -1,22 +1,24 @@
+import { useState } from "react";
 import ProgressBar from "./ProgressBar";
 
-interface IModule {
+export interface IModule {
   id: number;
   title: string;
   startDate: string;
   endDate: string;
-  progress: number;
   expanded?: boolean;
 }
 
+interface IModuleListProps {
+  modules: IModule[];
+}
 // Dummy data
-const modules: IModule[] = [
+export const modules: IModule[] = [
   {
     id: 1,
     title: "HTML & CSS",
     startDate: "2023-08-15",
     endDate: "2023-09-01",
-    progress: 100,
     expanded: true,
   },
   {
@@ -24,25 +26,27 @@ const modules: IModule[] = [
     title: "JavaScript",
     startDate: "2023-09-02",
     endDate: "2023-09-20",
-    progress: 60,
   },
   {
     id: 3,
     title: "React",
     startDate: "2023-09-21",
     endDate: "2023-10-15",
-    progress: 20,
   },
   {
     id: 4,
     title: "Databasedesign",
     startDate: "2023-10-16",
     endDate: "2023-11-05",
-    progress: 0,
   },
 ];
 
-export const ModuleList: React.FC = () => {
+export const ModuleList: React.FC<IModuleListProps> = ({ modules }) => {
+  const [openModule, setOpenModule] = useState<number | null>(1);
+
+  const toggleModule = (id: number) => {
+    setOpenModule(openModule === id ? null : id);
+  };
   return (
     // TODO: delete the main tag before PR
     <main className="module-page">
@@ -51,20 +55,42 @@ export const ModuleList: React.FC = () => {
         <ul className="list-group module-list-group">
           {modules.map((mod) => (
             <li className="module-list-item list-group-item">
-              <div className="module-item-container">
-                <span className="material-symbols-outlined">check</span>
-                <div className="title-date-container">
-                  <p className="module-title">{mod.title}</p>
-                  <div className="module-date-container">
-                    <span className="material-symbols-outlined">calendar_today</span>
-                    <p className="module-date">
-                      {mod.startDate} - {mod.endDate}
-                    </p>
+              <button
+                type="button"
+                onClick={() => toggleModule(mod.id)}
+                className="module-button-item list-group-item"
+              >
+                <div className="module-item-container">
+                  {}
+                  <span className="material-symbols-outlined">menu_book</span>
+                  <div className="title-date-container">
+                    <p className="module-title">{mod.title}</p>
+                    <div className="module-date-container">
+                      <span className="material-symbols-outlined">calendar_today</span>
+                      <p className="module-date">
+                        {mod.startDate} - {mod.endDate}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              {/* TODO: change these values to props where total= totalActivities and completed = completedActivities */}
-              <ProgressBar total={4} completed={1} />
+                {/* TODO: change these values to props where total= totalActivities and completed = completedActivities */}
+                <div className="progress-arrow-container">
+                  <ProgressBar total={4} completed={1} />
+                  {openModule === mod.id ? (
+                    <span className="material-symbols-outlined">keyboard_arrow_down</span>
+                  ) : (
+                    <span className="material-symbols-outlined">keyboard_arrow_right</span>
+                  )}
+                </div>
+              </button>
+              {openModule === mod.id && (
+                <div className="border-t p-4 bg-gray-50">
+                  {/* Placeholder for "Aktiviteter" */}
+                  <div className="text-gray-500 italic">
+                    Activity component goes here, this is just a placeholder.
+                  </div>
+                </div>
+              )}
             </li>
           ))}
         </ul>
