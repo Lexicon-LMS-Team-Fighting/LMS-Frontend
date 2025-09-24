@@ -7,11 +7,14 @@ interface IModuleListProps {
 }
 
 export const ModuleList: React.FC<IModuleListProps> = ({ modules }) => {
-  const [openModule, setOpenModule] = useState<number | null>(1);
+  const [openModules, setOpenModules] = useState<string[]>([]);
 
-  const toggleModule = (id: number) => {
-    setOpenModule(openModule === id ? null : id);
+  const toggleModule = (id: string) => {
+    setOpenModules((prev) =>
+      prev.includes(id) ? prev.filter((mid) => mid !== id) : [...prev, id]
+    );
   };
+
   return (
     // TODO: delete the main tag before PR
     <main className="module-page">
