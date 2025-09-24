@@ -1,13 +1,6 @@
 import { useState } from "react";
 import ProgressBar from "./ProgressBar";
-
-export interface IModule {
-  id: number;
-  title: string;
-  startDate: string;
-  endDate: string;
-  expanded?: boolean;
-}
+import { IModule } from "../types/types";
 
 interface IModuleListProps {
   modules: IModule[];
