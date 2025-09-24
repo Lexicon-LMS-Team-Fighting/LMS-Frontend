@@ -1,5 +1,5 @@
 import React from 'react';
-import CourseCreatePage from '../../features/shared/components/CourseCreatePage';
+import Dashboard from '../Dashboard';
 
 export const TestArea = () => {
     return (
@@ -14,7 +14,7 @@ export const TestArea = () => {
         <div className="spinner-border" role="status">
             <span className="visually-hidden">Loading...</span>
         </div> */}
-        <CourseCreatePage />
+        <Dashboard />
         </>
     );
 };
