@@ -1,13 +1,13 @@
-import { ReactElement,useState } from 'react';
+import { ReactElement, useState } from 'react';
 import "../css/TeacherDashboard.css"
 import DashboardNavBar, { Tab } from "./DashboardNavBar";
 import CourseCreatePage from './CourseCreatePage';
-import TeacherDashboardCourses from './TeacherdashboardCourses';
+import TeacherDashboardCourses from './TeacherDashboardCourses';
 import TeacherDashboardOverview from './TeacherDashboardOverview';
 
 
 
-export default function TeacherDashboard(){
+export default function TeacherDashboard(): ReactElement{
     const [tab, setTab] = useState<Tab>("overview"); //setting default tab to "overview"
     console.log(tab)
     

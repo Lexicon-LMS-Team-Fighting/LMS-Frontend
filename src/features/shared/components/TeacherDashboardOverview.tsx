@@ -1,8 +1,8 @@
-import { ReactElement } from 'react';
+import { ReactElement } from "react";
 
 
 
-export default function TeacherDashboardOverview(){
+export default function TeacherDashboardOverview(): ReactElement{
  
 
 

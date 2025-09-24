@@ -3,7 +3,7 @@ import TeacherDashboard from '../features/shared/components/TeacherDashboard';
 import "../features/shared/css/Dashboard.css"
 
 
-export default function Dashboard(){
+export default function Dashboard(): ReactElement{
  
 
 

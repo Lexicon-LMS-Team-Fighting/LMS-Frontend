@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 
 
 
-export default function TeacherDashboardCourses(){
+export default function TeacherDashboardCourses():ReactElement {
  
 
 
