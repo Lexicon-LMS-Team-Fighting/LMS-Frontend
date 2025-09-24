@@ -21,7 +21,7 @@
   justify-content: center;
   align-items: center;
 
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .module-list-item.list-group-item {
@@ -53,7 +53,7 @@
   cursor: pointer;
 }
 
-p.module-title {
+p.module-name {
   font-weight: bold;
   margin: 0;
 }
@@ -87,4 +87,21 @@ p.module-date {
   align-items: center;
 
   gap: 1rem;
+}
+
+.icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+  background-color: var(--blue-100);
+  color: var(--main-blue);
+
+  width: 2.5rem;
+  aspect-ratio: 1/1;
+}
+
+.activity-container {
+  padding: 1rem;
 }
