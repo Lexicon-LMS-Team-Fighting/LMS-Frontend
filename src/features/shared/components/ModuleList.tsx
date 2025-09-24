@@ -12,34 +12,6 @@ export interface IModule {
 interface IModuleListProps {
   modules: IModule[];
 }
-// Dummy data
-export const modules: IModule[] = [
-  {
-    id: 1,
-    title: "HTML & CSS",
-    startDate: "2023-08-15",
-    endDate: "2023-09-01",
-    expanded: true,
-  },
-  {
-    id: 2,
-    title: "JavaScript",
-    startDate: "2023-09-02",
-    endDate: "2023-09-20",
-  },
-  {
-    id: 3,
-    title: "React",
-    startDate: "2023-09-21",
-    endDate: "2023-10-15",
-  },
-  {
-    id: 4,
-    title: "Databasedesign",
-    startDate: "2023-10-16",
-    endDate: "2023-11-05",
-  },
-];
 
 export const ModuleList: React.FC<IModuleListProps> = ({ modules }) => {
   const [openModule, setOpenModule] = useState<number | null>(1);
