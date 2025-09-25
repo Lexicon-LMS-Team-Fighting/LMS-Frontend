@@ -19,10 +19,12 @@ export const ActivityList: React.FC<IActivityListProps> = ({ activities }) => {
             />
 
             <div className="document-status-container">
-              {/* TODO: This path should be changed when document is implemented in backend */}
-              <a href="#" className="document-container">
-                <span className="material-symbols-outlined">news</span>Dokument
-              </a>
+              {/* TODO: This should be correctly implemented once the backend part for handling documents is in place */}
+              {
+                <a href="" className="document-container">
+                  <span className="material-symbols-outlined">news</span>Dokument
+                </a>
+              }
 
               {activity.status && (
                 <span
