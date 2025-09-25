@@ -3,7 +3,7 @@
 interface ITitleDateProps {
   title: string;
   startDate: string;
-  endDate: string;
+  endDate?: string;
   activityType?: string;
 }
 
@@ -21,9 +21,13 @@ export const TitleDate: React.FC<ITitleDateProps> = ({
       </div>
       <div className="date-container">
         <span className="material-symbols-outlined">calendar_today</span>
-        <p className="titledate-date">
-          {startDate} - {endDate}
-        </p>
+        {endDate ? (
+          <p className="titledate-date">
+            {startDate} - {endDate}
+          </p>
+        ) : (
+          <p className="titledate-date">{startDate}</p>
+        )}
       </div>
     </div>
   );
