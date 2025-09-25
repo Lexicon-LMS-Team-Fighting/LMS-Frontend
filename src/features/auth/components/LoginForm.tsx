@@ -26,7 +26,7 @@ export function LoginForm({
         <TextInput
           id="email"
           label="E-postadress"
-          type="email"
+          type="text"
           value={email}
           onChange={onEmailChange}
           labelStyle="email-label"

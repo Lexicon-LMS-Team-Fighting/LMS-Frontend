@@ -15,10 +15,22 @@ export async function requireAuthLoader({ request }: LoaderFunctionArgs) {
     if (nextRaw !== raw) {
       localStorage.setItem(TOKENS, nextRaw);
     }
-    // This lets router.tsx get access to roles through requireAuthLoader
-     try {
-        const p = jwtDecode<{ role?: string | string[] }>(next.accessToken);
-        const roles = Array.isArray(p.role) ? p.role : p.role ? [p.role] : [];
+    
+    // This lets router.ts get access to roles through 
+   try {
+      const key = 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role';
+
+      const decodedToken = jwtDecode<Record<string, unknown>>(next.accessToken);
+
+      const roleKey = decodedToken[key];
+      let roles: string[] = [];
+
+      if (Array.isArray(roleKey)) {
+        roles = roleKey.map(String);
+      } else if (typeof roleKey === 'string') {
+        roles = roleKey.split(',').map(s => s.trim()).filter(Boolean);
+      }
+
         return { roles };
     } catch {
         return { roles: [] };
