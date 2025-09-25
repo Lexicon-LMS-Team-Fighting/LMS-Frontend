@@ -1,0 +1,56 @@
+import { IActivity } from "../types";
+
+export const dummyActivities: IActivity[] = [
+  {
+    id: "1",
+    moduleId: "1",
+    activityType: "Föreläsning",
+    name: "Introduktion till HTML",
+    startDate: "2023-08-15",
+    status: "Genomförd",
+  },
+  {
+    id: "2",
+    moduleId: "1",
+    activityType: "Övning",
+    name: "Skapa en webbsida",
+    startDate: "2023-08-16",
+    status: "Genomförd",
+  },
+  {
+    id: "3",
+    moduleId: "2",
+    activityType: "Föreläsning",
+    name: "CSS styling",
+    startDate: "2023-08-18",
+    status: "Genomförd",
+  },
+  {
+    id: "4",
+    moduleId: "3",
+    activityType: "Inlämning",
+    name: "Personlig webbsida",
+    startDate: "2023-09-01",
+    status: "Godkänd",
+    feedback: "Bra arbete med responsiv design!",
+  },
+  {
+    id: "4",
+    moduleId: "3",
+    activityType: "Inlämning",
+    name: "Personlig webbsida",
+    startDate: "2023-09-01",
+    status: "Försenad",
+    feedback: "Bra arbete med responsiv design!",
+  },
+
+  {
+    id: "5",
+    moduleId: "4",
+    activityType: "Inlämning",
+    name: "Personlig webbsida",
+    startDate: "2023-09-01",
+    // status: "Försenad",
+    feedback: "Bra arbete med responsiv design!",
+  },
+];
