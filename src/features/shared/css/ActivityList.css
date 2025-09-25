@@ -2,7 +2,7 @@
   padding-inline: 1.5rem;
   padding-block: 1rem;
 
-  border-inline: 1px solid var(--gray-100);
+  border: 1px solid var(--gray-100);
 }
 
 .activity-list-section {
