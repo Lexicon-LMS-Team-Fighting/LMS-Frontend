@@ -18,7 +18,8 @@ export const ModuleList: React.FC<IModuleListProps> = ({ modules }) => {
       <ul className="list-group module-list-group">
         {modules.map((mod) => {
           const moduleProgress = progress[mod.id] ?? { completed: 0, total: 0 };
-          const isCompleted = completedModules.includes(mod.id);
+          const isCompleted =
+            moduleProgress.total > 0 && moduleProgress.completed === moduleProgress.total;
           const isOpen = openModules.includes(mod.id);
 
           return (
@@ -29,9 +30,9 @@ export const ModuleList: React.FC<IModuleListProps> = ({ modules }) => {
                 className="module-button-item list-group-item"
               >
                 <div className="module-item-container">
-                  <div className="icon-wrapper">
-                    <span className="material-symbols-outlined">
-                      {isCompleted ? "check" : "menu_book"}
+                  <div className={`icon-wrapper ${isCompleted ? "check" : "menu_book"}`}>
+                    <span className={`material-symbols-outlined`}>
+                      {isCompleted ? "task_alt" : "menu_book"}
                     </span>
                   </div>
                   <TitleDate title={mod.name} startDate={mod.startDate} endDate={mod.endDate} />
