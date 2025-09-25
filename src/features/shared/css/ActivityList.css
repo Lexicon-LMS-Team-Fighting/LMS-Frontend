@@ -1,0 +1,69 @@
+.activity-container {
+  padding-inline: 1.5rem;
+  padding-block: 1rem;
+
+  border-inline: 1px solid var(--gray-100);
+}
+
+.activity-list-section {
+  /* TODO: Change this to 100% before PR */
+  width: 100%;
+}
+
+.list-group.activity-list-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 1rem;
+
+  width: 100%;
+}
+
+.activity-list-item.list-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  border: 1px solid var(--gray-200);
+  border-radius: var(--standard-radius);
+
+  background-color: white;
+  padding: 1rem;
+
+  width: 100%;
+}
+
+.activity-list-item.list-group:hover {
+  border-color: var(--blue-500);
+}
+
+.activity-title {
+  font-size: 16px;
+}
+
+.document-status-container {
+  display: flex;
+  flex-direction: row;
+
+  gap: 1rem;
+}
+
+.document-container,
+.status-container {
+  display: inline-flex;
+  align-items: center;
+
+  font-size: 14px;
+  text-decoration: none;
+  gap: 0.25rem;
+  height: 24px;
+}
+
+.status-container {
+  color: var(--green-600);
+}
+
+.status-container.status-red {
+  color: var(--red-600);
+}
