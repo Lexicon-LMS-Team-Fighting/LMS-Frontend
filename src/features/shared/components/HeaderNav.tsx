@@ -1,16 +1,18 @@
 import { ReactElement } from 'react';
 import { useAuthContext } from '../../auth/hooks/useAuthContext';
 import { useNavigate } from 'react-router';
-import '../css/HeaderNav.css'
+import '../css/HeaderNav.css';
+import { useIsTeacher } from '../hooks/useIsTeacher';
+
 
 //TODO handle when auth is done
 export function HeaderNav(): ReactElement {
+  const isTeacher = useIsTeacher();
   const { isLoggedIn, logout } = useAuthContext();
   const navigate = useNavigate();
 
   const handleOnLogout = () => {
-    //TODO: This must logout a user
-    //logout();
+    logout();
     console.log('clicked');
     navigate('/login');
   };
@@ -45,7 +47,7 @@ export function HeaderNav(): ReactElement {
                   account_circle
                 </span>
               </div>
-              <span className="ms-2 d-none d-md-inline">Lärare</span>
+              <span className="ms-2 d-none d-md-inline">{isTeacher ? "Lärare" : "Elev"}</span>
             </button>
           </div>
           {/* Render logout if user is logged in */}

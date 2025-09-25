@@ -2,6 +2,7 @@ import { redirect, type LoaderFunctionArgs } from 'react-router';
 import { validateOrRefreshTokens } from '../utilities';
 import { TOKENS } from '../constants';
 import { ITokens } from '../types';
+import {jwtDecode} from 'jwt-decode';
 
 export async function requireAuthLoader({ request }: LoaderFunctionArgs) {
   const raw = localStorage.getItem(TOKENS);
@@ -14,7 +15,14 @@ export async function requireAuthLoader({ request }: LoaderFunctionArgs) {
     if (nextRaw !== raw) {
       localStorage.setItem(TOKENS, nextRaw);
     }
-    return null; // Let the route through
+    // This lets router.tsx get access to roles through requireAuthLoader
+     try {
+        const p = jwtDecode<{ role?: string | string[] }>(next.accessToken);
+        const roles = Array.isArray(p.role) ? p.role : p.role ? [p.role] : [];
+        return { roles };
+    } catch {
+        return { roles: [] };
+    }
   }
 
   const url = new URL(request.url);
@@ -22,4 +30,6 @@ export async function requireAuthLoader({ request }: LoaderFunctionArgs) {
 
   console.log('Redirecting unauthenticated user => /login');
   throw redirect(`/login?redirectTo=${redirectTo}`);
+
+
 }
