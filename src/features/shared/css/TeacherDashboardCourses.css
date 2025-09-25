@@ -77,3 +77,19 @@ th:first-child {
     border-bottom: var(--border);
 }
 
+
+.table-links {
+    text-align: end;
+    text-wrap: nowrap;
+    font-weight: 500;
+    font-size: var(--smallest-paragraph);
+}
+
+.table-links a {
+    text-decoration: none;    padding-right: 1rem;
+}
+
+.table-links a:hover {
+    color: #2a4365;
+    text-decoration: none;
+}
