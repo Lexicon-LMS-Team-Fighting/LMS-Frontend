@@ -10,14 +10,7 @@ interface IModuleListProps {
 }
 
 export const ModuleList: React.FC<IModuleListProps> = ({ modules }) => {
-  const {
-    openModules,
-    completedModules,
-    progress,
-    toggleModule,
-    markModuleComplete,
-    handleProgressChange,
-  } = useModuleList();
+  const { openModules, progress, toggleModule, handleProgressChange } = useModuleList();
 
   return (
     <section className="module-list-container">
