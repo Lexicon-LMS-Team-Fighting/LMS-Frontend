@@ -10,7 +10,7 @@ export default function Dashboard(): ReactElement{
 
   return (
     <main className='main-container bg-gray-50'>
-        <StudentDashboard />
+        <TeacherDashboard />
     </main>
   );
 }
