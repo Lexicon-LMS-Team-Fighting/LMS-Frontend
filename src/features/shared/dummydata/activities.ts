@@ -18,6 +18,7 @@ export const dummyActivities: IActivity[] = [
     name: "Skapa en webbsida",
     startDate: "2023-08-16",
     status: "Genomförd",
+    description: "Bra aktivitet!",
   },
   {
     id: "3",
