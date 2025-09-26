@@ -7,11 +7,14 @@ interface IActivityListProps {
 }
 
 export const ActivityList: React.FC<IActivityListProps> = ({ activities }) => {
-  const [selectedActivityId, setSelectedActivityId] = useState<string | null>(null);
+  const [expandedActivities, setExpandedActivities] = useState<string[]>([]);
 
   const handleClick = (activity: IActivity) => {
     if (!activity.description) return;
-    setSelectedActivityId((prev) => (prev === activity.id ? null : activity.id));
+
+    setExpandedActivities((prev) =>
+      prev.includes(activity.id) ? prev.filter((id) => id !== activity.id) : [...prev, activity.id]
+    );
   };
 
   return (
@@ -19,7 +22,7 @@ export const ActivityList: React.FC<IActivityListProps> = ({ activities }) => {
       <h3 className="activity-title">Aktiviteter</h3>
       <ul className="list-group activity-list-group">
         {activities?.map((activity) => {
-          const isExpanded = selectedActivityId === activity.id;
+          const isExpanded = expandedActivities.includes(activity.id);
           return (
             <li
               key={activity.id}
@@ -70,7 +73,7 @@ export const ActivityList: React.FC<IActivityListProps> = ({ activities }) => {
                 </div>
               )}
 
-              {selectedActivityId === activity.id && (
+              {isExpanded && activity.id && (
                 <div className={`description-container`}>
                   <strong>Beskrivning: </strong> <p>{activity.description}</p>
                 </div>
