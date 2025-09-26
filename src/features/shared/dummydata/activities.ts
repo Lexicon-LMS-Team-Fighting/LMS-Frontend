@@ -7,6 +7,7 @@ export const dummyActivities: IActivity[] = [
     activityType: "Föreläsning",
     name: "Introduktion till HTML",
     startDate: "2023-08-15",
+    endDate: "2023-08-16",
     status: "Genomförd",
     description: "Bra aktivitet!",
     feedback: "Bra!",
