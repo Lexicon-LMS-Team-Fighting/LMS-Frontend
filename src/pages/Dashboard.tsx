@@ -1,5 +1,6 @@
 import { ReactElement } from 'react';
 import TeacherDashboard from '../features/shared/components/TeacherDashboard';
+import StudentDashboard from '../features/shared/components/StudentDashboard';
 import "../features/shared/css/Dashboard.css"
 
 
