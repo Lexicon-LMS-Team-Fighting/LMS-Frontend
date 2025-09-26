@@ -40,6 +40,7 @@ export const ActivityList: React.FC<IActivityListProps> = ({ activities }) => {
                 <TitleDate
                   title={activity.name}
                   startDate={activity.startDate}
+                  endDate={activity.endDate}
                   activityType={activity.activityType}
                 />
 
