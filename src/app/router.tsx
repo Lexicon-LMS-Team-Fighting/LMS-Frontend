@@ -21,6 +21,7 @@ export const router = createBrowserRouter(
           }}
           path="companies/:id"
         />
+        <Route element={<TestArea />} path="/testarea2" />
       </Route>
       <Route element={<Login />} path="/login" />
       {/* TODO: remove this in a production enviroment TestArea */}
