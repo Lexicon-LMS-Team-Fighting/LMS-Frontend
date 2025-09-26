@@ -15,6 +15,7 @@ export interface IActivity {
   id: string;
   moduleId: string;
   activityType: string;
+  description?: string;
   name: string;
   startDate: string;
   endDate?: string;
