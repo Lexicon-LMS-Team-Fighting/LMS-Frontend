@@ -1,4 +1,3 @@
-// components/ModuleList.tsx
 import { ProgressBar } from "./ProgressBar";
 import { IModule } from "../types/types";
 import { TitleDate } from "./TitleDate";
