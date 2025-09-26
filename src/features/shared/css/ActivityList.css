@@ -22,20 +22,56 @@
 
 .activity-list-item.list-group {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
 
   border: 1px solid var(--gray-200);
   border-radius: var(--standard-radius);
 
   background-color: white;
   padding: 1rem;
+  gap: 0.5rem;
 
   width: 100%;
 }
 
 .activity-list-item.list-group:hover {
   border-color: var(--blue-500);
+}
+
+.activity-list-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.feedback-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  color: var(--blue-800);
+  background-color: var(--blue-100);
+  border-radius: var(--standard-radius);
+
+  gap: 0.5rem;
+  padding: 0.75rem;
+}
+
+.description-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  gap: 0.5rem;
+}
+
+.activity-list-item.list-group.clickable {
+  cursor: pointer;
+}
+
+.feedback-container p,
+.description-container p {
+  margin: 0;
 }
 
 .activity-title {
