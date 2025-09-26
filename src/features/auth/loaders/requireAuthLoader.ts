@@ -3,6 +3,7 @@ import { validateOrRefreshTokens } from '../utilities';
 import { TOKENS } from '../constants';
 import { ITokens } from '../types';
 import {jwtDecode} from 'jwt-decode';
+const FAKE = import.meta.env.VITE_FAKE_AUTH === '1';
 
 export async function requireAuthLoader({ request }: LoaderFunctionArgs) {
   const raw = localStorage.getItem(TOKENS);
@@ -16,10 +17,12 @@ export async function requireAuthLoader({ request }: LoaderFunctionArgs) {
       localStorage.setItem(TOKENS, nextRaw);
     }
     
-    // This lets router.ts get access to roles through 
+    // This lets router.ts get access to roles through requireAuthLoader
    try {
-      const key = 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role';
 
+    // Changing object key to target based on if it's mock login or not
+      const key = !FAKE ? 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role' : "role"
+    console.log(key)
       const decodedToken = jwtDecode<Record<string, unknown>>(next.accessToken);
 
       const roleKey = decodedToken[key];

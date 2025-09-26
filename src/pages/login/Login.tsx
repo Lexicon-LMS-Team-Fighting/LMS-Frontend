@@ -9,7 +9,6 @@ export function Login(): ReactElement {
   const [searchParams] = useSearchParams();
   const { login } = useAuthContext();
   const navigate = useNavigate();
-console.log(email, password)
 
 
   const handleOnSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
