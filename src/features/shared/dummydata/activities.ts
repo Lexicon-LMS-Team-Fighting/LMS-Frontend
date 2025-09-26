@@ -8,6 +8,8 @@ export const dummyActivities: IActivity[] = [
     name: "Introduktion till HTML",
     startDate: "2023-08-15",
     status: "Genomförd",
+    description: "Bra aktivitet!",
+    feedback: "Bra!",
   },
   {
     id: "2",
@@ -24,6 +26,7 @@ export const dummyActivities: IActivity[] = [
     name: "CSS styling",
     startDate: "2023-08-18",
     status: "Genomförd",
+    feedback: "Bra arbete med responsiv design!",
   },
   {
     id: "4",
@@ -32,7 +35,6 @@ export const dummyActivities: IActivity[] = [
     name: "Personlig webbsida",
     startDate: "2023-09-01",
     status: "Godkänd",
-    feedback: "Bra arbete med responsiv design!",
   },
   {
     id: "4",
@@ -41,7 +43,6 @@ export const dummyActivities: IActivity[] = [
     name: "Personlig webbsida",
     startDate: "2023-09-01",
     status: "Försenad",
-    feedback: "Bra arbete med responsiv design!",
   },
 
   {
@@ -51,6 +52,5 @@ export const dummyActivities: IActivity[] = [
     name: "Personlig webbsida",
     startDate: "2023-09-01",
     // status: "Försenad",
-    feedback: "Bra arbete med responsiv design!",
   },
 ];
