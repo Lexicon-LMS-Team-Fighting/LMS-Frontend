@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 createRoot(document.getElementById('root')!).render(
   //TODO: Authprovider needs to be uncommented once Login is done
-  // <AuthProvider>
+   <AuthProvider>
     <RouterProvider router={router} />
-  // </AuthProvider>
+   </AuthProvider>
 );

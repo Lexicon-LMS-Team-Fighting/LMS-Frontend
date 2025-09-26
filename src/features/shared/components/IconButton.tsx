@@ -20,7 +20,7 @@ export const IconButton: React.FC<IIConButtonProps> = ({
       disabled={disabled}
       className={`btn btn-primary ${disabled ? "disabled" : ""} ${addStyle}`}
       title={title}
-      type="button"
+      type="submit"
     >
       <span className="material-symbols-outlined">{icon}</span>
       {name}
