@@ -4,7 +4,7 @@ import { dummyActivities } from "../dummydata";
 import { IActivity } from "../types";
 
 // This component filters the activities using moduleId, it uses the ActivityList component to render the data.
-// This component also tracks progress (for usage in progressBar) throught the status field to show total progress for the module it belongs to.
+// This component also tracks progress (for usage in progressBar) through the status field to show total progress for the module it belongs to.
 
 interface IActivitiesForModuleProps {
   moduleId: string;
