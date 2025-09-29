@@ -32,7 +32,7 @@ export default function TeacherDashboard(): ReactElement{
         <section className="options-view">
 
              {tab === "overview" && <TeacherDashboardOverview />}
-            {tab === "courses"  && <TeacherDashboardCourses />}
+            {tab === "courses"  && <TeacherDashboardCourses onChange={setTab} />}
             {tab === "new" && <CourseCreatePage />}
         </section>
     </main>
