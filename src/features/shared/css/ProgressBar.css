@@ -1,0 +1,30 @@
+.progress-bar-container {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+
+  gap: 0.25rem;
+}
+
+div.progress-bar {
+  width: 8rem;
+  height: 0.5rem;
+
+  border-radius: var(--standard-radius);
+  background-color: rgba(128, 128, 128, 0.2);
+
+  overflow: hidden;
+}
+
+div.current-progress {
+  background-color: rgb(43, 127, 255);
+  transition-property: all;
+
+  height: 100%;
+}
+
+.progress-bar-text {
+  font-size: 14px;
+  font-weight: bold;
+}

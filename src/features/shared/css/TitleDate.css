@@ -1,0 +1,55 @@
+.titledate-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 0.25rem;
+}
+.titledate-container-activity {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+
+  gap: 0.25rem;
+}
+
+.date-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  color: rgba(0, 0, 0, 0.6);
+
+  font-size: 14px;
+
+  gap: 0.5rem;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: row;
+
+  gap: 0.5rem;
+}
+
+p.titledate-title {
+  font-weight: bold;
+  margin: 0;
+}
+
+p.titledate-date {
+  margin: 0;
+}
+
+.activity-wrapper {
+  padding-inline: 0.5rem;
+  padding-block: 0.25rem;
+
+  background-color: var(--blue-100);
+  color: var(--blue-800);
+  font-size: 12px;
+  font-weight: 600;
+
+  border-radius: calc(infinity * 1px);
+}
