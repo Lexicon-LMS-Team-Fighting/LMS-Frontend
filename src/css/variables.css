@@ -1,17 +1,23 @@
 :root {
   /* Colors */
+  /* --- BLUE --- */
   --main-blue: rgb(21, 93, 251);
-  --main-gray: rgb(243, 244, 246);
-  --gray-300: rgb(209, 213, 219);
-  --blue-500: rgb(43, 127, 255);
-  --background-gray: rgb(249 250 251);
   --blue-100: rgb(219, 234, 254);
+  --blue-500: rgb(43, 127, 255);
+  --blue-600: rgb(37 99 235);
   --blue-800: rgb(25, 60, 184);
-  --gray-200: rgb(229, 231, 235);
-  --green-600: rgb(22 163 74);
-  --green-100: rgb(220, 252, 231);
-  --red-600: rgb(220 38 38);
+  /* --- GRAY --- */
+  --main-gray: rgb(243, 244, 246);
+  --background-gray: rgb(249 250 251);
   --gray-100: rgb(222, 226, 230);
+  --gray-200: rgb(229, 231, 235);
+  --gray-300: rgb(209, 213, 219);
+  --gray-500: rgb(107 114 128);
+  /* --- GREEN --- */
+  --green-100: rgb(220, 252, 231);
+  --green-600: rgb(22 163 74);
+  /* --- RED --- */
+  --red-600: rgb(220 38 38);
 
   /* Fonts */
   --main-font: sans-serif;
