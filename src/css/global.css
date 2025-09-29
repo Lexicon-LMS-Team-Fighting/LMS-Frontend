@@ -1,7 +1,18 @@
 .g-container {
   padding-inline: 4rem;
 }
+
 .main-wrapper {
   padding:1rem;
 }
 
+=======
+
+  /* text */
+  .bold {
+    font-weight: bold;
+  }
+
+  .text-gray {
+    color: var(--text-gray);
+  }
