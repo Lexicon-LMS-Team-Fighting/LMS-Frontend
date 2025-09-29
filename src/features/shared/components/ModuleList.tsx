@@ -1,25 +1,25 @@
-// components/ModuleList.tsx
 import { ProgressBar } from "./ProgressBar";
 import { IModule } from "../types/types";
 import { TitleDate } from "./TitleDate";
 import { useModuleList } from "../hooks/useModuleList";
+import { ActivitiesForModule } from "./ActivitiesForModule";
 
 interface IModuleListProps {
   modules: IModule[];
 }
 
 export const ModuleList: React.FC<IModuleListProps> = ({ modules }) => {
-  const { openModules, completedModules, toggleModule, markModuleComplete } = useModuleList();
+  const { openModules, progress, toggleModule, handleProgressChange } = useModuleList();
 
   return (
     <section className="module-list-container">
       <h2 className="module-h2">Moduler</h2>
       <ul className="list-group module-list-group">
         {modules.map((mod) => {
-          //TODO: Remove these when Activity component is implemented as these are here as placeholders
-          const totalActivities = mod.totalActivities ?? 4;
-          const completedActivities = mod.completedActivities ?? 1;
-          const isCompleted = completedModules.includes(mod.id);
+          const moduleProgress = progress[mod.id] ?? { completed: 0, total: 0 };
+          const isCompleted =
+            moduleProgress.total > 0 && moduleProgress.completed === moduleProgress.total;
+          const isOpen = openModules.includes(mod.id);
 
           return (
             <li key={mod.id} className="module-list-item list-group-item">
@@ -29,21 +29,17 @@ export const ModuleList: React.FC<IModuleListProps> = ({ modules }) => {
                 className="module-button-item list-group-item"
               >
                 <div className="module-item-container">
-                  <div className="icon-wrapper">
-                    <span className="material-symbols-outlined">
-                      {isCompleted ? "check" : "menu_book"}
+                  <div className={`icon-wrapper ${isCompleted ? "check" : "menu_book"}`}>
+                    <span className={`material-symbols-outlined`}>
+                      {isCompleted ? "task_alt" : "menu_book"}
                     </span>
                   </div>
                   <TitleDate title={mod.name} startDate={mod.startDate} endDate={mod.endDate} />
                 </div>
 
                 <div className="progress-arrow-container">
-                  <ProgressBar
-                    total={totalActivities}
-                    completed={completedActivities}
-                    onComplete={() => markModuleComplete(mod.id)}
-                  />
-                  {openModules.includes(mod.id) ? (
+                  <ProgressBar total={moduleProgress.total} completed={moduleProgress.completed} />
+                  {isOpen ? (
                     <span className="material-symbols-outlined">keyboard_arrow_down</span>
                   ) : (
                     <span className="material-symbols-outlined">keyboard_arrow_right</span>
@@ -51,13 +47,15 @@ export const ModuleList: React.FC<IModuleListProps> = ({ modules }) => {
                 </div>
               </button>
 
-              {openModules.includes(mod.id) && (
-                <div className="activity-container">
-                  <p>{mod.description}</p>
-                  {/* Just a placeholder, remove this and replace with the Activity component */}
-                  <p>Activity component goes here, this is just a placeholder.</p>
-                </div>
-              )}
+              {/* Since we need to fetch the activity.status for the progress bar to render properly when loading this component, we need to put this outside with a isOpen hook to track it */}
+              <ActivitiesForModule
+                moduleId={mod.id}
+                isOpen={isOpen}
+                moduleDescription={mod.description}
+                onProgressChange={(completed, total) =>
+                  handleProgressChange(mod.id, completed, total)
+                }
+              />
             </li>
           );
         })}

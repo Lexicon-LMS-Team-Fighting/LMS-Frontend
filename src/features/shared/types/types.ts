@@ -9,3 +9,16 @@ export interface IModule {
   totalActivities?: number;
   completedActivities?: number;
 }
+
+// Interface type for the activity data, used in ActivityList.tsx
+export interface IActivity {
+  id: string;
+  moduleId: string;
+  activityType: string;
+  description?: string;
+  name: string;
+  startDate: string;
+  endDate?: string;
+  status?: "Genomförd" | "Försenad" | "Godkänd";
+  feedback?: string;
+}

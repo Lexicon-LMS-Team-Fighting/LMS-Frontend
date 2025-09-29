@@ -67,6 +67,7 @@
   aspect-ratio: 1/1;
 }
 
-.activity-container {
-  padding: 1rem;
+.icon-wrapper.check {
+  color: var(--green-600);
+  background-color: var(--green-100);
 }
