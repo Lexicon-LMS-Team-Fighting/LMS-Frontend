@@ -1,4 +1,3 @@
-// components/ModuleList.tsx
 import { ProgressBar } from "./ProgressBar";
 import { IModule } from "../types/types";
 import { TitleDate } from "./TitleDate";
@@ -7,10 +6,12 @@ import { ActivitiesForModule } from "./ActivitiesForModule";
 
 interface IModuleListProps {
   modules: IModule[];
+  progress: Record<string, { completed: number; total: number }>;
+  onProgressChange: (moduleId: string, completed: number, total: number) => void;
 }
 
-export const ModuleList: React.FC<IModuleListProps> = ({ modules }) => {
-  const { openModules, progress, toggleModule, handleProgressChange } = useModuleList();
+export const ModuleList: React.FC<IModuleListProps> = ({ modules, progress, onProgressChange }) => {
+  const { openModules, toggleModule } = useModuleList();
 
   return (
     <section className="module-list-container">
@@ -53,9 +54,9 @@ export const ModuleList: React.FC<IModuleListProps> = ({ modules }) => {
                 moduleId={mod.id}
                 isOpen={isOpen}
                 moduleDescription={mod.description}
-                onProgressChange={(completed, total) =>
-                  handleProgressChange(mod.id, completed, total)
-                }
+                onProgressChange={(completed, total) => {
+                  onProgressChange(mod.id, completed, total);
+                }}
               />
             </li>
           );
