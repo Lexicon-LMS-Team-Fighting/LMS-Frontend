@@ -1,0 +1,80 @@
+.row-space-between{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.week-banner {
+    text-wrap: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .25rem;
+    width: 7rem;
+    height: 2rem;
+    background-color: var(--blue-100);
+    color: var(--blue-800);
+    border-radius: var( --large-radius);
+}
+
+#calender-icon {
+    width: 1rem;
+}
+
+.dashboard-module-section {
+width: 100%;
+
+}
+
+.dashboard-module-header {
+    width: 100%;
+    height: 3rem;
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: var(--blue-50);
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-blue);
+    border-top-left-radius: var(--standard-radius) ;
+      border-top-right-radius: var(--standard-radius) ;
+}
+
+.dashboard-module-header span {
+    color: var(--blue-800);
+    font-weight: 500;
+
+}
+
+#book-icon {
+    height: 1.25rem;
+}
+
+.dashboard-module-content {
+    width: 100%;
+    height: auto;
+    min-height: 10rem;
+}
+
+.dashboard-upcoming-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: auto;
+}
+
+.dashboard-upcoming-assignments{
+    display: flex;
+    flex-direction: column;
+    width: 49%;
+    height: auto;
+}
+
+.dashboard-module-progress {
+    display: flex;
+    flex-direction: column;
+    width: 49%;
+    height: auto;
+}
