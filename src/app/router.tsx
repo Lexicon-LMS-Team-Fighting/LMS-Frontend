@@ -8,7 +8,6 @@ import { TestArea } from "../pages/testarea";
 import { modules } from "../features/shared/dummydata";
 import { course } from "../features/shared/dummydata/courses";
 import { MyCourse } from "../pages/course";
-import { ActivitiesForModule, ActivityList, ModuleList } from "../features/shared/components";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
