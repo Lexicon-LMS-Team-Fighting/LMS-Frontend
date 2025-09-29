@@ -22,3 +22,11 @@ export interface IActivity {
   status?: "Genomförd" | "Försenad" | "Godkänd";
   feedback?: string;
 }
+
+export interface ICourse {
+  id: string;
+  name: string;
+  description?: string;
+  startDate: string;
+  endDate: string;
+}
