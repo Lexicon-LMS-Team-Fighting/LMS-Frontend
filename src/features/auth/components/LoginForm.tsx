@@ -1,26 +1,24 @@
 import { ReactElement, FormEventHandler } from "react";
 import { TextInput } from "./TextInput";
-import { RoleSelector } from "./RoleSelector";
+/* import { RoleSelector } from "./RoleSelector"; */
 import { IconButton } from "../../shared/components/IconButton";
 
 interface ILoginFormProps {
   email: string;
   password: string;
-  role: string;
   onEmailChange: (value: string) => void;
   onPasswordChange: (value: string) => void;
-  onRoleChange: (value: string) => void;
   onSubmit: FormEventHandler<HTMLFormElement>;
+  error: string;
 }
 
 export function LoginForm({
   email,
   password,
-  role,
   onEmailChange,
   onPasswordChange,
-  onRoleChange,
   onSubmit,
+  error
 }: ILoginFormProps): ReactElement {
   return (
     <form className="login-form" onSubmit={onSubmit}>
@@ -30,7 +28,7 @@ export function LoginForm({
         <TextInput
           id="email"
           label="E-postadress"
-          type="email"
+          type="text"
           value={email}
           onChange={onEmailChange}
           labelStyle="email-label"
@@ -44,9 +42,9 @@ export function LoginForm({
           labelStyle="password-label"
         />
 
-        <RoleSelector role={role} onRoleChange={onRoleChange} />
+        {error && <p role="alert" className="login-error text-danger mt-2">{error}</p>}
 
-        <IconButton icon="login" name=" Logga in" addStyle="login-btn" />
+        <IconButton icon="login" name="Logga in" addStyle="login-btn" />
       </fieldset>
 
       <a className="forgot-password-link" href="#">

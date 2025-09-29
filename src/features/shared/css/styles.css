@@ -1,2 +1,6 @@
-@import url('./HeaderNav.css');
-@import url('./IconButton.css');
+@import url("./HeaderNav.css");
+@import url("./IconButton.css");
+@import url("./ModuleList.css");
+@import url("./ProgressBar.css");
+@import url("./TitleDate.css");
+@import url("./ActivityList.css");

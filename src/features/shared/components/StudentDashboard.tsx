@@ -54,8 +54,6 @@ const { week } = getWeek();
                     </div>
                 </section>
  
-        </section>
-        
-    </main>
+      </section>
   );
 }

@@ -1,25 +1,23 @@
 .login-form {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 2rem;
   flex-direction: column;
-
   width: 450px;
   height: 550px;
-
   background-color: white;
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   border-radius: 0.5rem;
-
   padding-block: 2rem;
   padding-inline: 1.5rem;
 }
 
 .login-form fieldset {
+  position:relative;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-
   gap: 0.5rem;
   width: 100%;
 }
@@ -31,6 +29,7 @@
 
 .login-btn.btn {
   width: 100%;
+  margin-top: 4rem;
 }
 
 .book-icon {
@@ -43,3 +42,15 @@
   font-size: 14px;
   text-decoration: none;
 }
+
+.login-error{
+position: absolute;
+bottom: 2rem;
+}
+@media screen and (max-width: 480px) {
+  .login-form {
+    width: 95%;
+    min-width: 200px;
+  }
+}
+
