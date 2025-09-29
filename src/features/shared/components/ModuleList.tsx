@@ -54,9 +54,7 @@ export const ModuleList: React.FC<IModuleListProps> = ({ modules, progress, onPr
                 moduleId={mod.id}
                 isOpen={isOpen}
                 moduleDescription={mod.description}
-                onProgressChange={(completed, total) => {
-                  onProgressChange(mod.id, completed, total);
-                }}
+                onProgressChange={onProgressChange}
               />
             </li>
           );
