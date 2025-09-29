@@ -23,6 +23,7 @@ export function AuthProvider({ children }: IAuthProviderProps): ReactElement {
     } catch (error) {
       if (error instanceof CustomError) {
         console.log(error);
+        throw error;
       }
     }
   }

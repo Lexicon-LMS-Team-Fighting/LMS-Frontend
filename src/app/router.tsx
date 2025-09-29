@@ -15,16 +15,16 @@ export const router = createBrowserRouter(
     <>
       {/* requireAuthLoader is a route guard that protects the App and its child routes. */}
       {/* TODO uncomment line below and remove "<Route element={<App />} path="/"></Route>" when front end login is done */}
-      {/* <Route element={<App />} loader={requireAuthLoader} path="/"> */}
-      <Route element={<App />} path="/">
-        <Route element={<Companies />} index loader={companiesLoader} />
+      <Route element={<App />} loader={requireAuthLoader} path="/">
+   {/*    <Route element={<App />} path="/"> */}
+{/*         <Route element={<Companies />} index loader={companiesLoader} />
         <Route
           element={<Company />}
           loader={({ params }) => {
             return companyLoader(params.id);
           }}
           path="companies/:id"
-        />
+        /> */}
       </Route>
       <Route element={<Login />} path="/login" />
       {/* TODO: remove this in a production enviroment TestArea */}

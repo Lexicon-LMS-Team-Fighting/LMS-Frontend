@@ -2,6 +2,8 @@ import { redirect, type LoaderFunctionArgs } from 'react-router';
 import { validateOrRefreshTokens } from '../utilities';
 import { TOKENS } from '../constants';
 import { ITokens } from '../types';
+import {jwtDecode} from 'jwt-decode';
+const FAKE = import.meta.env.VITE_FAKE_AUTH === '1';
 
 export async function requireAuthLoader({ request }: LoaderFunctionArgs) {
   const raw = localStorage.getItem(TOKENS);
@@ -14,7 +16,27 @@ export async function requireAuthLoader({ request }: LoaderFunctionArgs) {
     if (nextRaw !== raw) {
       localStorage.setItem(TOKENS, nextRaw);
     }
-    return null; // Let the route through
+    
+    // This lets router.ts get access to roles through requireAuthLoader
+   try {
+
+    // Changing object key to target based on if it's mock login or not
+      const key = !FAKE ? 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role' : "role"
+      const decodedToken = jwtDecode<Record<string, unknown>>(next.accessToken);
+
+      const roleKey = decodedToken[key];
+      let roles: string[] = [];
+
+      if (Array.isArray(roleKey)) {
+        roles = roleKey.map(String);
+      } else if (typeof roleKey === 'string') {
+        roles = roleKey.split(',').map(s => s.trim()).filter(Boolean);
+      }
+
+        return { roles };
+    } catch {
+        return { roles: [] };
+    }
   }
 
   const url = new URL(request.url);
@@ -22,4 +44,6 @@ export async function requireAuthLoader({ request }: LoaderFunctionArgs) {
 
   console.log('Redirecting unauthenticated user => /login');
   throw redirect(`/login?redirectTo=${redirectTo}`);
+
+
 }
