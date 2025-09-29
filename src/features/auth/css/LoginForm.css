@@ -14,6 +14,7 @@
 }
 
 .login-form fieldset {
+  position:relative;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
@@ -42,9 +43,14 @@
   text-decoration: none;
 }
 
+.login-error{
+position: absolute;
+bottom: 2rem;
+}
 @media screen and (max-width: 480px) {
   .login-form {
     width: 95%;
     min-width: 200px;
   }
 }
+

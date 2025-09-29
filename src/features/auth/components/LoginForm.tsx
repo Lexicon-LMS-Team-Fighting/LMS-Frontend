@@ -9,6 +9,7 @@ interface ILoginFormProps {
   onEmailChange: (value: string) => void;
   onPasswordChange: (value: string) => void;
   onSubmit: FormEventHandler<HTMLFormElement>;
+  error: string;
 }
 
 export function LoginForm({
@@ -17,6 +18,7 @@ export function LoginForm({
   onEmailChange,
   onPasswordChange,
   onSubmit,
+  error
 }: ILoginFormProps): ReactElement {
   return (
     <form className="login-form" onSubmit={onSubmit}>
@@ -39,6 +41,8 @@ export function LoginForm({
           onChange={onPasswordChange}
           labelStyle="password-label"
         />
+
+        {error && <p role="alert" className="login-error text-danger mt-2">{error}</p>}
 
         <IconButton icon="login" name="Logga in" addStyle="login-btn" />
       </fieldset>

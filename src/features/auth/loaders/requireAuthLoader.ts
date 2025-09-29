@@ -22,7 +22,6 @@ export async function requireAuthLoader({ request }: LoaderFunctionArgs) {
 
     // Changing object key to target based on if it's mock login or not
       const key = !FAKE ? 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role' : "role"
-    console.log(key)
       const decodedToken = jwtDecode<Record<string, unknown>>(next.accessToken);
 
       const roleKey = decodedToken[key];
