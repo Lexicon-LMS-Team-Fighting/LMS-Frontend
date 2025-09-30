@@ -20,34 +20,39 @@ export default function StudentDashboard(): ReactElement {
     <main className="main-wrapper">
       <h1 className="fs-3 mb-4">Välkommen tillbaka!</h1>
 
-      <section className="row-space-between mb-3">
-        <h2 className="fs-5">Veckans Aktiviteter</h2>
-        <div className="week-banner">
-          <img id="calender-icon" src="calender-icon.svg" alt="Calender" />
-          <span>Vecka {week}</span>
-        </div>
-      </section>
-
-      <section className="dashboard-module-section">
-        <div className="dashboard-module-header">
-          <img id="book-icon" src="book-icon.svg" alt="LMS logo" />
-          <span className="fs-6">Modul: Javascript</span>
-        </div>
-        <div className="dashboard-module-content mb-5">
-          <span> Module components goes here </span>
-        </div>
-
-        <section className="dashboard-upcoming-info">
-          <div className="dashboard-upcoming-assignments">
-            <h4 className="fs-5 mb-3">Kommande inlämningar</h4>
-            <span>Assignments component goes here</span>
-          </div>
-          <div className="dashboard-module-progress">
-            <h4 className="fs-5 mb-3">Modulframsteg</h4>
-            <span>Moduleprogress component goes here</span>
-          </div>
+               <section className="row-space-between mb-3">
+            <h2 className="fs-5">Veckans Aktiviteter</h2>
+            <div className="week-banner">
+                <img id="calender-icon" src="calender-icon.svg" alt="Calender"/>
+                <span>Vecka {week}</span>
+            </div>
         </section>
-      </section>
-    </main>
+
+        <section className="dashboard-module-section">
+
+            <div className="dashboard-module-header">
+                <img id="book-icon" src="book-icon.svg"  alt="LMS logo"/>
+                <span className="fs-6">Modul: Javascript</span>
+           </div>
+                <div className="dashboard-module-content mb-5">
+                    <span> Module components goes here </span>
+
+                </div>
+
+                </section>
+
+                <section className="dashboard-upcoming-info">
+                    <div className="dashboard-upcoming-assignments">
+                        <h4 className="fs-5 mb-3">Kommande inlämningar</h4>
+                         <span>Assignments component goes here</span>
+
+                    </div>
+                    <div className="dashboard-module-progress">
+                        <h4 className="fs-5 mb-3">Modulframsteg</h4>
+                         <span>Moduleprogress component goes here</span>
+                    </div>
+                </section>
+ 
+      </main>
   );
 }
