@@ -2,17 +2,15 @@
   /* Colors */
   /* --- BLUE --- */
   --main-blue: rgb(21, 93, 251);
+  --blue-50: rgb(239 246 255);
   --blue-100: rgb(219, 234, 254);
   --blue-500: rgb(43, 127, 255);
   --blue-600: rgb(37 99 235);
   --blue-800: rgb(25, 60, 184);
+  --blue-800: rgb(30, 64, 175);
   /* --- GRAY --- */
   --main-gray: rgb(243, 244, 246);
-  --blue-600:  rgb(37, 99, 235);
-  --blue-800: rgb(30, 64, 175);
   --background-gray: rgb(249 250 251);
-  --blue-100: rgb(219 234 254);
-  --blue-50 :rgb(239 246 255);
   --text-gray: rgb(107 114 128);
   --gray-100: rgb(222, 226, 230);
   --gray-200: rgb(229, 231, 235);
@@ -33,14 +31,12 @@
   --medium-radius: 0.375rem;
   --small-radius: 0.25rem;
 
-
   /* Border*/
-  --border-blue:rgb(219, 234, 254, 1);
+  --border-blue: rgb(219, 234, 254, 1);
 
-    /* sizes */
-    --smallest-paragraph: 0.9rem;
+  /* sizes */
+  --smallest-paragraph: 0.9rem;
 
-    /* misc */
-    --border: 1px solid rgba(107, 114, 128, 0.2);
-
+  /* misc */
+  --border: 1px solid rgba(107, 114, 128, 0.2);
 }
