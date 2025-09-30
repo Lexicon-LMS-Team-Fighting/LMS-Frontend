@@ -103,3 +103,49 @@
 .status-container.status-red {
   color: var(--red-600);
 }
+
+@media screen and (max-width: 768px) {
+  .document-status-container {
+    flex-direction: column;
+
+    gap: 0.5rem;
+  }
+
+  p.titledate-title {
+    font-size: 14px;
+  }
+
+  .document-container,
+  .status-container {
+    font-size: 12px;
+  }
+
+  .activity-container {
+    padding-inline: 0.5rem;
+  }
+
+  .activity-list-item.list-group {
+    padding: 0.5rem;
+  }
+
+  .feedback-container,
+  .description-container {
+    font-size: 12px;
+  }
+
+  .feedback-container {
+    padding: 0.5rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .activity-list-box {
+    flex-direction: column;
+  }
+
+  .document-status-container {
+    flex-direction: row;
+
+    gap: 0.5rem;
+  }
+}
