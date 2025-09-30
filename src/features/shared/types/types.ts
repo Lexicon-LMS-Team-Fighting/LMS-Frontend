@@ -35,7 +35,7 @@ export interface IActivity {
 export interface ICourse {
   id: string;
   name: string;
-  description: string;
+  description?: string;
   startDate: Date;
   endDate: Date;
 }
@@ -67,12 +67,4 @@ export interface IDocument {
   name: string;
   description: string;
   timeStamp: Date;
-}
-
-export interface ICourse {
-  id: string;
-  name: string;
-  description?: string;
-  startDate: string;
-  endDate: string;
 }
