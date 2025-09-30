@@ -33,38 +33,38 @@ export interface IActivity {
  * Represents a course with basic details.
  */
 export interface ICourse {
-  CourseId: string;
-  Name: string;
-  Description: string;
-  StartDate: Date;
-  EndDate: Date;
+  courseId: string;
+  name: string;
+  description: string;
+  startDate: Date;
+  endDate: Date;
 }
 
 /**
  * Represents a user enrolled in courses.
  */
 export interface IUser {
-  Id: string;
-  UserName: string;
-  Email: string;
-  FirstName: string;
-  LastName: string;
-  RefreshToken: string;
-  RefreshTokenExpireTime: Date;
-  CourseIds: string[];
+  id: string;
+  userName: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  refreshToken: string;
+  refreshTokenExpireTime: Date;
+  courseIds: string[];
 }
 
 /**
  * Represents a document uploaded or associated with a user, course, module, and activity.
  */
 export interface IDocument {
-  Id: string;
-  UserId: string;
-  CourseId: string;
-  ModuleId: string;
-  ActivityId: string;
-  Path: string;
-  Name: string;
-  Description: string;
-  TimeStamp: Date;
+  id: string;
+  userId: string;
+  courseId: string;
+  moduleId: string;
+  activityId: string;
+  path: string;
+  name: string;
+  description: string;
+  timeStamp: Date;
 }
