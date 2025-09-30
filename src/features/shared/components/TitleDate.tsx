@@ -22,7 +22,7 @@ export const TitleDate: React.FC<ITitleDateProps> = ({
         </div>
       )}
       <div className="date-container">
-        <span className="material-symbols-outlined">calendar_today</span>
+        <span className="material-symbols-outlined hidden">calendar_today</span>
         {endDate ? (
           <p className="titledate-date">
             {startDate} - {endDate}
