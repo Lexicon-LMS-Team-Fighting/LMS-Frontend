@@ -1,17 +1,7 @@
 import { CustomError } from "../features/shared/classes";
 import { BASE_URL } from "../features/shared/constants";
+import { IUser } from "../features/shared/types/types";
 import { fetchWithToken } from "../features/shared/utilities";
-
-export interface IUser {
-  Id: string;
-  UserName: string;
-  Email: string;
-  FirstName: string;
-  LastName: string;
-  RefreshToken: string;
-  RefreshTokenExpireTime: Date;
-  CourseIds: string[];
-}
 
 export async function fetchUserById(guid: string): Promise<IUser> {
   if (!guid) throw new Response("User id missing", { status: 400 });
