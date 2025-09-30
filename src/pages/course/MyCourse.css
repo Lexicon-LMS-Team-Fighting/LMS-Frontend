@@ -1,0 +1,35 @@
+main.course-page {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+
+  background-color: rgb(249, 250, 251);
+
+  min-height: 100vh;
+  width: 100%;
+
+  padding: 1rem;
+}
+
+h1.course-title {
+  font-size: 24px;
+  font-weight: bold;
+
+  margin: 0;
+}
+
+section.course-progress {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+
+  background-color: white;
+  border-radius: var(--standard-radius);
+
+  padding: 1.5rem;
+  width: 100%;
+}
+
+h2.course-progress-title {
+  font-size: 18px;
+}

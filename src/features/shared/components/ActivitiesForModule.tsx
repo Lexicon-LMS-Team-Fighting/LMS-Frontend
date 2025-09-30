@@ -10,7 +10,7 @@ interface IActivitiesForModuleProps {
   moduleId: string;
   isOpen: boolean;
   moduleDescription?: string;
-  onProgressChange: (completed: number, total: number) => void;
+  onProgressChange: (moduleId: string, completed: number, total: number) => void;
 }
 
 export const ActivitiesForModule: React.FC<IActivitiesForModuleProps> = ({
@@ -51,7 +51,7 @@ export const ActivitiesForModule: React.FC<IActivitiesForModuleProps> = ({
 
     const completed = data.filter((a) => a.status === "Genomförd" || a.status === "Godkänd").length;
 
-    onProgressChange(completed, data.length);
+    onProgressChange(moduleId, completed, data.length);
   }, [moduleId, onProgressChange]);
 
   if (!isOpen) return null;
