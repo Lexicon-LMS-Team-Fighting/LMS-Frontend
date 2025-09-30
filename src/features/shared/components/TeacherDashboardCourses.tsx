@@ -4,21 +4,10 @@ import "../css/TeacherDashboardCourses.css";
 import { Tab } from "./DashboardNavBar";
 import { ICourse } from "../types/types";
 
-// type Course = {
-//   id: string;
-//   name: string;
-//   startDate: string;
-//   endDate: string;
-//   students: string[];
-//   modules: string[];
-// };
-
 type Props = {
   courses: ICourse[];
   onChange: (t: Tab) => void;
 };
-
-//TODO, receive course array as prop from parent instead
 
 export default function TeacherDashboardCourses({
   courses,
@@ -41,40 +30,6 @@ export default function TeacherDashboardCourses({
 
   useEffect(() => {
     setCourseArr(courses);
-    // setCourseArr([
-    //   {
-    //     id: "1",
-    //     name: "Lexicon LTU",
-    //     startDate: "2025-09-02",
-    //     endDate: "2025-12-08",
-    //     students: ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-    //     modules: ["1", "1", "1", "1", "1"],
-    //   },
-    //   {
-    //     id: "1",
-    //     name: "Datorkurs",
-    //     startDate: "2025-10-08",
-    //     endDate: "2025-12-19",
-    //     students: [
-    //       "1",
-    //       "1",
-    //       "1",
-    //       "1",
-    //       "1",
-    //       "1",
-    //       "1",
-    //       "1",
-    //       "1",
-    //       "1",
-    //       "1",
-    //       "1",
-    //       "1",
-    //       "1",
-    //       "1",
-    //     ],
-    //     modules: ["1", "1", "1", "1"],
-    //   },
-    // ]);
   }, []);
 
   return (
@@ -119,8 +74,8 @@ export default function TeacherDashboardCourses({
               <tr key={`${course.name}-${i}`} className="table-row-white">
                 <td className="bold">{course.name}</td>
                 <td className="text-gray">
-                  {course.startDate.toISOString()} -{" "}
-                  {course.endDate.toISOString()}
+                  {course.startDate.toLocaleDateString()} -{" "}
+                  {course.endDate.toLocaleDateString()}
                 </td>
                 {/* Activate when modules and students get added. */}
                 {/* <td>{course.students.length}</td> */}

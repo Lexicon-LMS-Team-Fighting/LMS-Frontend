@@ -20,21 +20,17 @@ export async function DashboardDifferedLoader(): Promise<ICourseDifferedLoaderRe
   const user: IUser = await fetchUserById(userId);
 
   const courses: ICourse[] = await Promise.all(
-    user.courseIds.map((cId) => fetchCourseById(cId))
+    user.courseIds.map(async (cId) => {
+      const courseData = await fetchCourseById(cId);
+      console.log(`print loop: ${courseData}`);
+
+      return {
+        ...courseData,
+        startDate: new Date(courseData.startDate),
+        endDate: new Date(courseData.endDate),
+      };
+    })
   );
-
-  // const courses: ICourse[] = await Promise.all(
-  //   user.courseIds.map(async (cId) => {
-  //     const courseData = await fetchCourseById(cId);
-  //     console.log(`print loop: ${courseData}`);
-
-  //     return {
-  //       ...courseData,
-  //       startDate: new Date(courseData.startDate),
-  //       endDate: new Date(courseData.endDate),
-  //     };
-  //   })
-  // );
 
   return { userCourses: Promise.resolve(courses) };
 }
