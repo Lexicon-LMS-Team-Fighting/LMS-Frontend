@@ -53,3 +53,14 @@ p.titledate-date {
 
   border-radius: calc(infinity * 1px);
 }
+
+@media screen and (max-width: 768px) {
+  .activity-wrapper {
+    font-size: 10px;
+
+  }
+
+  .date-container {
+    font-size: 12px;
+  }
+}
