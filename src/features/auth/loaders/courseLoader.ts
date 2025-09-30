@@ -19,7 +19,6 @@ export async function DashboardDifferedLoader(): Promise<ICourseDifferedLoaderRe
 
   const user: IUser = await fetchUserById(userId);
 
-  console.log(`print 1:`, user);
   const courses: ICourse[] = await Promise.all(
     user.courseIds.map((cId) => fetchCourseById(cId))
   );
@@ -36,7 +35,6 @@ export async function DashboardDifferedLoader(): Promise<ICourseDifferedLoaderRe
   //     };
   //   })
   // );
-  console.log(`print 2:`, courses);
 
   return { userCourses: Promise.resolve(courses) };
 }

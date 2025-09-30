@@ -18,3 +18,20 @@ export function getCurrentUserId(): string | null {
     return null;
   }
 }
+
+export function getCurrentUserRole(): string | null {
+  const token = getTokens();
+
+  if (!token) return null;
+
+  try {
+    const claim: any = jwtDecode(token.accessToken);
+
+    return (
+      claim["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] ??
+      null
+    );
+  } catch {
+    return null;
+  }
+}

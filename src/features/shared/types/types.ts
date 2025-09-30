@@ -33,7 +33,7 @@ export interface IActivity {
  * Represents a course with basic details.
  */
 export interface ICourse {
-  courseId: string;
+  id: string;
   name: string;
   description: string;
   startDate: Date;
