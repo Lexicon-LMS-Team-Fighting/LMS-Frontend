@@ -36,17 +36,17 @@ export default function StudentDashboard(): ReactElement {
         <div className="dashboard-module-content mb-5">
           <span> Module components goes here </span>
         </div>
+      </section>
 
-        <section className="dashboard-upcoming-info">
-          <div className="dashboard-upcoming-assignments">
-            <h4 className="fs-5 mb-3">Kommande inlämningar</h4>
-            <span>Assignments component goes here</span>
-          </div>
-          <div className="dashboard-module-progress">
-            <h4 className="fs-5 mb-3">Modulframsteg</h4>
-            <span>Moduleprogress component goes here</span>
-          </div>
-        </section>
+      <section className="dashboard-upcoming-info">
+        <div className="dashboard-upcoming-assignments">
+          <h4 className="fs-5 mb-3">Kommande inlämningar</h4>
+          <span>Assignments component goes here</span>
+        </div>
+        <div className="dashboard-module-progress">
+          <h4 className="fs-5 mb-3">Modulframsteg</h4>
+          <span>Moduleprogress component goes here</span>
+        </div>
       </section>
     </main>
   );
