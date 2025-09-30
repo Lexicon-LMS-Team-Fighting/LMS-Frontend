@@ -1,0 +1,16 @@
+import { ReactElement } from 'react';
+import TeacherDashboard from '../features/shared/components/TeacherDashboard';
+import StudentDashboard from '../features/shared/components/StudentDashboard';
+import "../features/shared/css/Dashboard.css"
+
+
+export default function Dashboard(): ReactElement{
+ 
+
+
+  return (
+    <main className='main-container bg-gray-50'>
+        <TeacherDashboard />
+    </main>
+  );
+}
