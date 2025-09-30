@@ -42,6 +42,8 @@ const { week } = getWeek();
 
                 </div>
 
+                </section>
+
                 <section className="dashboard-upcoming-info">
                     <div className="dashboard-upcoming-assignments">
                         <h4 className="fs-5 mb-3">Kommande inlämningar</h4>
@@ -54,6 +56,6 @@ const { week } = getWeek();
                     </div>
                 </section>
  
-      </section>
+      </main>
   );
 }
