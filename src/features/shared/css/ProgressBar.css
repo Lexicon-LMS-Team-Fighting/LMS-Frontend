@@ -59,3 +59,14 @@ div.current-progress {
   font-size: 16px;
   font-weight: normal;
 }
+
+@media screen and (max-width: 768px) {
+  .progress-bar-text p {
+    font-size: 12px;
+  }
+
+  div.progress-bar {
+    width: 6rem;
+    height: 0.375rem;
+  }
+}
