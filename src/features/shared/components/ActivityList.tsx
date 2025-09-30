@@ -32,7 +32,7 @@ export const ActivityList: React.FC<IActivityListProps> = ({ activities }) => {
                 activity.description
                   ? isExpanded
                     ? "Click to show less"
-                    : "Click to see more"
+                    : "Click to show more"
                   : ""
               }
             >
@@ -47,7 +47,7 @@ export const ActivityList: React.FC<IActivityListProps> = ({ activities }) => {
                 <div className="document-status-container">
                   {/* TODO: This should be correctly implemented once the backend part for handling documents is in place */}
                   {
-                    <a href="" className="document-container">
+                    <a href="" className="document-container" title="Click to show document">
                       <span className="material-symbols-outlined">news</span>Dokument
                     </a>
                   }

@@ -51,5 +51,19 @@ p.titledate-date {
   font-size: 12px;
   font-weight: 600;
 
+  height: 26px;
+
   border-radius: calc(infinity * 1px);
+}
+
+@media screen and (max-width: 768px) {
+  .activity-wrapper {
+    font-size: 10px;
+
+    height: 23px;
+  }
+
+  .date-container {
+    font-size: 12px;
+  }
 }

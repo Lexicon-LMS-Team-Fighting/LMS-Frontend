@@ -1,7 +1,7 @@
 //A container component showing title, date and the optional activityType
 
 interface ITitleDateProps {
-  title: string;
+  title?: string;
   startDate: string;
   endDate?: string;
   activityType?: string;
@@ -15,10 +15,12 @@ export const TitleDate: React.FC<ITitleDateProps> = ({
 }) => {
   return (
     <div className={activityType ? `titledate-container-activity` : "titledate-container"}>
-      <div className="title-container">
-        {activityType && <span className="activity-wrapper">{activityType}</span>}
-        <p className="titledate-title">{title}</p>
-      </div>
+      {title && (
+        <div className="title-container">
+          {activityType && <span className="activity-wrapper">{activityType}</span>}
+          <p className="titledate-title">{title}</p>
+        </div>
+      )}
       <div className="date-container">
         <span className="material-symbols-outlined">calendar_today</span>
         {endDate ? (
