@@ -5,10 +5,10 @@ import CourseCreatePage from "./CourseCreatePage";
 import TeacherDashboardCourses from "./TeacherDashboardCourses";
 import TeacherDashboardOverview from "./TeacherDashboardOverview";
 import { Await, useLoaderData } from "react-router";
-import { ICourseDifferedLoaderReturn } from "../../auth/loaders/courseLoader";
+import { ICourseForUserDifferedLoader } from "../../auth/loaders/courseForUserLoader";
 
 export default function TeacherDashboard(): ReactElement {
-  const { userCourses } = useLoaderData<ICourseDifferedLoaderReturn>();
+  const { userCourses } = useLoaderData<ICourseForUserDifferedLoader>();
 
   console.log(userCourses);
   const [tab, setTab] = useState<Tab>("overview"); //setting default tab to "overview"

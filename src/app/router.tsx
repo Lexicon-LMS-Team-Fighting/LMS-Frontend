@@ -10,8 +10,10 @@ import { Companies, Company } from "../features/companies/components";
 import { companiesLoader, companyLoader } from "../features/companies/loaders";
 import { TestArea } from "../pages/testarea";
 import { modules } from "../features/shared/dummydata";
-import { DashboardDifferedLoader } from "../features/auth/loaders/courseLoader";
+import { CourseForUserDifferedLoader } from "../features/auth/loaders/courseForUserLoader";
 import RoleSwitch from "../pages/RoleSwitch";
+import { MyCourse } from "../pages/course/MyCourse";
+import { course } from "../features/shared/dummydata/courses";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,7 +25,7 @@ export const router = createBrowserRouter(
         <Route
           element={<RoleSwitch />}
           path="dashboard"
-          loader={DashboardDifferedLoader}
+          loader={CourseForUserDifferedLoader}
         />
         {/* TODO: remove this in a production enviroment TestArea */}
         <Route element={<TestArea />} path="/testarea" />
@@ -31,6 +33,7 @@ export const router = createBrowserRouter(
         <Route
           element={<MyCourse course={course} modules={modules} />}
           path="/course"
+          loader={CourseForUserDifferedLoader}
         />
       </Route>
     </>

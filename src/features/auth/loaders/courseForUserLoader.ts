@@ -4,11 +4,11 @@ import { ICourse, IUser } from "../../shared/types/types";
 import { getCurrentUserId } from "../../shared/utilities/jwtDecoder";
 import { getTokens } from "../utilities";
 
-export interface ICourseDifferedLoaderReturn {
+export interface ICourseForUserDifferedLoader {
   userCourses: Promise<ICourse[]>;
 }
 
-export async function DashboardDifferedLoader(): Promise<ICourseDifferedLoaderReturn> {
+export async function CourseForUserDifferedLoader(): Promise<ICourseForUserDifferedLoader> {
   const token = getTokens();
 
   if (!token) throw new Response("Unauthorized", { status: 401 }); // Todo: implement standardized exception/Response handling?.
