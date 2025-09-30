@@ -68,3 +68,11 @@ export interface IDocument {
   description: string;
   timeStamp: Date;
 }
+
+export interface ICourse {
+  id: string;
+  name: string;
+  description?: string;
+  startDate: string;
+  endDate: string;
+}

@@ -32,7 +32,7 @@ export const ActivityList: React.FC<IActivityListProps> = ({ activities }) => {
                 activity.description
                   ? isExpanded
                     ? "Click to show less"
-                    : "Click to see more"
+                    : "Click to show more"
                   : ""
               }
             >

@@ -9,8 +9,6 @@ import { requireAuthLoader } from "../features/auth/loaders";
 import { Companies, Company } from "../features/companies/components";
 import { companiesLoader, companyLoader } from "../features/companies/loaders";
 import { TestArea } from "../pages/testarea";
-import Dashboard from "../pages/Dashboard";
-import { ModuleList } from "../features/shared/components";
 import { modules } from "../features/shared/dummydata";
 import { DashboardDifferedLoader } from "../features/auth/loaders/courseLoader";
 import RoleSwitch from "../pages/RoleSwitch";
@@ -29,8 +27,11 @@ export const router = createBrowserRouter(
         />
         {/* TODO: remove this in a production enviroment TestArea */}
         <Route element={<TestArea />} path="/testarea" />
-        {/* TODO: remove this in a production enviroment ModuleList, only here temporarily. */}
-        <Route element={<ModuleList modules={modules} />} path="/modulelist" />
+        {/* TODO: Edit this when everything else is properly implemented (Login, Header, Side Menu etc.) */}
+        <Route
+          element={<MyCourse course={course} modules={modules} />}
+          path="/course"
+        />
       </Route>
     </>
   )

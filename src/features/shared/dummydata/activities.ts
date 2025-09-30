@@ -36,10 +36,10 @@ export const dummyActivities: IActivity[] = [
     activityType: "Inlämning",
     name: "Personlig webbsida",
     startDate: "2023-09-01",
-    status: "Godkänd",
+    status: "Försenad",
   },
   {
-    id: "4",
+    id: "5",
     moduleId: "3",
     activityType: "Inlämning",
     name: "Personlig webbsida",
@@ -48,11 +48,19 @@ export const dummyActivities: IActivity[] = [
   },
 
   {
-    id: "5",
+    id: "6",
     moduleId: "4",
     activityType: "Inlämning",
     name: "Personlig webbsida",
     startDate: "2023-09-01",
     // status: "Försenad",
+  },
+  {
+    id: "7",
+    moduleId: "4",
+    activityType: "Inlämning",
+    name: "Personlig webbsida",
+    startDate: "2023-09-01",
+    status: "Godkänd",
   },
 ];
