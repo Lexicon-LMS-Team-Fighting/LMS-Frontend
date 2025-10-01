@@ -7,7 +7,7 @@ import { App } from ".";
 import { Login } from "../pages/login";
 import { requireAuthLoader } from "../features/auth/loaders";
 import { TestArea } from "../pages/testarea";
-import { CourseForUserDifferedLoader } from "../features/auth/loaders/courseForUserLoader";
+import { CourseForUserDifferedLoader } from "../features/auth/loaders/dashboardLoader";
 import RoleSwitch from "../pages/RoleSwitch";
 import { MyCourse } from "../pages/course/MyCourse";
 import { MyCourseDifferedLoader } from "../features/auth/loaders/myCourseLoader";

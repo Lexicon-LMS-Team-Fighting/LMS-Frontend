@@ -7,7 +7,7 @@ import { getTokens } from "../utilities";
 /**
  * Represents the shape of the loader result for a user's courses.
  */
-export interface ICourseForUserDifferedLoader {
+export interface IDashboardDifferedLoader {
   userCourses: Promise<ICourse[]>;
 }
 
@@ -23,7 +23,7 @@ export interface ICourseForUserDifferedLoader {
  * @throws {Response} 403 - If the user ID cannot be determined.
  * @throws {Response} 502 - If fetching the user or course data fails.
  */
-export async function CourseForUserDifferedLoader(): Promise<ICourseForUserDifferedLoader> {
+export async function CourseForUserDifferedLoader(): Promise<IDashboardDifferedLoader> {
   const token = getTokens();
 
   if (!token) throw new Response("Unauthorized", { status: 401 }); // Todo: implement standardized exception/Response handling?.
