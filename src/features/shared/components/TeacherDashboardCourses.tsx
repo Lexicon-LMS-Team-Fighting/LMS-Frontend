@@ -13,24 +13,48 @@ export default function TeacherDashboardCourses({
   courses,
   onChange,
 }: Props): ReactElement {
-  const [courseArr, setCourseArr] = useState<ICourse[] | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredArr = !courseArr
-    ? []
-    : courseArr.filter((c) => {
-        const query = searchQuery.trim().toLowerCase();
-        if (!query) return true;
-        return (
-          c.name.toLowerCase().includes(query) ||
-          c.startDate.toISOString().toLowerCase().includes(query) ||
-          c.endDate.toISOString().toLowerCase().includes(query)
-        );
-      });
+  courses = courses.filter((c) => {
+    const query = searchQuery.trim().toLowerCase();
 
-  useEffect(() => {
-    setCourseArr(courses);
-  }, [courses]);
+    if (!query) return true;
+
+    return (
+      c.name.toLowerCase().includes(query) ||
+      c.startDate.toISOString().toLowerCase().includes(query) ||
+      c.endDate.toISOString().toLowerCase().includes(query)
+    );
+  });
+
+  function renderCourse() {
+    return (
+      <tbody>
+        {courses?.map((course, i) => (
+          <tr key={`${course.name}-${i}`} className="table-row-white">
+            <td className="bold">{course.name}</td>
+            <td className="text-gray">
+              {course.startDate.toLocaleDateString()} -{" "}
+              {course.endDate.toLocaleDateString()}
+            </td>
+            {/* Activate when modules and students get added. */}
+            {/* <td>{course.students.length}</td> */}
+            {/* <td>{course.modules.length}</td> */}
+            {/*TODO, make sure we have the correct routes*/}
+            <td className="table-links">
+              <Link to={`/teacher/course/${course.id}`}>Visa</Link>{" "}
+              <Link to={`/teacher/course/edit/${course.id}`}>Redigera</Link>
+            </td>
+          </tr>
+        ))}
+        {courses?.length === 0 && (
+          <tr>
+            <td>Inga kurser ännu</td>
+          </tr>
+        )}
+      </tbody>
+    );
+  }
 
   return (
     <section className="dashboard-courses-container">
@@ -69,30 +93,7 @@ export default function TeacherDashboardCourses({
               <th>MODULER</th>
             </tr>
           </thead>
-          <tbody>
-            {filteredArr?.map((course, i) => (
-              <tr key={`${course.name}-${i}`} className="table-row-white">
-                <td className="bold">{course.name}</td>
-                <td className="text-gray">
-                  {course.startDate.toLocaleDateString()} -{" "}
-                  {course.endDate.toLocaleDateString()}
-                </td>
-                {/* Activate when modules and students get added. */}
-                {/* <td>{course.students.length}</td> */}
-                {/* <td>{course.modules.length}</td> */}
-                {/*TODO, make sure we have the correct routes*/}
-                <td className="table-links">
-                  <Link to={`/teacher/course/${course.id}`}>Visa</Link>{" "}
-                  <Link to={`/teacher/course/edit/${course.id}`}>Redigera</Link>
-                </td>
-              </tr>
-            ))}
-            {filteredArr?.length === 0 && (
-              <tr>
-                <td>Inga kurser ännu</td>
-              </tr>
-            )}
-          </tbody>
+          {renderCourse()}
         </table>
       </div>
     </section>

@@ -8,20 +8,22 @@ import { getTokens } from "../utilities";
  * Represents the shape of the loader result for a user's courses.
  */
 export interface IDashboardDifferedLoader {
-  userCourses: Promise<ICourse[]>;
+  userCourses: Promise<ICourse[] | null>;
 }
 
 /**
- * Loads all courses for the currently authenticated user.
- * - Validates authentication and authorization using stored tokens and user ID.
- * - Fetches the user's details and retrieves their associated courses.
- * - Ensures `startDate` and `endDate` fields in courses are converted to `Date` objects.
+ * Loads the first course (with its modules) for the currently authenticated user.
+ * - Verifies authentication by checking for a valid token.
+ * - Retrieves the current user's ID from the JWT.
+ * - Fetches the user details and extracts their associated course IDs.
+ * - Loads the first course and its modules, ensuring date fields are converted to `Date` objects.
+ * - Returns `Promise<null>` if the user has no linked courses.
  *
- * @returns {Promise<IDashboardDifferedLoader>} An object containing a promise of the user's courses.
+ * @returns {Promise<IMyCourseDifferedLoader>} An object containing a promise of the user's first course with modules, or `null` if none exist.
  *
  * @throws {Response} 401 - If the user is not authenticated (missing token).
  * @throws {Response} 403 - If the user ID cannot be determined.
- * @throws {Response} 502 - If fetching the user or course data fails.
+ * @throws {Response} 502 - If fetching user or course data fails.
  */
 export async function CourseForUserDifferedLoader(): Promise<IDashboardDifferedLoader> {
   const token = getTokens();
@@ -33,6 +35,9 @@ export async function CourseForUserDifferedLoader(): Promise<IDashboardDifferedL
   if (!userId) throw new Response("Forbidden", { status: 403 }); // Todo: implement standardized exception/Response handling?.
 
   const user: IUser = await fetchUserById(userId);
+
+  if (user.courseIds.length === 0)
+    return { userCourses: Promise.resolve(null) };
 
   const courses: Promise<ICourse[]> = Promise.all(
     user.courseIds.map(async (cId) => {

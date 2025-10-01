@@ -41,7 +41,10 @@ export default function TeacherDashboard(): ReactElement {
           <Suspense>
             <Await resolve={userCourses}>
               {(uC) => (
-                <TeacherDashboardCourses courses={uC} onChange={setTab} />
+                <TeacherDashboardCourses
+                  courses={uC ? uC : []}
+                  onChange={setTab}
+                />
               )}
             </Await>
           </Suspense>
