@@ -1,4 +1,3 @@
-import { CustomError } from "../features/shared/classes";
 import { BASE_URL } from "../features/shared/constants";
 import {
   ICourse,
@@ -6,6 +5,7 @@ import {
   IModule,
 } from "../features/shared/types/types";
 import { fetchWithToken } from "../features/shared/utilities";
+import { catchFetchErrors } from "./fetchErrorsCatcher";
 import { fetchModulesForCourseById } from "./moduleFetcher";
 
 /**
@@ -26,19 +26,7 @@ export async function fetchCourseById(guid: string): Promise<ICourse> {
   try {
     return await fetchWithToken<ICourse>(`${BASE_URL}/course/${guid}`);
   } catch (e) {
-    if (e instanceof CustomError && e.errorCode === 401)
-      throw new Response("Unauthorized", { status: 401 }); // Todo: Better message is needed.
-
-    if (e instanceof CustomError && e.errorCode === 403)
-      throw new Response("Forbidden", { status: 403 }); // Todo: Better message is needed.
-
-    if (e instanceof CustomError && e.errorCode === 404)
-      throw new Response(`Could not find a course with id: ${guid}`, {
-        status: 404,
-      });
-
-    const msg = e instanceof Error ? e.message : "Failed to load course";
-    throw new Response(msg, { status: 502 });
+    catchFetchErrors(e, "course", guid);
   }
 }
 
@@ -80,18 +68,6 @@ export async function fetchCourseWithModules(
       modules: modulesWithDate,
     };
   } catch (e) {
-    if (e instanceof CustomError && e.errorCode === 401)
-      throw new Response("Unauthorized", { status: 401 }); // Todo: Better message is needed.
-
-    if (e instanceof CustomError && e.errorCode === 403)
-      throw new Response("Forbidden", { status: 403 }); // Todo: Better message is needed.
-
-    if (e instanceof CustomError && e.errorCode === 404)
-      throw new Response(`Could not find a course with id: ${guid}`, {
-        status: 404,
-      });
-
-    const msg = e instanceof Error ? e.message : "Failed to load course";
-    throw new Response(msg, { status: 502 });
+    catchFetchErrors(e, "course", guid);
   }
 }

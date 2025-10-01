@@ -2,6 +2,7 @@ import { CustomError } from "../features/shared/classes";
 import { BASE_URL } from "../features/shared/constants";
 import { IModule, PagedResponse } from "../features/shared/types";
 import { fetchWithToken } from "../features/shared/utilities/fetchWithToken";
+import { catchFetchErrors } from "./fetchErrorsCatcher";
 
 /**
  * Fetches all modules for a given course by its unique identifier.
@@ -32,18 +33,6 @@ export async function fetchModulesForCourseById(
       endDate: m.endDate ? new Date(m.endDate) : undefined,
     }));
   } catch (e) {
-    if (e instanceof CustomError && e.errorCode === 401)
-      throw new Response("Unauthorized", { status: 401 }); // Todo: Better message is needed.
-
-    if (e instanceof CustomError && e.errorCode === 403)
-      throw new Response("Forbidden", { status: 403 }); // Todo: Better message is needed.
-
-    if (e instanceof CustomError && e.errorCode === 404)
-      throw new Response(`Could not find a course with id: ${guid}`, {
-        status: 404,
-      });
-
-    const msg = e instanceof Error ? e.message : "Failed to load course";
-    throw new Response(msg, { status: 502 });
+    catchFetchErrors(e, "course", guid);
   }
 }
