@@ -7,10 +7,18 @@ import { ActivitiesForModule } from "./ActivitiesForModule";
 interface IModuleListProps {
   modules: IModule[];
   progress: Record<string, { completed: number; total: number }>;
-  onProgressChange: (moduleId: string, completed: number, total: number) => void;
+  onProgressChange: (
+    moduleId: string,
+    completed: number,
+    total: number
+  ) => void;
 }
 
-export const ModuleList: React.FC<IModuleListProps> = ({ modules, progress, onProgressChange }) => {
+export const ModuleList: React.FC<IModuleListProps> = ({
+  modules,
+  progress,
+  onProgressChange,
+}) => {
   const { openModules, toggleModule } = useModuleList();
 
   return (
@@ -20,7 +28,8 @@ export const ModuleList: React.FC<IModuleListProps> = ({ modules, progress, onPr
         {modules.map((mod) => {
           const moduleProgress = progress[mod.id] ?? { completed: 0, total: 0 };
           const isCompleted =
-            moduleProgress.total > 0 && moduleProgress.completed === moduleProgress.total;
+            moduleProgress.total > 0 &&
+            moduleProgress.completed === moduleProgress.total;
           const isOpen = openModules.includes(mod.id);
 
           return (
@@ -31,20 +40,35 @@ export const ModuleList: React.FC<IModuleListProps> = ({ modules, progress, onPr
                 className="module-button-item list-group-item"
               >
                 <div className="module-item-container">
-                  <div className={`icon-wrapper ${isCompleted ? "check" : "menu_book"}`}>
+                  <div
+                    className={`icon-wrapper ${
+                      isCompleted ? "check" : "menu_book"
+                    }`}
+                  >
                     <span className={`material-symbols-outlined`}>
                       {isCompleted ? "task_alt" : "menu_book"}
                     </span>
                   </div>
-                  <TitleDate title={mod.name} startDate={mod.startDate} endDate={mod.endDate} />
+                  <TitleDate
+                    title={mod.name}
+                    startDate={mod.startDate}
+                    endDate={mod.endDate}
+                  />
                 </div>
 
                 <div className="progress-arrow-container">
-                  <ProgressBar total={moduleProgress.total} completed={moduleProgress.completed} />
+                  <ProgressBar
+                    total={moduleProgress.total || 1}
+                    completed={moduleProgress.completed}
+                  />
                   {isOpen ? (
-                    <span className="material-symbols-outlined">keyboard_arrow_down</span>
+                    <span className="material-symbols-outlined">
+                      keyboard_arrow_down
+                    </span>
                   ) : (
-                    <span className="material-symbols-outlined">keyboard_arrow_right</span>
+                    <span className="material-symbols-outlined">
+                      keyboard_arrow_right
+                    </span>
                   )}
                 </div>
               </button>
