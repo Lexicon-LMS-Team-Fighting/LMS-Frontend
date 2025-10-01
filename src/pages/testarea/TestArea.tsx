@@ -1,5 +1,5 @@
 import React from 'react';
-import Dashboard from '../Dashboard';
+import AddNewModules from '../../features/shared/components/AddNewModules';
 
 export const TestArea = () => {
     return (
@@ -14,7 +14,7 @@ export const TestArea = () => {
         <div className="spinner-border" role="status">
             <span className="visually-hidden">Loading...</span>
         </div> */}
-        <Dashboard />
+        <AddNewModules />
         </>
     );
 };
