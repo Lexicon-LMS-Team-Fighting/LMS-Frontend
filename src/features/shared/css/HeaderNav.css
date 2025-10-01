@@ -16,3 +16,7 @@ nav div button.book-logo span{
 nav div h1{
     color: black;
 }
+
+.navbar-container{
+  height: 5rem;
+}

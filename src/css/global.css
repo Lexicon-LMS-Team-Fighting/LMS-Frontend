@@ -3,7 +3,12 @@
 }
 
 .main-wrapper {
-  padding:1rem;
+  padding-left:1rem;
+  padding-right:1rem;
+  padding-top:1rem;
+  width: 100%;
+  min-height: calc(100vh - var(--header-height));
+  height: auto;
 }
 
 
@@ -15,3 +20,16 @@
   .text-gray {
     color: var(--text-gray);
   }
+
+
+  
+.master-row {
+  display: flex;
+  flex-direction: row;
+}
+
+@media screen and (max-width: 810px) {
+  .master-row {
+    flex-direction: column;
+  }
+}
