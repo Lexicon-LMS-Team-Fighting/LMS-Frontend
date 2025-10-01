@@ -28,7 +28,6 @@ export default function StudentDashboard(): ReactElement {
         </div>
       </section>
 
-
         <section className="dashboard-module-section">
 
             <div className="dashboard-module-header">
@@ -55,5 +54,6 @@ export default function StudentDashboard(): ReactElement {
                 </section>
  
       </main>
+
   );
 }
