@@ -30,7 +30,7 @@ export default function TeacherDashboardCourses({
 
   useEffect(() => {
     setCourseArr(courses);
-  }, []);
+  }, [courses]);
 
   return (
     <section className="dashboard-courses-container">
