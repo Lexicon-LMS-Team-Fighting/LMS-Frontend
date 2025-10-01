@@ -3,6 +3,7 @@ import { ModuleList, ProgressBar } from "../../features/shared/components";
 import { TitleDate } from "../../features/shared/components/TitleDate";
 import { Await, useLoaderData } from "react-router";
 import { IMyCourseDifferedLoader } from "../../features/auth/loaders/myCourseLoader";
+import { ICourseWithModules, IModule } from "../../features/shared/types";
 
 export const MyCourse = () => {
   const { myCourse } = useLoaderData<IMyCourseDifferedLoader>();
@@ -27,31 +28,45 @@ export const MyCourse = () => {
     0
   );
 
+  function renderModuleList(modules: IModule[]) {
+    return (
+      <ModuleList
+        modules={modules}
+        progress={progress}
+        onProgressChange={handleModuleProgressChange}
+      />
+    );
+  }
+
+  function renderCourse(course: ICourseWithModules) {
+    return (
+      <main className="course-page">
+        <h1 className="course-title">{course.name}</h1>
+        <p className="course-description">{course.description}</p>
+        <TitleDate startDate={course.startDate} endDate={course.endDate} />
+
+        <section className="course-progress">
+          <h2 className="course-progress-title">Kursframsteg</h2>
+          <ProgressBar
+            total={courseTotal || 1}
+            completed={courseCompleted}
+            fullSize={true}
+          />
+        </section>
+
+        {course.modules ? (
+          renderModuleList(course.modules)
+        ) : (
+          <p>No modules..</p>
+        )}
+      </main>
+    );
+  }
+
   return (
     <Suspense>
       <Await resolve={myCourse}>
-        {(mc) => (
-          <main className="course-page">
-            <h1 className="course-title">{mc.name}</h1>
-            <p className="course-description">{mc.description}</p>
-            <TitleDate startDate={mc.startDate} endDate={mc.endDate} />
-
-            <section className="course-progress">
-              <h2 className="course-progress-title">Kursframsteg</h2>
-              <ProgressBar
-                total={courseTotal || 1}
-                completed={courseCompleted}
-                fullSize={true}
-              />
-            </section>
-
-            <ModuleList
-              modules={mc.modules}
-              progress={progress}
-              onProgressChange={handleModuleProgressChange}
-            />
-          </main>
-        )}
+        {(mc) => (mc ? renderCourse(mc) : <p>No course registered..</p>)}
       </Await>
     </Suspense>
   );

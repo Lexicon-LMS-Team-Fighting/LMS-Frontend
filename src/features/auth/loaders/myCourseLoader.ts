@@ -8,7 +8,7 @@ import { getTokens } from "../utilities/tokens";
  * Represents the shape of the loader result for the current user's course with modules.
  */
 export interface IMyCourseDifferedLoader {
-  myCourse: Promise<ICourseWithModules>;
+  myCourse: Promise<ICourseWithModules | null>;
 }
 
 /**
@@ -35,8 +35,16 @@ export async function MyCourseDifferedLoader(): Promise<IMyCourseDifferedLoader>
   if (!userId) throw new Response("Forbidden", { status: 403 }); // Todo: implement standardized exception/Response handling?.
 
   const user: IUser = await fetchUserById(userId);
-  const courseId = user.courseIds[0];
-  const course: ICourseWithModules = await fetchCourseWithModules(courseId);
 
-  return { myCourse: Promise.resolve(course) };
+  // User is not registered on any course
+  if (user.courseIds.length > 0) {
+    const courseId = user.courseIds[0];
+
+    const course: Promise<ICourseWithModules> =
+      fetchCourseWithModules(courseId);
+
+    return { myCourse: course };
+  }
+
+  return { myCourse: Promise.resolve(null) };
 }
