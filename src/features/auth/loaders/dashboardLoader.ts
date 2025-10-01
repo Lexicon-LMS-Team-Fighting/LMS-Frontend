@@ -17,7 +17,7 @@ export interface IDashboardDifferedLoader {
  * - Fetches the user's details and retrieves their associated courses.
  * - Ensures `startDate` and `endDate` fields in courses are converted to `Date` objects.
  *
- * @returns {Promise<ICourseForUserDifferedLoader>} An object containing a promise of the user's courses.
+ * @returns {Promise<IDashboardDifferedLoader>} An object containing a promise of the user's courses.
  *
  * @throws {Response} 401 - If the user is not authenticated (missing token).
  * @throws {Response} 403 - If the user ID cannot be determined.
@@ -34,7 +34,7 @@ export async function CourseForUserDifferedLoader(): Promise<IDashboardDifferedL
 
   const user: IUser = await fetchUserById(userId);
 
-  const courses: ICourse[] = await Promise.all(
+  const courses: Promise<ICourse[]> = Promise.all(
     user.courseIds.map(async (cId) => {
       const courseData = await fetchCourseById(cId);
       return {
@@ -45,5 +45,5 @@ export async function CourseForUserDifferedLoader(): Promise<IDashboardDifferedL
     })
   );
 
-  return { userCourses: Promise.resolve(courses) };
+  return { userCourses: courses };
 }
