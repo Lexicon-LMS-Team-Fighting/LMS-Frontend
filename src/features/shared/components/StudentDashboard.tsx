@@ -20,13 +20,14 @@ export default function StudentDashboard(): ReactElement {
     <main className="main-wrapper">
       <h1 className="fs-3 mb-4">Välkommen tillbaka!</h1>
 
-               <section className="row-space-between mb-3">
-            <h2 className="fs-5">Veckans Aktiviteter</h2>
-            <div className="week-banner">
-                <img id="calender-icon" src="calender-icon.svg" alt="Calender"/>
-                <span>Vecka {week}</span>
-            </div>
-        </section>
+      <section className="row-space-between mb-3">
+        <h2 className="fs-5">Veckans Aktiviteter</h2>
+        <div className="week-banner">
+          <img id="calender-icon" src="calender-icon.svg" alt="Calender" />
+          <span>Vecka {week}</span>
+        </div>
+      </section>
+
 
         <section className="dashboard-module-section">
 
