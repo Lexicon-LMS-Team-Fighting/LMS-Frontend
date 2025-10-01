@@ -13,7 +13,6 @@ export const TitleDate: React.FC<ITitleDateProps> = ({
   endDate,
   activityType,
 }) => {
-  console.log(title);
   return (
     <div
       className={
