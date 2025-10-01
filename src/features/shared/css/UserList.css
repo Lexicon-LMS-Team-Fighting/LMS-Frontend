@@ -31,3 +31,6 @@ p.user-data {
   padding-inline: 1.5rem;
 }
 
+.user-data.user-email a {
+  text-decoration: none;
+}
