@@ -30,3 +30,11 @@ export interface ICourse {
   startDate: string;
   endDate: string;
 }
+
+// Interface type for the User data, used in UserList.tsx to plot the user for said list.
+export interface IUser {
+  userId: string;
+  userName: string;
+  name: string;
+  email: string;
+}
