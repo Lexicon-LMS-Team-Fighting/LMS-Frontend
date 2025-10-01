@@ -10,3 +10,12 @@
 .user-list-group.list-group {
   background-color: white;
 }
+
+.list-group-item.user-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
+  background-color: white;
+
+  padding: 0;
+}
