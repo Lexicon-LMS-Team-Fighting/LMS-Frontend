@@ -14,6 +14,7 @@ import { CourseForUserDifferedLoader } from "../features/auth/loaders/courseForU
 import RoleSwitch from "../pages/RoleSwitch";
 import { MyCourse } from "../pages/course/MyCourse";
 import { course } from "../features/shared/dummydata/courses";
+import { MyCourseDifferedLoader } from "../features/auth/loaders/myCourseLoader";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,7 +34,7 @@ export const router = createBrowserRouter(
         <Route
           element={<MyCourse course={course} modules={modules} />}
           path="/course"
-          loader={CourseForUserDifferedLoader}
+          loader={MyCourseDifferedLoader}
         />
       </Route>
     </>

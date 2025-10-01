@@ -1,13 +1,84 @@
 import { CustomError } from "../features/shared/classes";
 import { BASE_URL } from "../features/shared/constants";
-import { ICourse } from "../features/shared/types/types";
+import {
+  ICourse,
+  ICourseWithModules,
+  IModule,
+} from "../features/shared/types/types";
 import { fetchWithToken } from "../features/shared/utilities";
+import { fetchModulesForCourseById } from "./moduleFetcher";
 
+/**
+ * Fetches a course by its unique identifier.
+ *
+ * @param {string} guid - The unique course ID.
+ * @returns {Promise<ICourse>} A promise resolving to the course object.
+ *
+ * @throws {Response} 400 - If the course ID is missing.
+ * @throws {Response} 401 - If the request is unauthorized.
+ * @throws {Response} 403 - If access is forbidden.
+ * @throws {Response} 404 - If no course is found with the given ID.
+ * @throws {Response} 502 - If the request fails for another reason.
+ */
 export async function fetchCourseById(guid: string): Promise<ICourse> {
   if (!guid) throw new Response("Course id missing", { status: 400 });
 
   try {
     return await fetchWithToken<ICourse>(`${BASE_URL}/course/${guid}`);
+  } catch (e) {
+    if (e instanceof CustomError && e.errorCode === 401)
+      throw new Response("Unauthorized", { status: 401 }); // Todo: Better message is needed.
+
+    if (e instanceof CustomError && e.errorCode === 403)
+      throw new Response("Forbidden", { status: 403 }); // Todo: Better message is needed.
+
+    if (e instanceof CustomError && e.errorCode === 404)
+      throw new Response(`Could not find a course with id: ${guid}`, {
+        status: 404,
+      });
+
+    const msg = e instanceof Error ? e.message : "Failed to load course";
+    throw new Response(msg, { status: 502 });
+  }
+}
+
+/**
+ * Fetches a course along with its related modules.
+ * Converts all date fields (course and modules) into Date objects.
+ *
+ * @param {string} guid - The unique course ID.
+ * @returns {Promise<ICourseWithModules>} A promise resolving to the course with its modules.
+ *
+ * @throws {Response} 400 - If the course ID is missing.
+ * @throws {Response} 401 - If the request is unauthorized.
+ * @throws {Response} 403 - If access is forbidden.
+ * @throws {Response} 404 - If no course is found with the given ID.
+ * @throws {Response} 502 - If the request fails for another reason.
+ */
+export async function fetchCourseWithModules(
+  guid: string
+): Promise<ICourseWithModules> {
+  if (!guid) throw new Response("Course id missing", { status: 400 });
+
+  try {
+    const courseDate = await fetchWithToken<ICourseWithModules>(
+      `${BASE_URL}/course/${guid}`
+    );
+
+    const modules: IModule[] = await fetchModulesForCourseById(guid);
+
+    const modulesWithDate: IModule[] = modules.map((m) => ({
+      ...m,
+      startDate: new Date(m.startDate),
+      endDate: m.endDate ? new Date(m.endDate) : undefined,
+    }));
+
+    return {
+      ...courseDate,
+      startDate: new Date(courseDate.startDate),
+      endDate: new Date(courseDate.endDate),
+      modules: modulesWithDate,
+    };
   } catch (e) {
     if (e instanceof CustomError && e.errorCode === 401)
       throw new Response("Unauthorized", { status: 401 }); // Todo: Better message is needed.
