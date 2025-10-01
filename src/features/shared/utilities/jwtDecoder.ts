@@ -1,6 +1,14 @@
 import { jwtDecode } from "jwt-decode";
 import { getTokens } from "../../auth/utilities";
 
+/**
+ * Extracts the current user's ID from the access token.
+ * - Retrieves the stored tokens.
+ * - Decodes the access token using `jwt-decode`.
+ * - Reads the `nameidentifier` claim from the token.
+ *
+ * @returns {string | null} The user ID if available, otherwise `null`.
+ */
 export function getCurrentUserId(): string | null {
   const token = getTokens();
 
@@ -19,6 +27,14 @@ export function getCurrentUserId(): string | null {
   }
 }
 
+/**
+ * Extracts the current user's role from the access token.
+ * - Retrieves the stored tokens.
+ * - Decodes the access token using `jwt-decode`.
+ * - Reads the `role` claim from the token.
+ *
+ * @returns {string | null} The user role if available, otherwise `null`.
+ */
 export function getCurrentUserRole(): string | null {
   const token = getTokens();
 

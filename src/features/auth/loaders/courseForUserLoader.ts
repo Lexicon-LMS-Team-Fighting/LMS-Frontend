@@ -4,10 +4,25 @@ import { ICourse, IUser } from "../../shared/types/types";
 import { getCurrentUserId } from "../../shared/utilities/jwtDecoder";
 import { getTokens } from "../utilities";
 
+/**
+ * Represents the shape of the loader result for a user's courses.
+ */
 export interface ICourseForUserDifferedLoader {
   userCourses: Promise<ICourse[]>;
 }
 
+/**
+ * Loads all courses for the currently authenticated user.
+ * - Validates authentication and authorization using stored tokens and user ID.
+ * - Fetches the user's details and retrieves their associated courses.
+ * - Ensures `startDate` and `endDate` fields in courses are converted to `Date` objects.
+ *
+ * @returns {Promise<ICourseForUserDifferedLoader>} An object containing a promise of the user's courses.
+ *
+ * @throws {Response} 401 - If the user is not authenticated (missing token).
+ * @throws {Response} 403 - If the user ID cannot be determined.
+ * @throws {Response} 502 - If fetching the user or course data fails.
+ */
 export async function CourseForUserDifferedLoader(): Promise<ICourseForUserDifferedLoader> {
   const token = getTokens();
 
@@ -22,8 +37,6 @@ export async function CourseForUserDifferedLoader(): Promise<ICourseForUserDiffe
   const courses: ICourse[] = await Promise.all(
     user.courseIds.map(async (cId) => {
       const courseData = await fetchCourseById(cId);
-      console.log(`print loop: ${courseData}`);
-
       return {
         ...courseData,
         startDate: new Date(courseData.startDate),
