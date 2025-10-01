@@ -24,3 +24,10 @@
   background-color: var(--background-gray);
 }
 
+p.user-data {
+  margin: 0;
+
+  padding-block: 0.75rem;
+  padding-inline: 1.5rem;
+}
+
