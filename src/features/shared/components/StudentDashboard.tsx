@@ -2,20 +2,19 @@ import { ReactElement } from "react";
 import "../css/StudentDashboard.css";
 
 //TODO, take fetch data when implemented and send it down to the different components
+const getWeek = (date = new Date()): { week: number; year: number } => {
+  const dateObj = new Date(
+    Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
+  );
+  const day = dateObj.getUTCDay() || 7;
+  dateObj.setUTCDate(dateObj.getUTCDate() + 4 - day);
+  const isoYear = dateObj.getUTCFullYear();
+  const yearStart = new Date(Date.UTC(isoYear, 0, 1));
+  const week = Math.ceil(((+dateObj - +yearStart) / 86400000 + 1) / 7);
+  return { week, year: isoYear };
+};
 
 export default function StudentDashboard(): ReactElement {
-  const getWeek = (date = new Date()): { week: number; year: number } => {
-    const dateObj = new Date(
-      Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
-    );
-    const day = dateObj.getUTCDay() || 7;
-    dateObj.setUTCDate(dateObj.getUTCDate() + 4 - day);
-    const isoYear = dateObj.getUTCFullYear();
-    const yearStart = new Date(Date.UTC(isoYear, 0, 1));
-    const week = Math.ceil(((+dateObj - +yearStart) / 86400000 + 1) / 7);
-    return { week, year: isoYear };
-  };
-
   const { week } = getWeek();
 
   return (
