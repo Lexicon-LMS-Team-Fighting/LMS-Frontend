@@ -1,20 +1,12 @@
 import { Suspense, useCallback, useState } from "react";
 import { ModuleList, ProgressBar } from "../../features/shared/components";
 import { TitleDate } from "../../features/shared/components/TitleDate";
-import { ICourse, IModule } from "../../features/shared/types";
-import { ICourseForUserDifferedLoader } from "../../features/auth/loaders/courseForUserLoader";
 import { Await, useLoaderData } from "react-router";
 import { IMyCourseDifferedLoader } from "../../features/auth/loaders/myCourseLoader";
 
-interface IMyCourseProps {
-  course: ICourse;
-  modules: IModule[];
-}
-
-export const MyCourse: React.FC<IMyCourseProps> = ({ course, modules }) => {
+export const MyCourse = () => {
   const { myCourse } = useLoaderData<IMyCourseDifferedLoader>();
 
-  console.log("LOG", myCourse);
   const [progress, setProgress] = useState<
     Record<string, { completed: number; total: number }>
   >({});

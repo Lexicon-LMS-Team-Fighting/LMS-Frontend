@@ -6,14 +6,10 @@ import {
 import { App } from ".";
 import { Login } from "../pages/login";
 import { requireAuthLoader } from "../features/auth/loaders";
-import { Companies, Company } from "../features/companies/components";
-import { companiesLoader, companyLoader } from "../features/companies/loaders";
 import { TestArea } from "../pages/testarea";
-import { modules } from "../features/shared/dummydata";
 import { CourseForUserDifferedLoader } from "../features/auth/loaders/courseForUserLoader";
 import RoleSwitch from "../pages/RoleSwitch";
 import { MyCourse } from "../pages/course/MyCourse";
-import { course } from "../features/shared/dummydata/courses";
 import { MyCourseDifferedLoader } from "../features/auth/loaders/myCourseLoader";
 
 export const router = createBrowserRouter(
@@ -32,7 +28,7 @@ export const router = createBrowserRouter(
         <Route element={<TestArea />} path="/testarea" />
         {/* TODO: Edit this when everything else is properly implemented (Login, Header, Side Menu etc.) */}
         <Route
-          element={<MyCourse course={course} modules={modules} />}
+          element={<MyCourse />}
           path="/course"
           loader={MyCourseDifferedLoader}
         />
