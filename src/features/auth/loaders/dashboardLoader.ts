@@ -11,8 +11,6 @@ export interface IDashboardDifferedLoader {
 
 /**
  * Loads the first course (with its modules) for the currently authenticated user.
- * - Verifies authentication by checking for a valid token.
- * - Retrieves the current user's ID from the JWT.
  * - Fetches the user details and extracts their associated course IDs.
  * - Loads the first course and its modules, ensuring date fields are converted to `Date` objects.
  * - Returns `Promise<null>` if the user has no linked courses.

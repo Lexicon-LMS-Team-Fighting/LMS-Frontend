@@ -1,11 +1,6 @@
 import { fetchCourseWithModules } from "../../../fetchers/courseFetcher";
-import {
-  fetchUserExtendedById,
-  fetchUserFromToken,
-} from "../../../fetchers/userFetcher";
+import { fetchUserFromToken } from "../../../fetchers/userFetcher";
 import { ICourseWithModules, IUserExtended } from "../../shared/types/types";
-import { getCurrentUserId } from "../../shared/utilities/jwtDecoder";
-import { getTokens } from "../utilities/tokens";
 
 /**
  * Represents the shape of the loader result for the current user's course with modules.
@@ -16,8 +11,6 @@ export interface IMyCourseDifferedLoader {
 
 /**
  * Loads the first course (with its modules) for the currently authenticated user.
- * - Verifies authentication by checking for a valid token.
- * - Retrieves the current user's ID from the JWT.
  * - Fetches the user details and extracts their associated course IDs.
  * - Loads the first course and its modules, ensuring date fields are converted to `Date` objects.
  *
