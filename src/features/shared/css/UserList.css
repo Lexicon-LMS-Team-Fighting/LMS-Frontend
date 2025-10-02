@@ -40,4 +40,12 @@ p.item-heading {
   margin: 0;
 }
 
+@media screen and (max-width: 768px) {
+  .user-list-header.desktop-view {
+    display: none;
+  }
+
+  .user-list-group.list-group {
+    overflow-x: hidden;
+  }
 }
