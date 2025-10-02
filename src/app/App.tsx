@@ -7,8 +7,6 @@ export function App() {
     <>
       <HeaderNav />
       <Outlet />
-      {/* used to chose compontents based on role */}
-      {/* <RoleSwitch /> */}
     </>
   );
 }

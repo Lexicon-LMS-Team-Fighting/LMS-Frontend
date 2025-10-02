@@ -6,6 +6,8 @@ import TeacherDashboardCourses from "./TeacherDashboardCourses";
 import TeacherDashboardOverview from "./TeacherDashboardOverview";
 import { Await, useLoaderData } from "react-router";
 import { IDashboardDifferedLoader } from "../../auth/loaders/dashboardLoader";
+import { AwaitError } from "./AwaitError";
+import { Spinner } from "./Spinner";
 
 export default function TeacherDashboard(): ReactElement {
   const { userCourses } = useLoaderData<IDashboardDifferedLoader>();
@@ -35,8 +37,8 @@ export default function TeacherDashboard(): ReactElement {
       <section className="options-view">
         {tab === "overview" && <TeacherDashboardOverview />}
         {tab === "courses" && (
-          <Suspense>
-            <Await resolve={userCourses}>
+          <Suspense fallback={<Spinner />}>
+            <Await resolve={userCourses} errorElement={<AwaitError />}>
               {(uC) => (
                 <TeacherDashboardCourses
                   courses={uC ? uC : []}

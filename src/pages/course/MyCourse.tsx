@@ -4,6 +4,8 @@ import { TitleDate } from "../../features/shared/components/TitleDate";
 import { Await, useLoaderData } from "react-router";
 import { IMyCourseDifferedLoader } from "../../features/auth/loaders/myCourseLoader";
 import { ICourseWithModules, IModule } from "../../features/shared/types";
+import { Spinner } from "../../features/shared/components/Spinner";
+import { AwaitError } from "../../features/shared/components/AwaitError";
 
 export const MyCourse = () => {
   const { myCourse } = useLoaderData<IMyCourseDifferedLoader>();
@@ -64,8 +66,8 @@ export const MyCourse = () => {
   }
 
   return (
-    <Suspense>
-      <Await resolve={myCourse}>
+    <Suspense fallback={<Spinner />}>
+      <Await resolve={myCourse} errorElement={<AwaitError />}>
         {(mc) => (mc ? renderCourse(mc) : <p>No course registered..</p>)}
       </Await>
     </Suspense>

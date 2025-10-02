@@ -1,6 +1,10 @@
 import { fetchCourseById } from "../../../fetchers/courseFetcher";
 import { fetchUserExtendedById } from "../../../fetchers/userFetcher";
-import { ICourse, IUser, IUserExtended } from "../../shared/types/types";
+import {
+  ICourse,
+  ICourseWithModules,
+  IUserExtended,
+} from "../../shared/types/types";
 import { getCurrentUserId } from "../../shared/utilities/jwtDecoder";
 import { getTokens } from "../utilities";
 
