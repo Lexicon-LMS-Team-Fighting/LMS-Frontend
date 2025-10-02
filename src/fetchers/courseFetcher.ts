@@ -50,22 +50,18 @@ export async function fetchCourseWithModules(
 
   try {
     const courseDate = await fetchWithToken<ICourseWithModules>(
-      `${BASE_URL}/course/${guid}`
+      `${BASE_URL}/course/${guid}?include=modules`
     );
-
-    const modules: IModule[] = await fetchModulesForCourseById(guid);
-
-    const modulesWithDate: IModule[] = modules.map((m) => ({
-      ...m,
-      startDate: new Date(m.startDate),
-      endDate: m.endDate ? new Date(m.endDate) : undefined,
-    }));
 
     return {
       ...courseDate,
       startDate: new Date(courseDate.startDate),
       endDate: new Date(courseDate.endDate),
-      modules: modulesWithDate,
+      modules: courseDate.modules?.map((m) => ({
+        ...m,
+        startDate: new Date(m.startDate),
+        endDate: m.endDate ? new Date(m.endDate) : undefined,
+      })),
     };
   } catch (e) {
     catchFetchErrors(e, "course", guid);

@@ -83,7 +83,13 @@ export interface IUser {
   lastName: string;
   refreshToken: string;
   refreshTokenExpireTime: Date;
-  courseIds: string[];
+}
+
+/**
+ * Represents a user with courses they attends. Extends IUser
+ */
+export interface IUserExtended extends IUser {
+  courses: ICourse[];
 }
 
 /**

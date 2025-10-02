@@ -1,6 +1,6 @@
 import { fetchCourseById } from "../../../fetchers/courseFetcher";
-import { fetchUserById } from "../../../fetchers/userFetcher";
-import { ICourse, IUser } from "../../shared/types/types";
+import { fetchUserExtendedById } from "../../../fetchers/userFetcher";
+import { ICourse, IUser, IUserExtended } from "../../shared/types/types";
 import { getCurrentUserId } from "../../shared/utilities/jwtDecoder";
 import { getTokens } from "../utilities";
 
@@ -19,13 +19,13 @@ export interface IDashboardDifferedLoader {
  * - Loads the first course and its modules, ensuring date fields are converted to `Date` objects.
  * - Returns `Promise<null>` if the user has no linked courses.
  *
- * @returns {Promise<IMyCourseDifferedLoader>} An object containing a promise of the user's first course with modules, or `null` if none exist.
+ * @returns {Promise<IDashboardDifferedLoader>} An object containing a promise of the user's first course with modules, or `null` if none exist.
  *
  * @throws {Response} 401 - If the user is not authenticated (missing token).
  * @throws {Response} 403 - If the user ID cannot be determined.
  * @throws {Response} 502 - If fetching user or course data fails.
  */
-export async function CourseForUserDifferedLoader(): Promise<IDashboardDifferedLoader> {
+export async function DashboardDifferedLoader(): Promise<IDashboardDifferedLoader> {
   const token = getTokens();
 
   if (!token) throw new Response("Unauthorized", { status: 401 }); // Todo: implement standardized exception/Response handling?.
@@ -34,14 +34,13 @@ export async function CourseForUserDifferedLoader(): Promise<IDashboardDifferedL
 
   if (!userId) throw new Response("Forbidden", { status: 403 }); // Todo: implement standardized exception/Response handling?.
 
-  const user: IUser = await fetchUserById(userId);
+  const user: IUserExtended = await fetchUserExtendedById(userId);
 
-  if (user.courseIds.length === 0)
-    return { userCourses: Promise.resolve(null) };
+  if (user.courses.length === 0) return { userCourses: Promise.resolve(null) };
 
   const courses: Promise<ICourse[]> = Promise.all(
-    user.courseIds.map(async (cId) => {
-      const courseData = await fetchCourseById(cId);
+    user.courses.map(async (c) => {
+      const courseData = await fetchCourseById(c.id);
       return {
         ...courseData,
         startDate: new Date(courseData.startDate),

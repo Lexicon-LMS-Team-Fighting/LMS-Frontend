@@ -7,7 +7,7 @@ import { App } from ".";
 import { Login } from "../pages/login";
 import { requireAuthLoader } from "../features/auth/loaders";
 import { TestArea } from "../pages/testarea";
-import { CourseForUserDifferedLoader } from "../features/auth/loaders/dashboardLoader";
+import { DashboardDifferedLoader } from "../features/auth/loaders/dashboardLoader";
 import RoleSwitch from "../pages/RoleSwitch";
 import { MyCourse } from "../pages/course/MyCourse";
 import { MyCourseDifferedLoader } from "../features/auth/loaders/myCourseLoader";
@@ -22,7 +22,7 @@ export const router = createBrowserRouter(
         <Route
           element={<RoleSwitch />}
           path="dashboard"
-          loader={CourseForUserDifferedLoader}
+          loader={DashboardDifferedLoader}
         />
         {/* TODO: remove this in a production enviroment TestArea */}
         <Route element={<TestArea />} path="/testarea" />

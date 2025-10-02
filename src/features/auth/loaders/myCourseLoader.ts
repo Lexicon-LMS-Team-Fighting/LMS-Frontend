@@ -1,6 +1,7 @@
 import { fetchCourseWithModules } from "../../../fetchers/courseFetcher";
-import { fetchUserById } from "../../../fetchers/userFetcher";
-import { ICourseWithModules, IUser } from "../../shared/types/types";
+import { fetchUserExtendedById } from "../../../fetchers/userFetcher";
+
+import { ICourseWithModules, IUserExtended } from "../../shared/types/types";
 import { getCurrentUserId } from "../../shared/utilities/jwtDecoder";
 import { getTokens } from "../utilities/tokens";
 
@@ -34,14 +35,15 @@ export async function MyCourseDifferedLoader(): Promise<IMyCourseDifferedLoader>
 
   if (!userId) throw new Response("Forbidden", { status: 403 }); // Todo: implement standardized exception/Response handling?.
 
-  const user: IUser = await fetchUserById(userId);
+  const user: IUserExtended = await fetchUserExtendedById(userId);
 
   // User is not registered on any course
-  if (user.courseIds.length > 0) {
-    const courseId = user.courseIds[0];
+  if (user.courses.length > 0) {
+    const myCourse = user.courses[0];
 
-    const course: Promise<ICourseWithModules> =
-      fetchCourseWithModules(courseId);
+    const course: Promise<ICourseWithModules> = fetchCourseWithModules(
+      myCourse.id
+    );
 
     return { myCourse: course };
   }

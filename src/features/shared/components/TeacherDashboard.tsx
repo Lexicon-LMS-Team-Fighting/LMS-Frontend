@@ -9,10 +9,7 @@ import { IDashboardDifferedLoader } from "../../auth/loaders/dashboardLoader";
 
 export default function TeacherDashboard(): ReactElement {
   const { userCourses } = useLoaderData<IDashboardDifferedLoader>();
-
-  console.log(userCourses);
   const [tab, setTab] = useState<Tab>("overview"); //setting default tab to "overview"
-  console.log(tab);
 
   return (
     <main className="main-wrapper">

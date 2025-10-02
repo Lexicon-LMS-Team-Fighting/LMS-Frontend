@@ -1,4 +1,4 @@
-import { ReactElement, useState, useEffect } from "react";
+import { ReactElement, useState } from "react";
 import { Link } from "react-router";
 import "../css/TeacherDashboardCourses.css";
 import { Tab } from "./DashboardNavBar";
