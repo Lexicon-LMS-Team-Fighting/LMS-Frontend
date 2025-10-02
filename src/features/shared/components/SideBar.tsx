@@ -18,17 +18,21 @@ export const SideBar: React.FC<SideBarProps> = ({ items }) => {
   //if no items been proped. Use defaultItems
   const displayItems = items && items.length > 0 ? items : defaultItems;
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean> (false);
 
   const toggleAside = () => {
     setIsOpen(!isOpen);
   };
 
+  // const OpenMenu = () => {
+  //   setIsOpen(true);
+  // }
+
   return (
     <>
       <div className="sidebar-container">
         <button className="show-button" onClick={toggleAside}><span className="material-symbols-outlined">chevron_right</span></button>
-        <aside className={`sidebar${isOpen ? " closed" : ""}`}>
+        <aside className={`sidebar${isOpen ? " closed" : " open"}`}>
           <button className="close-button" onClick={toggleAside}>
             <span className="material-symbols-outlined">
               highlight_off

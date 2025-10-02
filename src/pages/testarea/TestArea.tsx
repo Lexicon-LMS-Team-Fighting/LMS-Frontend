@@ -3,7 +3,7 @@ import React from 'react';
 export const TestArea = () => {
     return (
         <>
-        <div>
+        {/* <div>
             <h1>Test Area</h1>
             <p>This is a testarea. Feel free to test</p>
             <button type="button" className="btn btn-primary">
@@ -12,7 +12,7 @@ export const TestArea = () => {
         </div>
         <div className="spinner-border" role="status">
             <span className="visually-hidden">Loading...</span>
-        </div>
+        </div> */}
         </>
     );
 };

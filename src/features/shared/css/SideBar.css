@@ -1,11 +1,12 @@
 @media (max-width: 768px) {
-  aside {
+  aside.closed {
+    transform: translateX(0%);
+  }
+
+ aside.open {
     transform: translateX(-100%);
   }
 
-  /* .open {
-    transform: translateX(0%);
-  } */
 }
 
 @media (min-width: 769px) {
@@ -13,7 +14,7 @@
     transform: translateX(0%);
   }
 
-   aside .open {
+   aside.open {
     transform: translateX(0);
   }
 }
