@@ -34,7 +34,13 @@ export interface ICourse {
 // Interface type for the User data, used in UserList.tsx to plot the user for said list.
 export interface IUser {
   userId: string;
-  userName: string;
-  name: string;
-  email: string;
+  // userName: string;
+  // name: string;
+  // email: string;
+  användarnamn: string; // userName
+  namn: string; // name (will probably have to be firstName+" "+lastName)
+  email: string; // email
+
+  //Add more optional fields for multipurpose use, for example for Teachers View
+  test?: string;
 }
