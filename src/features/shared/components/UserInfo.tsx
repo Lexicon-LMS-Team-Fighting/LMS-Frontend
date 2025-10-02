@@ -39,6 +39,27 @@ export const UserInfo: React.FC<IUserInfoProps> = ({ user, fields }) => {
           );
         })}
       </li>
+
+      {/* Dropdown for mobile */}
+      {isMobile && expanded && (
+        <li className="user-dropdown">
+          {fields.slice(1).map((field) => {
+            const value = user[field as keyof IUser];
+            if (!value) return null;
+            const label: string = field;
+            return (
+              <p key={field} className="dropdown-data">
+                <strong className="user-dropdown-label">{label}: </strong>
+                {field === "email" ? (
+                  <a href={`mailto:${value}`}>{value as string}</a>
+                ) : (
+                  (value as string)
+                )}
+              </p>
+            );
+          })}
+        </li>
+      )}
     </>
   );
 };
