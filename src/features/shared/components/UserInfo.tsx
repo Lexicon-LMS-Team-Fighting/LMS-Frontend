@@ -6,6 +6,12 @@ interface IUserInfoProps {
   user: IUser;
   fields: string[];
 }
+/**
+ * This component renders user data, note that for mobile view, it omits the first header lable to match the labels in the dropdown. The first element index in the fields array is set as "Label" and shown in the mobile view list.
+ * @param user IUser
+ * @param fields string[] of fields derived from users field names
+ * @returns The user with relevant data using IUser interface
+ */
 export const UserInfo: React.FC<IUserInfoProps> = ({ user, fields }) => {
   const [expanded, setExpanded] = useState(false);
   const isMobile = useMediaQuery("(max-width: 768px)");
