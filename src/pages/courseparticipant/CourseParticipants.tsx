@@ -1,8 +1,5 @@
-import { IUser, UserList, users } from "../../features/shared/components/UserList";
-
-interface ICourseParticipantsProps {
-  users: IUser[];
-}
+import { UserList } from "../../features/shared/components/UserList";
+import { users } from "../../features/shared/dummydata";
 
 export const CourseParticipants: React.FC = () => {
   return (
