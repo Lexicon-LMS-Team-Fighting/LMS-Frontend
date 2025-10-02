@@ -1,4 +1,3 @@
-import { CustomError } from "../features/shared/classes";
 import { BASE_URL } from "../features/shared/constants";
 import { IModule, PagedResponse } from "../features/shared/types";
 import { fetchWithToken } from "../features/shared/utilities/fetchWithToken";

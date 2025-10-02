@@ -1,12 +1,7 @@
 import { BASE_URL } from "../features/shared/constants";
-import {
-  ICourse,
-  ICourseWithModules,
-  IModule,
-} from "../features/shared/types/types";
+import { ICourse, ICourseWithModules } from "../features/shared/types/types";
 import { fetchWithToken } from "../features/shared/utilities";
 import { catchFetchErrors } from "./fetchErrorsCatcher";
-import { fetchModulesForCourseById } from "./moduleFetcher";
 
 /**
  * Fetches a course by its unique identifier.

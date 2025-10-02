@@ -1,4 +1,3 @@
-import { ITokens } from "../features/auth/types";
 import { getTokens } from "../features/auth/utilities";
 import { BASE_URL } from "../features/shared/constants";
 import { IUserExtended } from "../features/shared/types/types";
