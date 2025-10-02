@@ -1,6 +1,5 @@
 import { fetchCourseWithModules } from "../../../fetchers/courseFetcher";
 import { fetchUserExtendedById } from "../../../fetchers/userFetcher";
-
 import { ICourseWithModules, IUserExtended } from "../../shared/types/types";
 import { getCurrentUserId } from "../../shared/utilities/jwtDecoder";
 import { getTokens } from "../utilities/tokens";

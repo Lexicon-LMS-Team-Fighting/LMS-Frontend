@@ -6,8 +6,9 @@ import TeacherDashboardCourses from "./TeacherDashboardCourses";
 import TeacherDashboardOverview from "./TeacherDashboardOverview";
 import { Await, useLoaderData } from "react-router";
 import { IDashboardDifferedLoader } from "../../auth/loaders/dashboardLoader";
-import { AwaitError } from "./AwaitError";
+
 import { Spinner } from "./Spinner";
+import { AwaitError } from "./AwaitError";
 
 export default function TeacherDashboard(): ReactElement {
   const { userCourses } = useLoaderData<IDashboardDifferedLoader>();
