@@ -1,6 +1,8 @@
 .user-list-container {
-  overflow-x: auto;
   width: 100%;
+
+  overflow-x: auto;
+  scrollbar-width: thin;
 
   border-radius: var(--standard-radius);
   background-color: var(--background-gray);
@@ -8,29 +10,34 @@
 }
 
 .user-list-group.list-group {
+  display: block;
   background-color: white;
+
+  width: 100%;
+  max-width: 100%;
 }
 
-.list-group-item.user-item {
+.user-list-header {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(var(--col-count), 1fr);
 
-  background-color: white;
-
-  padding: 0;
-}
-
-.list-group-item.user-item:hover {
+  width: 100%;
   background-color: var(--background-gray);
+
+  border-top: 1px solid;
+  border-radius: var(--standard-radius);
+  border-color: var(--gray-200);
 }
 
-p.user-data {
-  margin: 0;
+p.item-heading {
+  text-transform: uppercase;
+  color: var(--gray-500);
+  font-size: 12px;
+  font-weight: 500;
 
   padding-block: 0.75rem;
   padding-inline: 1.5rem;
+  margin: 0;
 }
 
-.user-data.user-email a {
-  text-decoration: none;
 }
