@@ -34,3 +34,37 @@ p.user-data {
   color: var(--text-gray);
 }
 
+@media screen and (max-width: 768px) {
+  .list-group-item.user-item p:not(.user-main) {
+    display: none;
+  }
+
+  .list-group-item.user-item.mobile-view {
+    grid-template-columns: 1fr;
+  }
+
+  .list-group-item.user-item {
+    cursor: pointer;
+  }
+
+  .user-dropdown {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--background-gray);
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .user-dropdown .dropdown-data {
+    margin: 0.25rem 0;
+    font-size: 14px;
+  }
+
+  .user-dropdown-label {
+    text-transform: uppercase;
+
+    color: var(--gray-600);
+    font-size: 12px;
+    font-weight: 500;
+
+    margin: 0;
+  }
+}
