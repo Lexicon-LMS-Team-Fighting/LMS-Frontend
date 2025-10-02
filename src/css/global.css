@@ -21,11 +21,10 @@
     color: var(--text-gray);
   }
 
-
-  
 .master-row {
   display: flex;
   flex-direction: row;
+  gap: 1rem;
 }
 
 @media screen and (max-width: 810px) {
