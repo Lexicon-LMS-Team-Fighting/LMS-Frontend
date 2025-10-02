@@ -8,6 +8,7 @@ import { TestArea } from "../pages/testarea";
 import { modules } from "../features/shared/dummydata";
 import { course } from "../features/shared/dummydata/courses";
 import { MyCourse } from "../pages/course";
+import { CourseParticipants } from "../pages/courseparticipant";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -15,8 +16,8 @@ export const router = createBrowserRouter(
       {/* requireAuthLoader is a route guard that protects the App and its child routes. */}
       {/* TODO uncomment line below and remove "<Route element={<App />} path="/"></Route>" when front end login is done */}
       <Route element={<App />} loader={requireAuthLoader} path="/">
-   {/*    <Route element={<App />} path="/"> */}
-{/*         <Route element={<Companies />} index loader={companiesLoader} />
+        {/*    <Route element={<App />} path="/"> */}
+        {/*         <Route element={<Companies />} index loader={companiesLoader} />
         <Route
           element={<Company />}
           loader={({ params }) => {
@@ -30,6 +31,8 @@ export const router = createBrowserRouter(
       <Route element={<TestArea />} path="/testarea" />
       {/* TODO: Edit this when everything else is properly implemented (Login, Header, Side Menu etc.) */}
       <Route element={<MyCourse course={course} modules={modules} />} path="/course" />
+      {/* TODO: remove/move this before merging into production */}
+      <Route element={<CourseParticipants />} path="kursdeltagare" />
     </>
   )
 );
