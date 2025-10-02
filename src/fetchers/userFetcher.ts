@@ -1,6 +1,9 @@
+import { ITokens } from "../features/auth/types";
+import { getTokens } from "../features/auth/utilities";
 import { BASE_URL } from "../features/shared/constants";
 import { IUserExtended } from "../features/shared/types/types";
 import { fetchWithToken } from "../features/shared/utilities";
+import { getCurrentUserId } from "../features/shared/utilities/jwtDecoder";
 import { catchFetchErrors } from "./fetchErrorsCatcher";
 
 /**
@@ -24,5 +27,21 @@ export async function fetchUserExtendedById(
     return await fetchWithToken<IUserExtended>(`${BASE_URL}/user/${guid}`);
   } catch (e) {
     catchFetchErrors(e, "user", guid);
+  }
+}
+
+export async function fetchUserFromToken(): Promise<IUserExtended> {
+  const token = getTokens();
+
+  if (!token) throw new Response("Unauthorized", { status: 401 }); // Todo: implement standardized exception/Response handling?.
+
+  const userId = getCurrentUserId();
+
+  if (!userId) throw new Response("Forbidden", { status: 403 }); // Todo: implement standardized exception/Response handling?.
+
+  try {
+    return await fetchUserExtendedById(userId);
+  } catch (e) {
+    catchFetchErrors(e, "user", userId);
   }
 }

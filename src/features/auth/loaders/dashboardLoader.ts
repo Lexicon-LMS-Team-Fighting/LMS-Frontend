@@ -1,12 +1,6 @@
 import { fetchCourseById } from "../../../fetchers/courseFetcher";
-import { fetchUserExtendedById } from "../../../fetchers/userFetcher";
-import {
-  ICourse,
-  ICourseWithModules,
-  IUserExtended,
-} from "../../shared/types/types";
-import { getCurrentUserId } from "../../shared/utilities/jwtDecoder";
-import { getTokens } from "../utilities";
+import { fetchUserFromToken } from "../../../fetchers/userFetcher";
+import { ICourse, IUserExtended } from "../../shared/types/types";
 
 /**
  * Represents the shape of the loader result for a user's courses.
@@ -30,15 +24,7 @@ export interface IDashboardDifferedLoader {
  * @throws {Response} 502 - If fetching user or course data fails.
  */
 export async function DashboardDifferedLoader(): Promise<IDashboardDifferedLoader> {
-  const token = getTokens();
-
-  if (!token) throw new Response("Unauthorized", { status: 401 }); // Todo: implement standardized exception/Response handling?.
-
-  const userId = getCurrentUserId();
-
-  if (!userId) throw new Response("Forbidden", { status: 403 }); // Todo: implement standardized exception/Response handling?.
-
-  const user: IUserExtended = await fetchUserExtendedById(userId);
+  const user: IUserExtended = await fetchUserFromToken(); //await fetchUserExtendedById(userId);
 
   if (user.courses.length === 0) return { userCourses: Promise.resolve(null) };
 

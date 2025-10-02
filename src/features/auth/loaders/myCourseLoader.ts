@@ -1,5 +1,8 @@
 import { fetchCourseWithModules } from "../../../fetchers/courseFetcher";
-import { fetchUserExtendedById } from "../../../fetchers/userFetcher";
+import {
+  fetchUserExtendedById,
+  fetchUserFromToken,
+} from "../../../fetchers/userFetcher";
 import { ICourseWithModules, IUserExtended } from "../../shared/types/types";
 import { getCurrentUserId } from "../../shared/utilities/jwtDecoder";
 import { getTokens } from "../utilities/tokens";
@@ -26,15 +29,7 @@ export interface IMyCourseDifferedLoader {
  * @throws {Response} 502 - If fetching user or course data fails.
  */
 export async function MyCourseDifferedLoader(): Promise<IMyCourseDifferedLoader> {
-  const token = getTokens();
-
-  if (!token) throw new Response("Unauthorized", { status: 401 }); // Todo: implement standardized exception/Response handling?.
-
-  const userId = getCurrentUserId();
-
-  if (!userId) throw new Response("Forbidden", { status: 403 }); // Todo: implement standardized exception/Response handling?.
-
-  const user: IUserExtended = await fetchUserExtendedById(userId);
+  const user: IUserExtended = await fetchUserFromToken();
 
   // User is not registered on any course
   if (user.courses.length > 0) {
