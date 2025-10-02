@@ -1,0 +1,36 @@
+.list-group-item.user-item {
+  display: grid;
+  grid-template-columns: repeat(var(--col-count), 1fr);
+  width: 100%;
+
+  background-color: white;
+  padding: 0;
+}
+
+.list-group-item.user-item:hover {
+  background-color: var(--background-gray);
+}
+
+p.user-data {
+  margin: 0;
+
+  padding-block: 0.75rem;
+  padding-inline: 1.5rem;
+}
+
+.user-data.user-email a {
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.user-data.user-main {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+}
+
+.user-data.user-username {
+  font-weight: 700;
+  color: var(--text-gray);
+}
+
