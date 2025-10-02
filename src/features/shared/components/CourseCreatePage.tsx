@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import AddNewCourseForm from './AddNewCourseForm';
-// import { createCourse } from 'path-to-api'; 
-// import {AddNewModule} from 'path-to-modulecomponent'
+import { ICourse } from '../types';
+import { createCourse } from '../../auth/api/course';
+import { CustomError } from '../../shared/classes';
 
 export type CourseDraft = {
   name: string;
@@ -11,9 +12,7 @@ export type CourseDraft = {
 };
 
 export default function CourseCreatePage() {
-  const [course, setCourse] = useState<CourseDraft>({
-    name: '', description: '', startDate: '', endDate: ''
-  });
+  const [course, setCourse] = useState<CourseDraft>({name: '', description: '', startDate: '', endDate: ''});
   const [saving, setSaving] = useState(false);
   const [msg, setMsg] = useState<string|null>(null);
 
@@ -22,16 +21,30 @@ export default function CourseCreatePage() {
     !!course.startDate && !!course.endDate &&
     course.startDate < course.endDate;
 
-  async function postCourse() {
-    if (!isValid || saving) return;
-    setSaving(true); setMsg(null);
+  async function submitCourse() {
+    if (!isValid || saving) {
+       setMsg("Se till att alla fält är korrekt ifyllda")
+        return;} 
+
+    setSaving(true); 
+    setMsg(null);
+
     try {
-      // Todo, make API-call here
-      // await <insertFetchFunctionOrHookHere>({ ...course });
-      setMsg('Kurs skapad');
+      const created: ICourse = await createCourse(course);
+      setMsg(`Kurs skapad: ${created.name}`);
       setCourse({ name: '', description: '', startDate: '', endDate: '' });
-    } catch (e:any) {
-      setMsg(e?.message ?? 'Kunde inte spara kursen');
+    } catch (e: unknown) {
+      if (e instanceof CustomError) {
+        const map: Record<number, string> = {
+          400: "En kurs med det namnet finns redan",
+          401: "Du saknar behörighet att skapa kurser.",
+          403: "Du saknar behörighet att skapa kurser.",
+          404: "Kursen hittades inte.",
+          500: "Ett serverfel inträffade.",
+        };
+        const fallback = e.message || "Ett fel inträffade.";
+        setMsg(map[e.errorCode] ?? fallback);
+      }
     } finally {
       setSaving(false);
     }
@@ -42,10 +55,10 @@ export default function CourseCreatePage() {
       <AddNewCourseForm
         value={course}
         onChange={setCourse}
-        onSubmit={postCourse}
+        onSubmit={submitCourse}
         disabled={!isValid || saving}
       />
-      {msg && <div className="alert alert-info mt-3">{msg}</div>}
+      {msg && <div className="error-msg mt-3">{msg}</div>}
     </div>
   );
 }
