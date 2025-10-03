@@ -107,15 +107,20 @@ export interface IDocument {
   timeStamp: Date;
 }
 
-/** Interface type for the User data, used in UserList.tsx to plot the user for said list. Use the field name approptiate to what is wanted in the header label for UserList.tsx here as these are used as header labels aswell.*/
-export interface IUser {
+/** Interface type for the User data, used in UserList.tsx and UserInfo.tsx to plot the user for said list. 
+ * Use the field name approptiate to what is wanted in the header label for UserList.tsx here as these are used as header labels aswell.
+ * Also note that since UserList.tsx and UserInfo.tsx uses the first index in the array as reference for which header/label names are used
+ * derived from the arrays field names, the first array element would have to have all the field names even if strings are empty.
+ * Else they won't show up as header/label.
+ * Note: It is suspected that backend data is already sent this way from the endpoint, but when testing using dummy data, this is a problem
+ * that can occur.
+ * 
+*/
+export interface IUserParticipants {
   userId: string;
-  // userName: string;
-  // name: string;
-  // email: string;
-  användarnamn: string; // userName
-  namn: string; // name (will probably have to be firstName+" "+lastName)
-  email: string; // email
+  användarnamn: string;
+  namn: string;
+  email: string;
 
   //Add more optional fields for multipurpose use, for example for Teachers View
   test?: string;
