@@ -12,6 +12,8 @@ import RoleSwitch from "../pages/RoleSwitch";
 import { MyCourse } from "../pages/course/MyCourse";
 import { MyCourseDifferedLoader } from "../features/auth/loaders/myCourseLoader";
 import { RouterError } from "../features/shared/components/RouterError";
+import { TeacherCourses } from "../pages/teacherCourses";
+import { TeacherCoursesDifferedLoader } from "../features/auth/loaders/coursesLoader";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,6 +35,13 @@ export const router = createBrowserRouter(
           element={<MyCourse />}
           path="/course"
           loader={MyCourseDifferedLoader}
+          errorElement={<RouterError />}
+        />
+
+        <Route
+          element={<TeacherCourses />}
+          path="/courses"
+          loader={TeacherCoursesDifferedLoader}
           errorElement={<RouterError />}
         />
       </Route>

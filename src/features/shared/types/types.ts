@@ -106,3 +106,35 @@ export interface IDocument {
   description: string;
   timeStamp: Date;
 }
+
+/**=====================================================================
+ * Types for teacher courses view
+ ======================================================================*/
+
+export interface IModulePreview {
+  id: string;
+  name: string;
+  startDate: Date;
+  endDate: Date;
+}
+
+export interface ICoursePreview {
+  id: string;
+  name: string;
+  startDate: Date;
+  endDate: Date;
+}
+
+export interface IPaginatedResponseMetadata {
+  totalItems: number;
+  totalPages: number;
+  currentPage: number;
+  pageSize: number;
+  hasPreviousPage: boolean;
+  hasNextPage: boolean;
+}
+
+export interface IPaginatedResponse<T> {
+  items: T[];
+  metadata: IPaginatedResponseMetadata;
+}
