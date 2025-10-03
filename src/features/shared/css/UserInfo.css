@@ -18,7 +18,8 @@ p.user-data {
   padding-inline: 1.5rem;
 }
 
-.user-data.user-email a {
+.user-data a,
+a.user-data {
   text-decoration: none;
   font-size: 14px;
 }
