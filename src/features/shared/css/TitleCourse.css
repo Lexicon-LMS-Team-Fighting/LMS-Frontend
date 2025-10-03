@@ -10,8 +10,6 @@
   display: flex;
   flex-direction: column;
   align-items: start;
-  background-color: blanchedalmond;
-
   gap: 0.25rem;
 }
 
