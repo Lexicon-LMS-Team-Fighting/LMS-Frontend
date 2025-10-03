@@ -106,3 +106,17 @@ export interface IDocument {
   description: string;
   timeStamp: Date;
 }
+
+/** Interface type for the User data, used in UserList.tsx to plot the user for said list. Use the field name approptiate to what is wanted in the header label for UserList.tsx here as these are used as header labels aswell.*/
+export interface IUser {
+  userId: string;
+  // userName: string;
+  // name: string;
+  // email: string;
+  användarnamn: string; // userName
+  namn: string; // name (will probably have to be firstName+" "+lastName)
+  email: string; // email
+
+  //Add more optional fields for multipurpose use, for example for Teachers View
+  test?: string;
+}

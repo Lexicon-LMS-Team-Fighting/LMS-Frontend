@@ -4,3 +4,5 @@ export * from "./ModuleList";
 export * from "./ProgressBar";
 export * from "./ActivityList";
 export * from "./ActivitiesForModule";
+export * from "./UserList";
+export * from "./UserInfo";
