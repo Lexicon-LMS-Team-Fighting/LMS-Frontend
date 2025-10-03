@@ -2,8 +2,8 @@
 
 interface ITitleDateProps {
   title?: string;
-  startDate: string;
-  endDate?: string;
+  startDate: Date;
+  endDate?: Date;
   activityType?: string;
 }
 
@@ -14,10 +14,16 @@ export const TitleDate: React.FC<ITitleDateProps> = ({
   activityType,
 }) => {
   return (
-    <div className={activityType ? `titledate-container-activity` : "titledate-container"}>
+    <div
+      className={
+        activityType ? `titledate-container-activity` : "titledate-container"
+      }
+    >
       {title && (
         <div className="title-container">
-          {activityType && <span className="activity-wrapper">{activityType}</span>}
+          {activityType && (
+            <span className="activity-wrapper">{activityType}</span>
+          )}
           <p className="titledate-title">{title}</p>
         </div>
       )}
@@ -25,10 +31,10 @@ export const TitleDate: React.FC<ITitleDateProps> = ({
         <span className="material-symbols-outlined hidden">calendar_today</span>
         {endDate ? (
           <p className="titledate-date">
-            {startDate} - {endDate}
+            {startDate.toLocaleDateString()} - {endDate.toLocaleDateString()}
           </p>
         ) : (
-          <p className="titledate-date">{startDate}</p>
+          <p className="titledate-date">{startDate.toLocaleDateString()}</p>
         )}
       </div>
     </div>
