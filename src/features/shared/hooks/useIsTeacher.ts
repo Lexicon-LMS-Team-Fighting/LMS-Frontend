@@ -1,10 +1,5 @@
-import { useLoaderData } from 'react-router';
+import { getCurrentUserRole } from "../utilities/jwtDecoder";
 
-type LoaderData = { roles: string[] };
-
-export function useIsTeacher() {
-  const { roles } = useLoaderData() as LoaderData;
-  return roles.includes('Teacher');
- 
-
+export function useIsTeacher(): Boolean | undefined {
+  return getCurrentUserRole()?.includes("Teacher");
 }
