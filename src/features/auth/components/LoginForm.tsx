@@ -27,7 +27,7 @@ export function LoginForm({
       <fieldset className="form-fieldset">
         <TextInput
           id="email"
-          label="E-postadress"
+          label="Användarnamn"
           type="text"
           value={email}
           onChange={onEmailChange}
