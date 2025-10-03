@@ -28,6 +28,8 @@ export default function TeacherDashboardCourses({
   const [saving, setSaving] = useState(false);
   const [modalMsg, setModalMsg] = useState<string | null>(null);
 
+  console.log(courses,courseArr)
+
   function openEdit(course: ICourse) {
     setEditing(course);
     setDraft({
@@ -53,11 +55,11 @@ export default function TeacherDashboardCourses({
   function renderCourse() {
     return (
       <tbody>
-        {courses?.map((course, i) => (
+        {courseArr?.map((course, i) => (
           <tr key={`${course.name}-${i}`} className="table-row-white">
             <td className="bold">{course.name}</td>
             <td className="text-gray">
-              {course.startDate.toLocaleDateString()} -{" "}
+              {course.startDate.toLocaleDateString()} - {" "}
               {course.endDate.toLocaleDateString()}
             </td>
             {/* Activate when modules and students get added. */}
@@ -70,24 +72,8 @@ export default function TeacherDashboardCourses({
             </td>
           </tr>
         ))}
-                       <Modal open={!!editing} onClose={() => { setEditing(null); setDraft(null); }}>
-              {editing && draft && (
-                <>
-                  <UpdateForm
-                    data={draft}
-                    buttonText="Spara ändringar"
-                    title={`Redigerar kurs: ${editing.name}`}
-                    onChange={setDraft}        
-                    onSubmit={handleSubmit}        
-                    disabled={!isValid || saving}
-                  />
-                  {modalMsg && (
-                    <div className="alert alert-danger mt-2">{modalMsg}</div>
-                  )}
-                </>
-              )}
-            </Modal>
-        {courses?.length === 0 && (
+              
+        {courseArr?.length === 0 && (
           <tr>
             <td>Inga kurser ännu</td>
           </tr>
@@ -107,11 +93,10 @@ const isValid =
       setSaving(true); setModalMsg(null);
 
       try {
-            console.log(3)
         const updated: ICourse = await updateCourse(editing.id, draft); 
         setCourseArr(arr => arr?.map(c =>
           c.id === updated.id
-            ? { ...c, ...updated, startDate: updated.startDate , endDate: updated.endDate }
+            ? { ...c, ...updated, startDate: new Date(updated.startDate) , endDate: new Date(updated.endDate) }
             : c
         ) ?? arr);
         setEditing(null);
@@ -173,6 +158,23 @@ const isValid =
           </thead>
           {renderCourse()}
         </table>
+                 <Modal open={!!editing} onClose={() => { setEditing(null); setDraft(null); }}>
+              {editing && draft && (
+                <>
+                  <UpdateForm
+                    data={draft}
+                    buttonText="Spara ändringar"
+                    title={`Redigerar kurs: ${editing.name}`}
+                    onChange={setDraft}        
+                    onSubmit={handleSubmit}        
+                    disabled={!isValid || saving}
+                  />
+                  {modalMsg && (
+                    <div className="alert alert-danger mt-2">{modalMsg}</div>
+                  )}
+                </>
+              )}
+            </Modal>
       </div>
     </section>
   );

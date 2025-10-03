@@ -12,9 +12,10 @@ export type CourseDraft = {
 };
 
 export default function CourseCreatePage() {
-  const [course, setCourse] = useState<CourseDraft>({name: '', description: '', startDate: new Date(), endDate: new Date()});
+  const [course, setCourse] = useState<CourseDraft>({name: '', description: '', startDate: new Date(""), endDate: new Date("") });
   const [saving, setSaving] = useState(false);
   const [msg, setMsg] = useState<string|null>(null);
+  const [errorMsg, setErrorMsg] = useState<string|null>(null);
 
   const isValid =
     course.name.trim().length > 0 &&
@@ -23,16 +24,19 @@ export default function CourseCreatePage() {
 
   async function submitCourse() {
     if (!isValid || saving) {
-       setMsg("Se till att alla fält är korrekt ifyllda")
+      setMsg(null);
+       setErrorMsg("Se till att alla fält är korrekt ifyllda")
         return;} 
 
     setSaving(true); 
     setMsg(null);
+    setErrorMsg(null);
 
     try {
       const created: ICourse = await createCourse(course);
+
       setMsg(`Kurs skapad: ${created.name}`);
-      setCourse({ name: '', description: '', startDate: new Date(), endDate: new Date() });
+      setCourse({ name: '', description: '', startDate: new Date(""), endDate: new Date("") });
     } catch (e: unknown) {
       if (e instanceof CustomError) {
         const map: Record<number, string> = {
@@ -43,7 +47,7 @@ export default function CourseCreatePage() {
           500: "Ett serverfel inträffade.",
         };
         const fallback = e.message || "Ett fel inträffade.";
-        setMsg(map[e.errorCode] ?? fallback);
+        setErrorMsg(map[e.errorCode] ?? fallback);
       }
     } finally {
       setSaving(false);
@@ -58,7 +62,8 @@ export default function CourseCreatePage() {
         onSubmit={submitCourse}
         disabled={!isValid || saving}
       />
-      {msg && <div className="error-msg mt-3">{msg}</div>}
+      {msg && <div className="alert alert-success mt-3">{msg}</div>}
+      {errorMsg && <div className="alert alert-danger mt-3">{errorMsg}</div>}
     </div>
   );
 }

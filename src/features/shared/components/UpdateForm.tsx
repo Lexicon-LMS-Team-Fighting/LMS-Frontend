@@ -56,8 +56,8 @@ export default function UpdateForm({
                       id="startDate"
                       type="date"
                       className="form-control date-input"
-                      value={data.startDate}
-                      onChange={(e) => set({ startDate: e.target.value })}
+                      value={data.startDate.toLocaleDateString()}
+                      onChange={(e) => set({ startDate: new Date(e.target.value) })}
                     />
                   </div>
 
@@ -67,8 +67,8 @@ export default function UpdateForm({
                       id="endDate"
                       type="date"
                       className="form-control date-input"
-                      value={data.endDate}
-                      onChange={(e) => set({ endDate: e.target.value })}
+                      value={data.endDate.toLocaleDateString()}
+                      onChange={(e) => set({ endDate: new Date(e.target.value) })}
                     />
                   </div>
                   </div>
