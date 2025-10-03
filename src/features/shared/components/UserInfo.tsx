@@ -57,7 +57,9 @@ export const UserInfo: React.FC<IUserInfoProps> = ({ user, fields }) => {
               <p key={field} className="dropdown-data">
                 <strong className="user-dropdown-label">{label}: </strong>
                 {field === "email" ? (
-                  <a href={`mailto:${value}`}>{value as string}</a>
+                  <a className="user-data" href={`mailto:${value}`}>
+                    {value as string}
+                  </a>
                 ) : (
                   (value as string)
                 )}
