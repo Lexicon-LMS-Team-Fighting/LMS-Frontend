@@ -19,4 +19,5 @@ nav div h1{
 
 .navbar-container{
   height: 5rem;
+  z-index:5;
 }
