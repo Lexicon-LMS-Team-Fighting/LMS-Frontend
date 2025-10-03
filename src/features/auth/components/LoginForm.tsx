@@ -1,6 +1,5 @@
 import { ReactElement, FormEventHandler } from "react";
 import { TextInput } from "./TextInput";
-/* import { RoleSelector } from "./RoleSelector"; */
 import { IconButton } from "../../shared/components/IconButton";
 
 interface ILoginFormProps {
@@ -18,7 +17,7 @@ export function LoginForm({
   onEmailChange,
   onPasswordChange,
   onSubmit,
-  error
+  error,
 }: ILoginFormProps): ReactElement {
   return (
     <form className="login-form" onSubmit={onSubmit}>
@@ -42,7 +41,11 @@ export function LoginForm({
           labelStyle="password-label"
         />
 
-        {error && <p role="alert" className="login-error text-danger mt-2">{error}</p>}
+        {error && (
+          <p role="alert" className="login-error text-danger mt-2">
+            {error}
+          </p>
+        )}
 
         <IconButton icon="login" name="Logga in" addStyle="login-btn" />
       </fieldset>
