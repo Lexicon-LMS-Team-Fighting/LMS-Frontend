@@ -5,15 +5,15 @@ import { ICourse } from "../../shared/types";
 export type CreateCourseDto = {
   name: string;
   description?: string;
-  startDate: string; 
-  endDate: string;  
+  startDate: Date; 
+  endDate: Date;  
 };
 
 export type UpdateCourseDto = {
   name: string;
   description?: string;
-  startDate: string; 
-  endDate: string;  
+  startDate: Date; 
+  endDate: Date;  
 };
 
 export async function createCourse(course: CreateCourseDto): Promise<ICourse> {

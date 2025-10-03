@@ -7,12 +7,12 @@ import { CustomError } from '../../shared/classes';
 export type CourseDraft = {
   name: string;
   description?: string;
-  startDate: string;
-  endDate: string;
+  startDate: Date;
+  endDate: Date;
 };
 
 export default function CourseCreatePage() {
-  const [course, setCourse] = useState<CourseDraft>({name: '', description: '', startDate: '', endDate: ''});
+  const [course, setCourse] = useState<CourseDraft>({name: '', description: '', startDate: new Date(), endDate: new Date()});
   const [saving, setSaving] = useState(false);
   const [msg, setMsg] = useState<string|null>(null);
 
@@ -32,7 +32,7 @@ export default function CourseCreatePage() {
     try {
       const created: ICourse = await createCourse(course);
       setMsg(`Kurs skapad: ${created.name}`);
-      setCourse({ name: '', description: '', startDate: '', endDate: '' });
+      setCourse({ name: '', description: '', startDate: new Date(), endDate: new Date() });
     } catch (e: unknown) {
       if (e instanceof CustomError) {
         const map: Record<number, string> = {
