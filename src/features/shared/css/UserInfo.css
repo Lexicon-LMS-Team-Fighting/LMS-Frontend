@@ -24,6 +24,12 @@ a.user-data {
   font-size: 14px;
 }
 
+.user-data a:hover,
+a.user-data:hover {
+  text-decoration: underline;
+  font-size: 14px;
+}
+
 .user-data.user-main {
   display: flex;
   justify-content: space-between;
