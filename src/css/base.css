@@ -6,3 +6,9 @@
 html body{
   background-color: var(--background-gray);
 }
+
+.error-msg{
+  color: red;
+  padding: 1rem;
+  font-weight: 500;
+}
