@@ -47,9 +47,9 @@ export function LoginForm({
         <IconButton icon="login" name="Logga in" addStyle="login-btn" />
       </fieldset>
 
-      <a className="forgot-password-link" href="#">
+      {/* <a className="forgot-password-link" href="#">
         Glömt lösenord?
-      </a>
+      </a> */}
     </form>
   );
 }
