@@ -1,8 +1,4 @@
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-} from "react-router";
+import { createBrowserRouter, createRoutesFromElements, Route } from "react-router";
 import { App } from ".";
 import { Login } from "../pages/login";
 import { requireAuthLoader } from "../features/auth/loaders";
@@ -12,6 +8,7 @@ import RoleSwitch from "../pages/RoleSwitch";
 import { MyCourse } from "../pages/course/MyCourse";
 import { MyCourseDifferedLoader } from "../features/auth/loaders/myCourseLoader";
 import { RouterError } from "../features/shared/components/RouterError";
+import { CourseParticipants } from "../pages/courseparticipant";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -28,6 +25,8 @@ export const router = createBrowserRouter(
         />
         {/* TODO: remove this in a production enviroment TestArea */}
         <Route element={<TestArea />} path="/testarea" />
+        {/* TODO: Edit this when the backend gets implemented so that it correctly represents the issue/userstory */}
+        <Route element={<CourseParticipants />} path="participants" />
         {/* TODO: Edit this when everything else is properly implemented (Login, Header, Side Menu etc.) */}
         <Route
           element={<MyCourse />}
