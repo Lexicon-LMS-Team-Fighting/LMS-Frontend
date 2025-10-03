@@ -1,6 +1,5 @@
 import { ReactElement, FormEventHandler } from "react";
 import { TextInput } from "./TextInput";
-/* import { RoleSelector } from "./RoleSelector"; */
 import { IconButton } from "../../shared/components/IconButton";
 
 interface ILoginFormProps {
@@ -18,7 +17,7 @@ export function LoginForm({
   onEmailChange,
   onPasswordChange,
   onSubmit,
-  error
+  error,
 }: ILoginFormProps): ReactElement {
   return (
     <form className="login-form" onSubmit={onSubmit}>
@@ -27,7 +26,7 @@ export function LoginForm({
       <fieldset className="form-fieldset">
         <TextInput
           id="email"
-          label="E-postadress"
+          label="Användarnamn"
           type="text"
           value={email}
           onChange={onEmailChange}
@@ -42,14 +41,18 @@ export function LoginForm({
           labelStyle="password-label"
         />
 
-        {error && <p role="alert" className="login-error text-danger mt-2">{error}</p>}
+        {error && (
+          <p role="alert" className="login-error text-danger mt-2">
+            {error}
+          </p>
+        )}
 
         <IconButton icon="login" name="Logga in" addStyle="login-btn" />
       </fieldset>
 
-      <a className="forgot-password-link" href="#">
+      {/* <a className="forgot-password-link" href="#">
         Glömt lösenord?
-      </a>
+      </a> */}
     </form>
   );
 }
