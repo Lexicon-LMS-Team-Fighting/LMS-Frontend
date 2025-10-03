@@ -108,7 +108,7 @@ export interface IDocument {
 }
 
 /** Interface type for the User data, used in UserList.tsx to plot the user for said list. Use the field name approptiate to what is wanted in the header label for UserList.tsx here as these are used as header labels aswell.*/
-export interface IUser {
+export interface IUserParticipants {
   userId: string;
   // userName: string;
   // name: string;

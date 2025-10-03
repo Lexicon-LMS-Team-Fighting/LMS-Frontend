@@ -1,16 +1,16 @@
 import { useState } from "react";
-import { IUser } from "../types";
+import { IUserParticipants } from "../types";
 import { useMediaQuery } from "usehooks-ts";
 
 interface IUserInfoProps {
-  user: IUser;
+  user: IUserParticipants;
   fields: string[];
 }
 /**
  * This component renders user data, note that for mobile view, it omits the first header lable to match the labels in the dropdown. The first element index in the fields array is set as "Label" and shown in the mobile view list.
- * @param user IUser
+ * @param user IUserParticipants
  * @param fields string[] of fields derived from users field names
- * @returns The user with relevant data using IUser interface
+ * @returns The user with relevant data using IUserParticipants interface
  */
 export const UserInfo: React.FC<IUserInfoProps> = ({ user, fields }) => {
   const [expanded, setExpanded] = useState(false);
@@ -24,7 +24,7 @@ export const UserInfo: React.FC<IUserInfoProps> = ({ user, fields }) => {
         onClick={isMobile ? () => setExpanded((prev) => !prev) : undefined}
       >
         {fields.map((field, index) => {
-          const value = user[field as keyof IUser];
+          const value = user[field as keyof IUserParticipants];
           const isMainField = index === 0;
           return (
             <p key={field} className={`user-data ${isMainField ? "user-main" : ""}`}>
@@ -50,7 +50,7 @@ export const UserInfo: React.FC<IUserInfoProps> = ({ user, fields }) => {
       {isMobile && expanded && (
         <li className="user-dropdown">
           {fields.slice(1).map((field) => {
-            const value = user[field as keyof IUser];
+            const value = user[field as keyof IUserParticipants];
             if (!value) return null;
             const label: string = field;
             return (

@@ -1,14 +1,14 @@
-import { IUser } from "../types";
+import { IUserParticipants } from "../types";
 import { UserInfo } from "./UserInfo";
 
 interface IUserListProps {
-  users: IUser[];
+  users: IUserParticipants[];
 }
 
 /**
- * Lists the users using the UserInfo component, note that the Header labels for the list are the same as the field names of users: IUser[]. Therefore they need to be edited/added appropriately given what header label is to be displayed
- * @param users IUser[]
- * @returns List of users and it's relevant data using IUser interface
+ * Lists the users using the UserInfo component, note that the Header labels for the list are the same as the field names of users: IUserParticipants[]. Therefore they need to be edited/added appropriately given what header label is to be displayed
+ * @param users IUserParticipants[]
+ * @returns List of users and it's relevant data using IUserParticipants interface
  */
 export const UserList: React.FC<IUserListProps> = ({ users }) => {
   if (!users || users.length === 0) {

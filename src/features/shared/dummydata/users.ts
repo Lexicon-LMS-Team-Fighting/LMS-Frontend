@@ -1,7 +1,7 @@
-import { IUser } from "../types";
+import { IUserParticipants } from "../types";
 
 // TODO: Remove temporary dummy data when backend is connected and implemented
-export const users: IUser[] = [
+export const users: IUserParticipants[] = [
   {
     userId: "1",
     namn: "Anna Andersson",
