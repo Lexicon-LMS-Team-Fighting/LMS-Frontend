@@ -75,3 +75,9 @@
   color: var(--blue-600);
   border-right: 4px solid var(--blue-600);
 }
+
+@media screen and (max-width: 768px) {
+  .menu-container {
+    position: absolute;
+  }
+}
