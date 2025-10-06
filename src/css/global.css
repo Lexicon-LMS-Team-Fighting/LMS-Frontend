@@ -3,27 +3,25 @@
 }
 
 .main-wrapper {
-  padding-left:1rem;
-  padding-right:1rem;
-  padding-top:1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 1rem;
   width: 100%;
   min-height: calc(100vh - var(--header-height));
   height: auto;
 }
 
+/* text */
+.bold {
+  font-weight: bold;
+}
 
-  /* text */
-  .bold {
-    font-weight: bold;
-  }
-
-  .text-gray {
-    color: var(--text-gray);
-  }
+.text-gray {
+  color: var(--text-gray);
+}
 
 .master-row {
   display: flex;
   flex-direction: row;
   gap: 1rem;
 }
-
