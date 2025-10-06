@@ -35,3 +35,20 @@ export async function fetchModulesForCourseById(
     catchFetchErrors(e, "course", guid);
   }
 }
+
+export async function fetchFullModuleById(guid: string): Promise<IModule> {
+  if (!guid) throw new Response("module id missing", { status: 400 });
+
+  try {
+    const module = await fetchWithToken<IModule>(
+      `${BASE_URL}/modules/${guid}?include=activitiesparticipantsdocuments`
+    );
+
+    module.startDate = new Date(module.startDate);
+    module.endDate = new Date(module.endDate ?? "");
+
+    return module;
+  } catch (e) {
+    catchFetchErrors(e, "module", guid);
+  }
+}
