@@ -35,7 +35,12 @@ export async function DashboardDifferedLoader(): Promise<IDashboardDifferedLoade
         endDate: new Date(courseData.endDate),
       };
     })
+    
+    //Loading activities.
+
   );
+
+  const 
 
   return { userCourses: courses };
 }
