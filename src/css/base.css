@@ -1,8 +1,15 @@
 * {
   box-sizing: border-box;
   margin: 0;
+  padding: 0;
 }
 
 html body{
   background-color: var(--background-gray);
+}
+
+.error-msg{
+  color: red;
+  padding: 1rem;
+  font-weight: 500;
 }
