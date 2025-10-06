@@ -9,6 +9,7 @@ import { MyCourse } from "../pages/course/MyCourse";
 import { MyCourseDifferedLoader } from "../features/auth/loaders/myCourseLoader";
 import { RouterError } from "../features/shared/components/RouterError";
 import { CourseParticipants } from "../pages/courseparticipant";
+import { participantsLoader } from "../features/auth/loaders/participantsLoader";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,6 +33,13 @@ export const router = createBrowserRouter(
           element={<MyCourse />}
           path="/course"
           loader={MyCourseDifferedLoader}
+          errorElement={<RouterError />}
+        />
+
+        <Route
+          element={<CourseParticipants />}
+          path="participants"
+          loader={participantsLoader}
           errorElement={<RouterError />}
         />
       </Route>
