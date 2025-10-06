@@ -1,6 +1,7 @@
 import { IUser, IUserParticipants } from "../features/shared/types";
 import { BASE_URL } from "../features/shared/constants";
 import { fetchWithToken } from "../features/shared/utilities";
+import { catchFetchErrors } from "./fetchErrorsCatcher";
 
 interface IPagedResult<T> {
   items: T[];
@@ -9,15 +10,18 @@ interface IPagedResult<T> {
 
 export async function fetchParticipants(courseId: string): Promise<IUserParticipants[]> {
   if (!courseId) throw new Response("Course id missing", { status: 400 });
+  try {
+    const data: IPagedResult<IUser> = await fetchWithToken<IPagedResult<IUser>>(
+      `${BASE_URL}/course/${courseId}/participants`
+    );
 
-  const data: IPagedResult<IUser> = await fetchWithToken<IPagedResult<IUser>>(
-    `${BASE_URL}/course/${courseId}/participants`
-  );
-
-  return data.items.map((user) => ({
-    userId: user.id,
-    användarnamn: user.userName,
-    namn: `${user.firstName} ${user.lastName}`,
-    email: user.email,
-  }));
+    return data.items.map((user) => ({
+      userId: user.id,
+      användarnamn: user.userName,
+      namn: `${user.firstName} ${user.lastName}`,
+      email: user.email,
+    }));
+  } catch (e) {
+    catchFetchErrors(e, "course", courseId);
+  }
 }
