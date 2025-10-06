@@ -79,17 +79,29 @@ th:first-child {
 
 
 .table-links {
-    text-align: end;
+    height: inherit;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
     text-wrap: nowrap;
     font-weight: 500;
     font-size: var(--smallest-paragraph);
 }
 
-.table-links a {
-    text-decoration: none;    padding-right: 1rem;
+.table-links a, button {
+    color: var(--blue-600);
+    text-decoration: none;  
+    padding-right: 1rem;
 }
 
-.table-links a:hover {
+.table-links a:hover, button:hover {
     color: #2a4365;
     text-decoration: none;
+}
+
+.table-links button {
+    border: none;
+    background-color: transparent;
+    font-weight: 500;
 }
