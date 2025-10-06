@@ -2,19 +2,44 @@ import { ReactElement, useState } from "react";
 import { Link } from "react-router";
 import "../css/TeacherDashboardCourses.css";
 import { Tab } from "./DashboardNavBar";
+import Modal from './Modal';
+import UpdateForm from './UpdateForm';
+import { updateCourse } from '../../auth/api/course';
+import { CustomError } from '../../shared/classes';
+import type { CourseDraft } from './CourseCreatePage';
 import { ICourse } from "../types/types";
 
+type Draft = CourseDraft
 type Props = {
   courses: ICourse[];
   onChange: (t: Tab) => void;
 };
+//TODO, receive course array as prop from parent instead
+
 
 export default function TeacherDashboardCourses({
   courses,
   onChange,
 }: Props): ReactElement {
+  const [courseArr, setCourseArr] = useState<ICourse[] | null>(courses);
   const [searchQuery, setSearchQuery] = useState("");
+  const [editing, setEditing] = useState<ICourse | null>(null);
+  const [draft, setDraft] = useState<Draft | null>(null);
+  const [saving, setSaving] = useState(false);
+  const [modalMsg, setModalMsg] = useState<string | null>(null);
 
+  console.log(courses,courseArr)
+
+  function openEdit(course: ICourse) {
+    setEditing(course);
+    setDraft({
+      name: course.name,
+      description: course.description ?? "",
+      startDate: new Date(course.startDate),
+      endDate: new Date(course.endDate)
+    });
+    setModalMsg(null);
+  }
   courses = courses.filter((c) => {
     const query = searchQuery.trim().toLowerCase();
 
@@ -30,11 +55,11 @@ export default function TeacherDashboardCourses({
   function renderCourse() {
     return (
       <tbody>
-        {courses?.map((course, i) => (
+        {courseArr?.map((course, i) => (
           <tr key={`${course.name}-${i}`} className="table-row-white">
             <td className="bold">{course.name}</td>
             <td className="text-gray">
-              {course.startDate.toLocaleDateString()} -{" "}
+              {course.startDate.toLocaleDateString()} - {" "}
               {course.endDate.toLocaleDateString()}
             </td>
             {/* Activate when modules and students get added. */}
@@ -43,11 +68,12 @@ export default function TeacherDashboardCourses({
             {/*TODO, make sure we have the correct routes*/}
             <td className="table-links">
               <Link to={`/teacher/course/${course.id}`}>Visa</Link>{" "}
-              <Link to={`/teacher/course/edit/${course.id}`}>Redigera</Link>
+              <button className="edit-course-button" onClick={() => openEdit(course)}>Redigera</button>
             </td>
           </tr>
         ))}
-        {courses?.length === 0 && (
+              
+        {courseArr?.length === 0 && (
           <tr>
             <td>Inga kurser ännu</td>
           </tr>
@@ -55,6 +81,43 @@ export default function TeacherDashboardCourses({
       </tbody>
     );
   }
+
+const isValid =
+    !!draft &&
+    draft.name.trim().length > 0 &&
+    !!draft.startDate && !!draft.endDate &&
+    draft.startDate < draft.endDate;
+
+  async function handleSubmit() {
+      if (!editing || !draft) return;
+      setSaving(true); setModalMsg(null);
+
+      try {
+        const updated: ICourse = await updateCourse(editing.id, draft); 
+        setCourseArr(arr => arr?.map(c =>
+          c.id === updated.id
+            ? { ...c, ...updated, startDate: new Date(updated.startDate) , endDate: new Date(updated.endDate) }
+            : c
+        ) ?? arr);
+        setEditing(null);
+        setDraft(null);
+        setModalMsg(`${updated.name} har uppdaterats`);
+      } catch (e: unknown) {
+      if (e instanceof CustomError) {
+        const map: Record<number, string> = {
+          400: "Kontrollera att fälten är korrekt ifyllda",
+          401: "Du saknar behörighet att ändra kurser.",
+          403: "Du saknar behörighet att ändra kurser.",
+          404: "Kursen hittades inte.",
+          500: "Ett serverfel inträffade.",
+        };
+        const fallback = e.message || "Ett fel inträffade.";
+        setModalMsg(map[e.errorCode] ?? fallback);
+      }
+      } finally {
+        setSaving(false);
+      }
+}
 
   return (
     <section className="dashboard-courses-container">
@@ -95,6 +158,23 @@ export default function TeacherDashboardCourses({
           </thead>
           {renderCourse()}
         </table>
+                 <Modal open={!!editing} onClose={() => { setEditing(null); setDraft(null); }}>
+              {editing && draft && (
+                <>
+                  <UpdateForm
+                    data={draft}
+                    buttonText="Spara ändringar"
+                    title={`Redigerar kurs: ${editing.name}`}
+                    onChange={setDraft}        
+                    onSubmit={handleSubmit}        
+                    disabled={!isValid || saving}
+                  />
+                  {modalMsg && (
+                    <div className="alert alert-danger mt-2">{modalMsg}</div>
+                  )}
+                </>
+              )}
+            </Modal>
       </div>
     </section>
   );
