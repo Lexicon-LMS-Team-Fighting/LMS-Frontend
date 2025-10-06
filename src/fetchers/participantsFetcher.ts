@@ -1,5 +1,7 @@
 import { IUser, IUserParticipants } from "../features/shared/types";
 import { BASE_URL } from "../features/shared/constants";
+import { fetchWithToken } from "../features/shared/utilities";
+
 interface IPagedResult<T> {
   items: T[];
   metadata: any;
