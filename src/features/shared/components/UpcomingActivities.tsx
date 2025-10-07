@@ -1,44 +1,17 @@
 // import { useState } from "react";
-import { IActivity } from "../types";
+import { IActivity, IUpcomingActivity } from "../types";
 import { TitleCourse } from "./TitleCourse";
 import "../css/UpcomingActivities.css";
 
 //TODO fix this later when activities are being fetched from backend
 interface IActivityListProps {
-  activities: IActivity[];
+  activities: IUpcomingActivity[];
+  count: number;
 }
 
-const devPops: IActivity[] = [
-  {
-    id: "1",
-    moduleId: "1",
-    activityType: "Lektion",
-    name: "Introduktion till React",
-    description: "Lär dig grunderna i React, inklusive komponenter, JSX och props.",
-    startDate: "2024-10-01",
-    endDate: "2024-10-01",
-    status: "Genomförd",
-    feedback: "Bra jobbat! Du har förstått grunderna i React.",
-    courseName : "Webbutveckling 101"
-  },
-{
-    id: "2",
-    moduleId: "1",
-    activityType: "Uppgift", 
-    name: "Bygg en To-Do App",
-    description: "Skapa en enkel To-Do applikation med React.",
-    startDate: "2024-10-05",
-    endDate: "2024-10-12",
-    status: "Ej påbörjad",
-    feedback: "",
-    courseName : "ReactJS"
-  }
-];
-
-  //TODO fix this later when activities are being fetched from backend
-// export const UpcomingActivities: React.FC<IActivityListProps> = ({ activities }) => {
-export const UpcomingActivities: React.FC<IActivityListProps> = () => {
-  const activities = devPops;
+export const UpcomingActivities: React.FC<IActivityListProps> = ({ activities, count }) => {
+  //console.log("Activities in UpcomingActivities", activities);
+  // const activities = devPops;
   // const [expandedActivities, setExpandedActivities] = useState<string[]>([]);
 
   const handleClick = (activity: IActivity) => {
@@ -49,11 +22,13 @@ export const UpcomingActivities: React.FC<IActivityListProps> = () => {
     );
   };
 
+  const act = activities.slice(0, count); // Show only the first 5 activities
+
   return (
     <section className="activity-list-section">
-      <h3 className="activity-title">Kommande Aktiviteter</h3>
       <ul className="list-group activity-list-group">
-        {activities?.map((activity) => {
+        {act?.map((activity) => {
+          console.log("Activity:", activity.startDate);
           return (
             <li
               key={activity.id}
@@ -63,8 +38,8 @@ export const UpcomingActivities: React.FC<IActivityListProps> = () => {
               <div className="activity-list-box">
                 <TitleCourse
                   title={activity.name}
-                  startDate={activity.startDate}
-                  activityType={activity.activityType}
+                  startDate={activity.startDate.toISOString().split("T")[0]}
+                  activityType={activity.activityTypeName}
                   courseName={activity.courseName}
                 />
 
@@ -73,7 +48,7 @@ export const UpcomingActivities: React.FC<IActivityListProps> = () => {
                   <p className="titledate-date">{activity.startDate}</p> */}
                   {/* TODO: This should be correctly implemented once the backend part for handling documents is in place */}
                   {
-                  <TitleCourse startDate={activity.startDate}/>
+                  <TitleCourse startDate={activity.startDate.toISOString().split("T")[0]}/>
                   }
                 </div>
               </div>
