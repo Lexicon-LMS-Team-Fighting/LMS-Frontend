@@ -33,6 +33,7 @@ export interface IModule {
   description?: string;
   startDate: Date;
   endDate?: Date;
+  progress?: number;
 }
 
 /**
