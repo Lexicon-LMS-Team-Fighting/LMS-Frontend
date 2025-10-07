@@ -47,5 +47,6 @@ export async function fetchUpcomingActivities(): Promise<IUpcomingActivity[]>
 
   } catch (e) {
     catchFetchErrors(e, "activities", "all");
+    return [];
   }
 }
