@@ -30,16 +30,6 @@ export const MyCourse = () => {
     0
   );
 
-  function renderModuleList(modules: IModule[]) {
-    return (
-      <ModuleList
-        modules={modules}
-        progress={progress}
-        onProgressChange={handleModuleProgressChange}
-      />
-    );
-  }
-
   function renderCourse(course: ICourseWithModules) {
     return (
       <main className="course-page">
@@ -62,6 +52,16 @@ export const MyCourse = () => {
           <p>No modules..</p>
         )}
       </main>
+    );
+  }
+
+  function renderModuleList(modules: IModule[]) {
+    return (
+      <ModuleList
+        modules={modules}
+        progress={progress}
+        onProgressChange={handleModuleProgressChange}
+      />
     );
   }
 
