@@ -51,13 +51,19 @@ export interface IModuleFull extends IModule {
 export interface IActivity {
   id: string;
   moduleId: string;
-  activityType: string;
+  activityTypeId: string;
   description?: string;
+  activityTypeName: string;
   name: string;
-  startDate: string;
-  endDate?: string;
-  status?: "Genomförd" | "Försenad" | "Godkänd";
-  feedback?: string;
+  startDate: Date;
+  endDate?: Date;
+  feedbacks: IFeedbacks[];
+}
+
+export interface IFeedbacks {
+  userId: string;
+  feedback: string;
+  status: "Genomförd" | "Försenad" | "Godkänd";
 }
 
 /**
