@@ -19,7 +19,7 @@ export default function Menu(): ReactElement{
   }
 
   return (
-    <menu className={`menu-container ${isMenuOpen ? "" : "closed"}`} aria-expanded={isMenuOpen}>
+    <menu className={`menu-container shadow-sm ${isMenuOpen ? "" : "closed"}`} aria-expanded={isMenuOpen}>
 
 
       <button className="toggle-menu" onClick={toggleMenu} aria-label="Toggle menu">
