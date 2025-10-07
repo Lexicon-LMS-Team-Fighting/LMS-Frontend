@@ -1,6 +1,12 @@
 import { BASE_URL } from "../features/shared/constants";
-import { IModule, PagedResponse } from "../features/shared/types";
+import {
+  IActivity,
+  IModule,
+  IModuleFull,
+  PagedResponse,
+} from "../features/shared/types";
 import { fetchWithToken } from "../features/shared/utilities/fetchWithToken";
+import { fetchActivityById } from "./activityFetcher";
 import { catchFetchErrors } from "./fetchErrorsCatcher";
 
 /**
@@ -36,18 +42,38 @@ export async function fetchModulesForCourseById(
   }
 }
 
-export async function fetchFullModuleById(guid: string): Promise<IModule> {
+/**
+ * Fetches a Single module, with all its data, by its unique identifier.
+ * Converts the `startDate` and `endDate` fields of each module and activity into Date objects.
+ *
+ * @param {string} guid - The unique module ID.
+ * @returns {Promise<IModule>} A promise resolving to a module with date fields converted.
+ *
+ * @throws {Response} 400 - If the module ID is missing.
+ * @throws {Response} 401 - If the request is unauthorized.
+ * @throws {Response} 403 - If access is forbidden.
+ * @throws {Response} 404 - If no modules are found for the given course ID.
+ * @throws {Response} 502 - If the request fails for another reason.
+ */
+export async function fetchFullModuleById(guid: string): Promise<IModuleFull> {
   if (!guid) throw new Response("module id missing", { status: 400 });
 
   try {
-    const module = await fetchWithToken<IModule>(
+    const module = await fetchWithToken<IModuleFull>(
       `${BASE_URL}/modules/${guid}?include=activitiesparticipantsdocuments`
     );
 
     module.startDate = new Date(module.startDate);
     module.endDate = new Date(module.endDate ?? "");
 
-    return module;
+    const activities: IActivity[] = await Promise.all(
+      module.activities!.map((a) => fetchActivityById(a.id))
+    );
+
+    return {
+      ...module,
+      activities,
+    };
   } catch (e) {
     catchFetchErrors(e, "module", guid);
   }
