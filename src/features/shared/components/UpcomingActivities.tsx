@@ -18,15 +18,15 @@ export const UpcomingActivities: React.FC<IActivityListProps> = ({ activities, c
   const act = activities.slice(0, count); // Show only the first 5 activities
 
   return (
-    <section className="activity-list-section">
-      <ul className="list-group activity-list-group">
+    <section className="uc-activity-list-section">
+      <ul className="list-group uc-activity-list-group">
         {act?.map((activity) => {
           return (
             <li
               key={activity.id}
-              className={`activity-list-item list-group ${activity.description ? "clickable" : ""}`}
+              className={`uc-activity-list-item list-group ${activity.description ? "clickable" : ""}`}
             >
-              <div className="activity-list-box">
+              <div className="uc-activity-list-box">
                 <TitleCourse
                   title={activity.name}
                   startDate={activity.startDate.toISOString().split("T")[0]}
