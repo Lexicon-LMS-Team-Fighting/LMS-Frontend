@@ -3,6 +3,7 @@ import { IModule } from "../types/types";
 import { TitleDate } from "./TitleDate";
 import { useModuleList } from "../hooks/useModuleList";
 import { ActivitiesForModule } from "./ActivitiesForModule";
+import { useIsTeacher } from "../hooks/useIsTeacher";
 
 interface IModuleListProps {
   modules: IModule[];
@@ -20,10 +21,11 @@ export const ModuleList: React.FC<IModuleListProps> = ({
   onProgressChange,
 }) => {
   const { openModules, toggleModule } = useModuleList();
+  const isTeacher = useIsTeacher()
 
   return (
     <section className="module-list-container">
-      <h2 className="module-h2">Moduler</h2>
+      <h2 className="fs-5 mb-5">Moduler</h2>
       <ul className="list-group module-list-group">
         {modules.map((mod) => {
           const moduleProgress = progress[mod.id] ?? { completed: 0, total: 0 };
@@ -51,16 +53,19 @@ export const ModuleList: React.FC<IModuleListProps> = ({
                   </div>
                   <TitleDate
                     title={mod.name}
-                    startDate={mod.startDate}
-                    endDate={mod.endDate}
+                    startDate={new Date(mod.startDate)}
+                    endDate={mod.endDate ? new Date(mod.endDate) : new Date("")}
                   />
                 </div>
 
                 <div className="progress-arrow-container">
+                  {/*If teacher, remove the progress bar for now*/}
+                  {!isTeacher &&
                   <ProgressBar
                     total={moduleProgress.total || 1}
                     completed={moduleProgress.completed}
                   />
+                  }
                   {isOpen ? (
                     <span className="material-symbols-outlined">
                       keyboard_arrow_down

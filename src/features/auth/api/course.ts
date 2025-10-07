@@ -35,3 +35,11 @@ export async function updateCourse(id: string, course: UpdateCourseDto): Promise
     method: "GET",
   });
 }
+
+export async function getCourseById(id: string): Promise<ICourse> {
+  return await fetchWithToken<ICourse>(`${BASE_URL}/course/${id}`, { method: "GET" });
+}
+
+export async function getCourseModules(id: string): Promise<ICourse> {
+  return await fetchWithToken<ICourse>(`${BASE_URL}/course/${id}/modules`, { method: "GET" });
+}

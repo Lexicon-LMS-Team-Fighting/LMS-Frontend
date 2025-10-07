@@ -14,6 +14,8 @@ import { MyCourseDifferedLoader } from "../features/auth/loaders/myCourseLoader"
 import { RouterError } from "../features/shared/components/RouterError";
 import { CourseParticipants } from "../pages/courseparticipant";
 import { participantsLoader } from "../features/auth/loaders/participantsLoader";
+import CourseOverview from "../pages/CourseOverview";
+import { courseByIdLoader } from "../features/auth/loaders/courseByIdLoader";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -44,7 +46,18 @@ export const router = createBrowserRouter(
           loader={participantsLoader}
           errorElement={<RouterError />}
         />
+
+        
+      <Route
+          element={<CourseOverview />}
+          path="teacher/course/:id"
+          loader={courseByIdLoader}
+          errorElement={<RouterError />}
+        />
+
+
       </Route>
+
     </>
   )
 );

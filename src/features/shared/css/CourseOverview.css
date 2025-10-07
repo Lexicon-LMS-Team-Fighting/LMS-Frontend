@@ -1,0 +1,11 @@
+.course-overview-p {
+    display: flex;
+    align-items: center;
+    vertical-align: center;
+    color: var(--text-gray);
+    font-size: var(--smallest-paragraph);
+}
+
+.date-icon{
+    height: 1rem;
+}
