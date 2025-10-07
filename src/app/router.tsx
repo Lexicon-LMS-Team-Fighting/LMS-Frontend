@@ -1,4 +1,8 @@
-import { createBrowserRouter, createRoutesFromElements, Route } from "react-router";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+} from "react-router";
 import { App } from ".";
 import { Login } from "../pages/login";
 import { requireAuthLoader } from "../features/auth/loaders";
@@ -29,7 +33,7 @@ export const router = createBrowserRouter(
         {/* TODO: Edit this when everything else is properly implemented (Login, Header, Side Menu etc.) */}
         <Route
           element={<MyCourse />}
-          path="/course"
+          path="/courses"
           loader={MyCourseDifferedLoader}
           errorElement={<RouterError />}
         />
