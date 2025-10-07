@@ -50,6 +50,7 @@ export const router = createBrowserRouter(
           path="/participants"
           loader={participantsLoader}
           errorElement={<RouterError />}
+        />
       </Route>
     </>
   )
