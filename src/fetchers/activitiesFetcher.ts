@@ -4,11 +4,10 @@ import { fetchWithToken } from "../features/shared/utilities/fetchWithToken";
 import { catchFetchErrors } from "./fetchErrorsCatcher";
 
 /**
- * Fetches all modules for a given course by its unique identifier.
+ * Fetches all activities.
  * Converts the `startDate` and `endDate` fields of each module into Date objects.
  *
- * @param {string} guid - The unique course ID.
- * @returns {Promise<IModule[]>} A promise resolving to an array of modules with date fields converted.
+ * @returns {Promise<IUpcomingActivity[]>} A promise resolving to an array of activities with date fields converted.
  *
  * @throws {Response} 400 - If the course ID is missing.
  * @throws {Response} 401 - If the request is unauthorized.
