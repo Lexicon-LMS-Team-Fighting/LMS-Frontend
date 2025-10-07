@@ -1,6 +1,6 @@
 import "../css/DashboardNavBar.css";
 
-export type Tab = "overview" | "courses" | "new";
+export type Tab = "overview" | "courses" | "new" | "modules" | "new-module";
 
 export default function DashboardNavBar({
   value,
@@ -16,6 +16,8 @@ export default function DashboardNavBar({
       <button className={cx("overview")} onClick={() => onChange("overview")}>Översikt</button>
       <button className={cx("courses")}  onClick={() => onChange("courses")}>Kurser</button>
       <button className={cx("new")}      onClick={() => onChange("new")}>Skapa ny kurs</button>
+      <button className={cx("modules")}      onClick={() => onChange("modules")}>Moduler</button>
+      <button className={cx("new-module")}      onClick={() => onChange("new-module")}>Skapa ny modul</button>
     </nav>
   );
 }
