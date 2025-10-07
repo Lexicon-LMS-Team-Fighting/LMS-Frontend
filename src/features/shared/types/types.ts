@@ -54,8 +54,8 @@ export interface IActivity {
   activityType: string;
   description?: string;
   name: string;
-  startDate: string;
-  endDate?: string;
+  startDate: Date;
+  endDate?: Date;
   status?: "Genomförd" | "Försenad" | "Godkänd";
   feedback?: string;
 }
@@ -75,7 +75,7 @@ export interface ICourse {
  * Represents a course with basic details and related modules.
  */
 export interface ICourseWithModules extends ICourse {
-  modules?: IModule[];
+  modules?: IModuleFull[];
 }
 
 /**
