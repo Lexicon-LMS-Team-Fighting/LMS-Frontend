@@ -9,6 +9,8 @@ import { MyCourse } from "../pages/course/MyCourse";
 import { MyCourseDifferedLoader } from "../features/auth/loaders/myCourseLoader";
 import { RouterError } from "../features/shared/components/RouterError";
 import { CourseParticipants } from "../pages/courseparticipant";
+import Users from "../pages/users";
+import { usersDeferredLoader } from "../features/auth/loaders/UsersLoader";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,6 +25,12 @@ export const router = createBrowserRouter(
           loader={DashboardDifferedLoader}
           errorElement={<RouterError />}
         />
+                <Route
+          element={<Users />}
+          path="users"
+          loader={usersDeferredLoader}
+          errorElement={<RouterError />}
+        />
         {/* TODO: remove this in a production enviroment TestArea */}
         <Route element={<TestArea />} path="/testarea" />
         {/* TODO: Edit this when the backend gets implemented so that it correctly represents the issue/userstory */}
@@ -35,6 +43,7 @@ export const router = createBrowserRouter(
           errorElement={<RouterError />}
         />
       </Route>
+      
     </>
   )
 );

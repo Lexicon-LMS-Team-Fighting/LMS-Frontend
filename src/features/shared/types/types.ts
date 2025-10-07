@@ -79,10 +79,21 @@ export interface IUser {
   id: string;
   userName: string;
   email: string;
+  role?: string;
   firstName: string;
   lastName: string;
   refreshToken: string;
   refreshTokenExpireTime: Date;
+}
+
+export interface IUserCreate {
+  id: string;
+  userName: string;
+  email: string;
+  role: "Student" | "Teacher";
+  firstName: string;
+  lastName: string;
+  password: string;
 }
 
 /**
