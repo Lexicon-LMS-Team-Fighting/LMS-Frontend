@@ -2,9 +2,8 @@
     height: 100%;
     width: 100%;
     display: flex;
-    gap:1rem;
+    gap:1.5rem;
     border-bottom: 1px solid rgba(107,114,128, 0.2);
-
 }
 
 .dashboard-nav-button {
@@ -14,6 +13,7 @@
     color: rgb(107 114 128);
     font-weight: 500;
     font-size: 0.9rem;
+    padding: .5rem 0; 
 }
 
 .dashboard-nav-button.is-active {

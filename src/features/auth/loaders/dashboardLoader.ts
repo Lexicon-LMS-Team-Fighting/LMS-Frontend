@@ -1,13 +1,16 @@
 import { fetchCourseById } from "../../../fetchers/courseFetcher";
+import { fetchAllModules } from "../../../fetchers/moduleFetcher";
 import { fetchUserFromToken } from "../../../fetchers/userFetcher";
-import { ICourse, IUserExtended } from "../../shared/types/types";
+import { ICourse, IUserExtended, IModule } from "../../shared/types/types";
 
 /**
  * Represents the shape of the loader result for a user's courses.
  */
 export interface IDashboardDifferedLoader {
   userCourses: Promise<ICourse[] | null>;
+  modules: Promise<IModule[]>
 }
+
 
 /**
  * Loads the first course (with its modules) for the currently authenticated user.
@@ -22,11 +25,26 @@ export interface IDashboardDifferedLoader {
  * @throws {Response} 502 - If fetching user or course data fails.
  */
 export async function DashboardDifferedLoader(): Promise<IDashboardDifferedLoader> {
-  const user: IUserExtended = await fetchUserFromToken(); //await fetchUserExtendedById(userId);
+  const user: IUserExtended = await fetchUserFromToken();
 
-  if (user.courses.length === 0) return { userCourses: Promise.resolve(null) };
 
-  const courses: Promise<ICourse[]> = Promise.all(
+  const modules: Promise<IModule[]> = fetchAllModules().then(list =>
+    list.map(m => ({
+      ...m,
+      startDate: new Date(m.startDate),
+      endDate: m.endDate ? new Date(m.endDate) : null,
+    }))
+  );
+
+
+  if (!user?.courses?.length) {
+    return {
+      userCourses: Promise.resolve(null),
+      modules, 
+    };
+  }
+
+  const userCourses: Promise<ICourse[]> = Promise.all(
     user.courses.map(async (c) => {
       const courseData = await fetchCourseById(c.id);
       return {
@@ -37,5 +55,5 @@ export async function DashboardDifferedLoader(): Promise<IDashboardDifferedLoade
     })
   );
 
-  return { userCourses: courses };
+  return { userCourses, modules };
 }

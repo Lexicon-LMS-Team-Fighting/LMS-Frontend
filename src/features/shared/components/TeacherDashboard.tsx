@@ -4,16 +4,19 @@ import DashboardNavBar, { Tab } from "./DashboardNavBar";
 import CourseCreatePage from "./CourseCreatePage";
 import TeacherDashboardCourses from "./TeacherDashboardCourses";
 import TeacherDashboardOverview from "./TeacherDashboardOverview";
+import TeacherDashboardModules from "./TeacherDashoardModules";
+import ModuleCreatePage from "./ModuleCreatePage";
 import { Await, useLoaderData } from "react-router";
 import { IDashboardDifferedLoader } from "../../auth/loaders/dashboardLoader";
-
 import { Spinner } from "./Spinner";
 import { AwaitError } from "./AwaitError";
 
+
 export default function TeacherDashboard(): ReactElement {
-  const { userCourses } = useLoaderData<IDashboardDifferedLoader>();
+  const { userCourses, modules } = useLoaderData<IDashboardDifferedLoader>();
   const [tab, setTab] = useState<Tab>("overview"); //setting default tab to "overview"
 
+  console.log(modules)
   return (
     <main className="main-wrapper">
       <h1 className="fs-3 mb-4">Lärarens Dashboard</h1>
@@ -50,6 +53,30 @@ export default function TeacherDashboard(): ReactElement {
           </Suspense>
         )}
         {tab === "new" && <CourseCreatePage />}
+
+        {tab === "modules" && (
+          <Suspense fallback={<Spinner />}>
+            <Await resolve={modules} errorElement={<AwaitError />}>
+              {(m) => (
+                <TeacherDashboardModules
+                  modules={m ? m : []}
+                  onChange={setTab}
+                />
+              )}
+            </Await>
+          </Suspense>
+        )}
+
+       {tab === "new-module" && (
+        <Suspense fallback={<Spinner />}>
+          <Await resolve={userCourses} errorElement={<AwaitError />}>
+            {(uC) => {
+              const cs = (uC ?? []).map((c: any) => ({ id: c.id, name: c.name })); 
+              return <ModuleCreatePage courses={cs} />;
+            }}
+          </Await>
+        </Suspense>
+       )}
       </section>
     </main>
   );
