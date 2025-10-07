@@ -3,6 +3,7 @@ import { fetchAllModules } from "../../../fetchers/moduleFetcher";
 import { fetchUserFromToken } from "../../../fetchers/userFetcher";
 import { fetchUpcomingActivities } from "../../../fetchers/activitiesFetcher";
 import { ICourse, IUserExtended, IModule, IUpcomingActivity } from "../../shared/types/types";
+import { getCurrentUserRole } from "../../shared/utilities/jwtDecoder";
 
 /**
  * Represents the shape of the loader result for a user's courses.
@@ -10,7 +11,7 @@ import { ICourse, IUserExtended, IModule, IUpcomingActivity } from "../../shared
 export interface IDashboardDifferedLoader {
   userCourses: Promise<ICourse[] | null>;
   modules: Promise<IModule[]>
-  upcomingActivities : IUpcomingActivity;
+  upcomingActivities? : IUpcomingActivity[] | null;
 }
 
 
@@ -46,6 +47,10 @@ export async function DashboardDifferedLoader(): Promise<IDashboardDifferedLoade
     };
   }
 
+
+  //load activities for teacher dashboard
+  const upcomingActivities: IUpcomingActivity[] = await fetchUpcomingActivities();
+
   const userCourses: Promise<ICourse[]> = Promise.all(
     user.courses.map(async (c) => {
       const courseData = await fetchCourseById(c.id);
@@ -57,9 +62,7 @@ export async function DashboardDifferedLoader(): Promise<IDashboardDifferedLoade
     })
   );
 
-  //Loading activities.
-  //TODO : fix this 
-  const upcomingAct: IUpcomingActivity = await fetchUpcomingActivities();
 
-  return { userCourses, modules, upcomingActivities : upcomingAct };
+
+  return { userCourses, modules, upcomingActivities};
 }
