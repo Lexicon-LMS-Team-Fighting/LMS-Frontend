@@ -14,6 +14,8 @@ import { MyCourseDifferedLoader } from "../features/auth/loaders/myCourseLoader"
 import { RouterError } from "../features/shared/components/RouterError";
 import { TeacherCourses } from "../pages/teacherCourses";
 import { TeacherCoursesDifferedLoader } from "../features/auth/loaders/coursesLoader";
+import { CourseParticipants } from "../pages/courseparticipant";
+import { participantsLoader } from "../features/auth/loaders/participantsLoader";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,17 +35,21 @@ export const router = createBrowserRouter(
         {/* TODO: Edit this when everything else is properly implemented (Login, Header, Side Menu etc.) */}
         <Route
           element={<MyCourse />}
-          path="/course"
+          path="/courses"
           loader={MyCourseDifferedLoader}
           errorElement={<RouterError />}
         />
-
         <Route
           element={<TeacherCourses />}
-          path="/courses"
+          path="/teacher-courses"
           loader={TeacherCoursesDifferedLoader}
           errorElement={<RouterError />}
         />
+        <Route
+          element={<CourseParticipants />}
+          path="/participants"
+          loader={participantsLoader}
+          errorElement={<RouterError />}
       </Route>
     </>
   )

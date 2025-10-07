@@ -4,78 +4,73 @@ import "../css/TeacherDashboardCourses.css";
 import { Tab } from "./DashboardNavBar";
 import Modal from './Modal';
 import UpdateForm from './UpdateForm';
-import { updateCourse } from '../../auth/api/course';
+import { updateModule } from '../../auth/api/module';
 import { CustomError } from '../../shared/classes';
-import type { CourseDraft } from './CourseCreatePage';
-import { ICourse } from "../types/types";
+import type { ModuleDraft } from './ModuleCreatePage';
+import { IModule } from "../types/types";
 
-type Draft = CourseDraft
+type Draft = ModuleDraft
 type Props = {
-  courses: ICourse[];
+  modules: IModule[];
   onChange: (t: Tab) => void;
 };
 //TODO, receive course array as prop from parent instead
 
 
-export default function TeacherDashboardCourses({
-  courses,
+export default function TeacherDashboardModules({
+  modules,
   onChange,
 }: Props): ReactElement {
-  const [courseArr, setCourseArr] = useState<ICourse[] | null>(courses);
+  const [moduleArr, setModuleArr] = useState<IModule[] | null>(modules);
   const [searchQuery, setSearchQuery] = useState("");
-  const [editing, setEditing] = useState<ICourse | null>(null);
+  const [editing, setEditing] = useState<IModule | null>(null);
   const [draft, setDraft] = useState<Draft | null>(null);
   const [saving, setSaving] = useState(false);
   const [modalMsg, setModalMsg] = useState<string | null>(null);
 
-  console.log(courses,courseArr)
 
-  function openEdit(course: ICourse) {
-    setEditing(course);
+  function openEdit(module: IModule) {
+    setEditing(module);
     setDraft({
-      name: course.name,
-      description: course.description ?? "",
-      startDate: new Date(course.startDate),
-      endDate: new Date(course.endDate)
+      name: module.name,
+      description: module.description ?? "",
+      startDate: new Date(module.startDate),
+      endDate: module.endDate ? new Date(module.endDate) : new Date(module.startDate),
     });
     setModalMsg(null);
   }
-  courses = courses.filter((c) => {
+  modules = modules.filter((m) => {
     const query = searchQuery.trim().toLowerCase();
 
     if (!query) return true;
 
     return (
-      c.name.toLowerCase().includes(query) ||
-      c.startDate.toISOString().toLowerCase().includes(query) ||
-      c.endDate.toISOString().toLowerCase().includes(query)
+      m.name.toLowerCase().includes(query) ||
+      m.startDate.toISOString().toLowerCase().includes(query) ||
+      m.endDate?.toISOString().toLowerCase().includes(query)
     );
   });
 
-  function renderCourse() {
+  function renderModule() {
     return (
       <tbody>
-        {courseArr?.map((course, i) => (
-          <tr key={`${course.name}-${i}`} className="table-row-white">
-            <td className="bold">{course.name}</td>
+        {moduleArr?.map((module, i) => (
+          <tr key={`${module.name}-${i}`} className="table-row-white">
+            <td className="bold">{module.name}</td>
             <td className="text-gray">
-              {course.startDate.toLocaleDateString()} - {" "}
-              {course.endDate.toLocaleDateString()}
+              {module.startDate.toLocaleDateString()} - {" "}
+              {module?.endDate?.toLocaleDateString()}
             </td>
-            {/* Activate when modules and students get added. */}
-            {/* <td>{course.students.length}</td> */}
-            {/* <td>{course.modules.length}</td> */}
-            {/*TODO, make sure we have the correct routes*/}
             <td className="table-links">
-              <Link to={`/teacher/course/${course.id}`}>Visa</Link>{" "}
-              <button className="edit-course-button" onClick={() => openEdit(course)}>Redigera</button>
+              <Link to={`/teacher/module/${module.id}`}>Visa</Link>{" "}
+              <button className="edit-course-button" onClick={() => openEdit(module)}>Redigera</button>
             </td>
           </tr>
         ))}
               
-        {courseArr?.length === 0 && (
+        {moduleArr?.length === 0 && (
           <tr>
-            <td>Inga kurser ännu</td>
+            <td>Inga moduler ännu</td>
           </tr>
         )}
       </tbody>
@@ -93,10 +88,10 @@ const isValid =
       setSaving(true); setModalMsg(null);
 
       try {
-        const updated: ICourse = await updateCourse(editing.id, draft); 
-        setCourseArr(arr => arr?.map(c =>
+        const updated: IModule = await updateModule(editing.id, draft); 
+        setModuleArr(arr => arr?.map(c =>
           c.id === updated.id
-            ? { ...c, ...updated, startDate: new Date(updated.startDate) , endDate: new Date(updated.endDate) }
+            ? { ...c, ...updated, startDate: new Date(updated.startDate) , endDate: updated.endDate ? new Date(updated.endDate) : null }
             : c
         ) ?? arr);
         setEditing(null);
@@ -106,9 +101,9 @@ const isValid =
       if (e instanceof CustomError) {
         const map: Record<number, string> = {
           400: "Kontrollera att fälten är korrekt ifyllda",
-          401: "Du saknar behörighet att ändra kurser.",
-          403: "Du saknar behörighet att ändra kurser.",
-          404: "Kursen hittades inte.",
+          401: "Du saknar behörighet att ändra moduler.",
+          403: "Du saknar behörighet att ändra moduler.",
+          404: "Modulen hittades inte.",
           500: "Ett serverfel inträffade.",
         };
         const fallback = e.message || "Ett fel inträffade.";
@@ -122,16 +117,16 @@ const isValid =
   return (
     <section className="dashboard-courses-container">
       <div className="card-border-radius-top">
-        <h2 className="fs-5">Alla kurser</h2>
+        <h2 className="fs-5">Alla moduler</h2>
         <p className="p-gray">
-          En översikt över alla aktiva och kommande kurser
+          En översikt över alla moduler
         </p>
       </div>
 
       <div className="search-course">
         <input
           type="text"
-          placeholder="Sök efter kurs..."
+          placeholder="Sök efter modul..."
           className="search-input"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
@@ -139,10 +134,10 @@ const isValid =
 
         <button
           className="create-course-button-small"
-          onClick={() => onChange("new")}
+          onClick={() => onChange("new-module")}
         >
           <img src="plus-white.svg" id="plus-icon" />
-          Ny kurs
+          Ny modul
         </button>
       </div>
 
@@ -152,11 +147,9 @@ const isValid =
             <tr className="table-header">
               <th>KURSNAMN</th>
               <th>PERIOD</th>
-              <th>ELEVER</th>
-              <th>MODULER</th>
             </tr>
           </thead>
-          {renderCourse()}
+          {renderModule()}
         </table>
                  <Modal open={!!editing} onClose={() => { setEditing(null); setDraft(null); }}>
               {editing && draft && (
@@ -164,7 +157,7 @@ const isValid =
                   <UpdateForm
                     data={draft}
                     buttonText="Spara ändringar"
-                    title={`Redigerar kurs: ${editing.name}`}
+                    title={`Redigerar modul: ${editing.name}`}
                     onChange={setDraft}        
                     onSubmit={handleSubmit}        
                     disabled={!isValid || saving}
