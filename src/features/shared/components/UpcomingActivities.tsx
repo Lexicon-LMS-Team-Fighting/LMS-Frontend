@@ -2,20 +2,20 @@ import { IUpcomingActivity } from "../types";
 import { TitleCourse } from "./TitleCourse";
 import "../css/UpcomingActivities.css";
 
-interface IActivityListProps {
-  activities: IUpcomingActivity[];
+interface IUpcomingProps {
+  activities: IUpcomingActivity[] | null;
   count: number;
 }
 
-export const UpcomingActivities: React.FC<IActivityListProps> = ({ activities, count }) => {
+export const UpcomingActivities: React.FC<IUpcomingProps> = ({ activities, count }) => {
 
 
   if (!activities || activities.length === 0) {
     return <p>Inga kommande aktiviteter</p>;
   }
 
-  console.log("Activities in UpcomingActivities component:", activities);
-  const act = activities.slice(0, count); // Show only the first 5 activities
+  //Slice using count prop to limit number of activities shown
+  const act = activities.slice(0, count);
 
   return (
     <section className="uc-activity-list-section">
@@ -34,13 +34,8 @@ export const UpcomingActivities: React.FC<IActivityListProps> = ({ activities, c
                   courseName={activity.courseName}
                 />
 
-                <div className="document-status-container">
-                  {/* <span className="material-symbols-outlined hidden">calendar_today</span>
-                  <p className="titledate-date">{activity.startDate}</p> */}
-                  {/* TODO: This should be correctly implemented once the backend part for handling documents is in place */}
-                  {
+                <div className="date-container">
                   <TitleCourse startDate={activity.startDate.toISOString().split("T")[0]}/>
-                  }
                 </div>
               </div>
             </li>
