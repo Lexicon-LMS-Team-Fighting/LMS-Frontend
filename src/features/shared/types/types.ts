@@ -122,6 +122,7 @@ export interface IModulePreview {
   name: string;
   startDate: Date;
   endDate: Date;
+  progress: number; 
 }
 
 export interface ICoursePreview {
@@ -129,6 +130,7 @@ export interface ICoursePreview {
   name: string;
   startDate: Date;
   endDate: Date;
+  progress: number; 
 }
 
 export interface IPaginatedResponseMetadata {

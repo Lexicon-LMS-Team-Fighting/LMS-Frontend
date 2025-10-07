@@ -12,7 +12,6 @@ interface CourseItemProps {
 
 export const CourseItem = (props: CourseItemProps) => {
   const { course } = props;
-  const randomProgress = useRef(Math.random()); // Placeholder for actual progress
   const [showModules, setShowModules] = useState(false);
 
   const paginatedLoader = usePaginatedLoader<IModulePreview>({
@@ -32,7 +31,7 @@ export const CourseItem = (props: CourseItemProps) => {
 
       <section className="course-progress">
         <h2 className="course-progress-title">Kursframsteg</h2>
-        <ProgressBar total={1} completed={randomProgress.current} fullSize />
+        <ProgressBar total={1} completed={course.progress} fullSize />
       </section>
 
       <div className="text-center">
@@ -50,8 +49,6 @@ export const CourseItem = (props: CourseItemProps) => {
           )}
           <TeacherModuleList
             parinatedLoader={paginatedLoader}
-            onProgressChange={() => { }}
-            progress={{ [course.id]: { completed: randomProgress.current, total: 1 } }}
           />
         </>
       )}

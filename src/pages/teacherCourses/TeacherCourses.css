@@ -1,7 +1,16 @@
+.teacher-courses-page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .course-list {
   list-style-type: none;
   padding: 0;
   margin: 0;
+  width: 100%;
 }
 
 .course-item {

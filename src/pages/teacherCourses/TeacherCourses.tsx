@@ -7,10 +7,29 @@ import { fetchCourses } from "../../fetchers/coursesFetcher";
 import { CourseItem } from "./TeacherCourseItem";
 import { Spinner } from "../../features/shared/components/Spinner";
 import { AwaitError } from "../../features/shared/components/AwaitError";
+import { useIsTeacher } from "../../features/shared/hooks/useIsTeacher";
 import "./TeacherCourses.css";
 
 export const TeacherCourses = () => {
   const { courses: initialCoursesPromise } = useLoaderData<ITeacherCoursesDifferedLoader>();
+  const isTeacher = useIsTeacher();
+
+  // Проверяем, является ли пользователь учителем
+  if (isTeacher === false) {
+    return (
+      <div className="teacher-courses-page">
+        <div className="alert alert-warning" role="alert">
+          <h4>Åtkomst nekad</h4>
+          <p>Du har inte behörighet att visa denna sida. Endast lärare kan se kurser.</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Показываем загрузку пока проверяется роль
+  if (isTeacher === undefined) {
+    return <div className="text-center"><Spinner /></div>;
+  }
 
   return (
     <Suspense fallback={<div className="text-center"><Spinner /></div>}>
@@ -28,7 +47,7 @@ export const TeacherCourses = () => {
           });
 
           return (
-          <>
+          <div className="teacher-courses-page">
             {coursesError && (
               <div className="alert alert-danger" role="alert">
                 <strong>Ett fel uppstod:</strong> {coursesError}
@@ -59,7 +78,7 @@ export const TeacherCourses = () => {
                 </button>
               </div>
             )}
-          </>
+          </div>
           );
         }}
       </Await>

@@ -5,7 +5,7 @@ import { catchFetchErrors } from "./fetchErrorsCatcher";
 
 export async function fetchModulesByCourseId(guid: string, pageNumber: number = 1, pageSize: number = 10): Promise<IPaginatedResponse<IModulePreview>> {
   try {
-    const response = await fetchWithToken<IPaginatedResponse<IModulePreview>>(`${BASE_URL}/course/${guid}/modules?page=${pageNumber}&pageSize=${pageSize}`);
+    const response = await fetchWithToken<IPaginatedResponse<IModulePreview>>(`${BASE_URL}/course/${guid}/modules?page=${pageNumber}&pageSize=${pageSize}&include=progress`, {});
 
     const modulesWithDates = response.items.map((m) => ({
       ...m,
