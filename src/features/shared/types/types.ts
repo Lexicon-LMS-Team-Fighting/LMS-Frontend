@@ -55,6 +55,24 @@ export interface IActivity {
 }
 
 /**
+ * Represents an activity with no association.
+ * Used in the UpcomingActivity.tsx component to display activity details.
+ */
+export interface IUpcomingActivity {
+  id : string;
+  name : string;
+  courseName : string;
+  courseId : string;
+  moduleId : string;
+  activityTypeName : string;
+  startDate : Date;
+  endDate? : Date;
+  status? : "Genomförd" | "Försenad" | "Godkänd";
+  feedback? : string;
+  description? : string;
+}
+
+/**
  * Represents a course with basic details.
  */
 export interface ICourse {
