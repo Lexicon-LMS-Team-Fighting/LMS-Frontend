@@ -1,4 +1,4 @@
-.titledate-container {
+.titlecourse-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6,14 +6,14 @@
   gap: 0.25rem;
 }
 
-.titledate-container-activity {
+.titlecourse-container-activity {
   display: flex;
   flex-direction: column;
   align-items: start;
   gap: 0.25rem;
 }
 
-.date-container {
+.info-container {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -34,13 +34,13 @@
   gap: 0.5rem;
 }
 
-p.titledate-title {
+p.titlecourse-title {
   font-weight: bold;
   margin: 0;
   display: block;
 }
 
-p.titledate-date {
+p.titlecourse-date {
   margin: 0;
 }
 
@@ -73,7 +73,7 @@ p.titledate-course {
     height: 23px;
   }
 
-  .date-container {
+  .info-container {
     font-size: 12px;
   }
 }
