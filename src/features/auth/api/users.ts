@@ -38,7 +38,7 @@ export async function updateUser(id: string, user: UpdateUserDto): Promise<IUser
     body: JSON.stringify(user),
   });
 
-  return await fetchWithToken<IUserCreate>(`${BASE_URL}/users/${id}`, {
+  return await fetchWithToken<IUserCreate>(`${BASE_URL}/user/${id}`, {
     method: "GET",
   });
 }
