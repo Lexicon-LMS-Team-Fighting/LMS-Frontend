@@ -15,6 +15,8 @@ import { RouterError } from "../features/shared/components/RouterError";
 import { TeacherCourses } from "../pages/teacherCourses";
 import { TeacherCoursesDifferedLoader } from "../features/auth/loaders/coursesLoader";
 import { CourseParticipants } from "../pages/courseparticipant";
+import Users from "../pages/Users";
+import { usersDeferredLoader } from "../features/auth/loaders/UsersLoader";
 import { participantsLoader } from "../features/auth/loaders/participantsLoader";
 
 export const router = createBrowserRouter(
@@ -28,6 +30,12 @@ export const router = createBrowserRouter(
           element={<RoleSwitch />}
           path="dashboard"
           loader={DashboardDifferedLoader}
+          errorElement={<RouterError />}
+        />
+                <Route
+          element={<Users />}
+          path="users"
+          loader={usersDeferredLoader}
           errorElement={<RouterError />}
         />
         {/* TODO: remove this in a production enviroment TestArea */}
@@ -52,6 +60,7 @@ export const router = createBrowserRouter(
           errorElement={<RouterError />}
         />
       </Route>
+      
     </>
   )
 );
