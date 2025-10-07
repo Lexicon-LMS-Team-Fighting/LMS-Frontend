@@ -1,4 +1,4 @@
-import { fetchCourseWithModules } from "../../../fetchers/courseFetcher";
+import { fetchCourseWithFullModules } from "../../../fetchers/courseFetcher";
 import { fetchUserFromToken } from "../../../fetchers/userFetcher";
 import { ICourseWithModules, IUserExtended } from "../../shared/types/types";
 
@@ -28,7 +28,7 @@ export async function MyCourseDifferedLoader(): Promise<IMyCourseDifferedLoader>
   if (user.courses.length > 0) {
     const myCourse = user.courses[0];
 
-    const course: Promise<ICourseWithModules> = fetchCourseWithModules(
+    const course: Promise<ICourseWithModules> = fetchCourseWithFullModules(
       myCourse.id
     );
 
