@@ -1,12 +1,14 @@
 import { fetchCourseById } from "../../../fetchers/courseFetcher";
 import { fetchUserFromToken } from "../../../fetchers/userFetcher";
-import { ICourse, IUserExtended } from "../../shared/types/types";
+import { fetchUpcomingActivities } from "../../../fetchers/activitiesFetcher";
+import { ICourse, IUserExtended, IUpcomingActivity } from "../../shared/types/types";
 
 /**
  * Represents the shape of the loader result for a user's courses.
  */
 export interface IDashboardDifferedLoader {
   userCourses: Promise<ICourse[] | null>;
+  upcomingActivities : IUpcomingActivity;
 }
 
 /**
@@ -24,8 +26,7 @@ export interface IDashboardDifferedLoader {
 export async function DashboardDifferedLoader(): Promise<IDashboardDifferedLoader> {
   const user: IUserExtended = await fetchUserFromToken(); //await fetchUserExtendedById(userId);
 
-  if (user.courses.length === 0) return { userCourses: Promise.resolve(null) };
-
+  //if (user.courses.length === 0) return { userCourses: Promise.resolve(null) };
   const courses: Promise<ICourse[]> = Promise.all(
     user.courses.map(async (c) => {
       const courseData = await fetchCourseById(c.id);
@@ -35,12 +36,11 @@ export async function DashboardDifferedLoader(): Promise<IDashboardDifferedLoade
         endDate: new Date(courseData.endDate),
       };
     })
-    
-    //Loading activities.
-
   );
 
-  const 
+  //Loading activities.
+  //TODO : fix this 
+  const upcomingAct: IUpcomingActivity = await fetchUpcomingActivities();
 
-  return { userCourses: courses };
+  return { userCourses: courses, upcomingActivities : upcomingAct };
 }
