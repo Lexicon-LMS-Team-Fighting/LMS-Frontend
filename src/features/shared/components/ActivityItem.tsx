@@ -21,10 +21,42 @@ export function ActivityItem({ activity }: IActivityItemProps): ReactElement {
     );
   };
 
+  const getShowInfo = isExpanded ? "Click to show less" : "Click to show more";
+
+  const getStatusColor =
+    activity.feedbacks[0]?.status === "Försenad"
+      ? "status-red"
+      : "status-green";
+
   function renderFeedback(activity: IActivity): ReactNode {
     if (!activity.feedbacks[0].feedback) return null;
 
     return <FeedbackItem feedback={activity.feedbacks[0]} />;
+  }
+
+  function renderIcon(activity: IActivity): ReactNode {
+    return (
+      <>
+        {activity.feedbacks[0]?.status === "Försenad" ? (
+          <span className="material-symbols-outlined">error</span>
+        ) : (
+          <span className="material-symbols-outlined">task_alt</span>
+        )}
+      </>
+    );
+  }
+
+  function renderStatus(activity: IActivity): ReactNode {
+    return (
+      <>
+        {activity.feedbacks[0]?.status && (
+          <span className={`status-container ${getStatusColor}`}>
+            {renderIcon(activity)}
+            {activity.feedbacks[0]?.status}
+          </span>
+        )}
+      </>
+    );
   }
 
   return (
@@ -34,13 +66,7 @@ export function ActivityItem({ activity }: IActivityItemProps): ReactElement {
         activity.description ? "clickable" : ""
       }`}
       onClick={() => handleClick(activity)}
-      title={
-        activity.description
-          ? isExpanded
-            ? "Click to show less"
-            : "Click to show more"
-          : ""
-      }
+      title={activity.description ? getShowInfo : ""}
     >
       <div className="activity-list-box">
         <TitleDate
@@ -51,8 +77,6 @@ export function ActivityItem({ activity }: IActivityItemProps): ReactElement {
         />
 
         <div className="document-status-container">
-          {/* TODO: This should be correctly implemented once the backend part 
-                  for handling documents is in place */}
           {
             <a
               href=""
@@ -64,22 +88,7 @@ export function ActivityItem({ activity }: IActivityItemProps): ReactElement {
             </a>
           }
 
-          {activity.feedbacks[0]?.status && (
-            <span
-              className={`status-container ${
-                activity.feedbacks[0]?.status === "Försenad"
-                  ? "status-red"
-                  : "status-green"
-              }`}
-            >
-              {activity.feedbacks[0]?.status === "Försenad" ? (
-                <span className="material-symbols-outlined">error</span>
-              ) : (
-                <span className="material-symbols-outlined">task_alt</span>
-              )}
-              {activity.feedbacks[0]?.status}
-            </span>
-          )}
+          {renderStatus(activity)}
         </div>
       </div>
 
