@@ -35,3 +35,40 @@ export async function fetchModulesForCourseById(
     catchFetchErrors(e, "course", guid);
   }
 }
+
+export async function fetchFullModuleById(guid: string): Promise<IModule> {
+  if (!guid) throw new Response("module id missing", { status: 400 });
+
+  try {
+    const module = await fetchWithToken<IModule>(
+      `${BASE_URL}/modules/${guid}?include=activitiesparticipantsdocuments`
+    );
+
+    module.startDate = new Date(module.startDate);
+    module.endDate = new Date(module.endDate ?? "");
+
+    return module;
+  } catch (e) {
+    catchFetchErrors(e, "module", guid);
+  }
+}
+
+//TODO, This function only gets the first page of modules. Either fetch all or implement paging in ui
+export async function fetchAllModules(): Promise<IModule[]> {
+  const res = await fetchWithToken<PagedResponse<IModule> | IModule[]>(
+    `${BASE_URL}/modules`,
+    { method: "GET" }
+  );
+
+  const items = Array.isArray(res) ? res : res.items;
+
+  if (!Array.isArray(items)) {
+    throw new Error("Expected modules array from /modules endpoint");
+  }
+
+  return items.map((m) => ({
+    ...m,
+    startDate: new Date(m.startDate),
+    endDate: m.endDate ? new Date(m.endDate) : undefined,
+  }));
+}

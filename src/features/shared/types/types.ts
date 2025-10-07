@@ -33,9 +33,15 @@ export interface IModule {
   description?: string;
   startDate: Date;
   endDate?: Date;
-  // Placeholders, should get removed when these are provided along with the implementation of Activity component.
-  totalActivities?: number;
-  completedActivities?: number;
+}
+
+/**
+ * Represents a module with extended details including activities, participants, and documents.
+ */
+export interface IModuleFull extends IModule {
+  activities?: IActivity[];
+  participants?: IUserParticipants[];
+  documents?: IDocument[];
 }
 
 /**
@@ -125,15 +131,15 @@ export interface IDocument {
   timeStamp: Date;
 }
 
-/** Interface type for the User data, used in UserList.tsx and UserInfo.tsx to plot the user for said list. 
+/** Interface type for the User data, used in UserList.tsx and UserInfo.tsx to plot the user for said list.
  * Use the field name approptiate to what is wanted in the header label for UserList.tsx here as these are used as header labels aswell.
  * Also note that since UserList.tsx and UserInfo.tsx uses the first index in the array as reference for which header/label names are used
  * derived from the arrays field names, the first array element would have to have all the field names even if strings are empty.
  * Else they won't show up as header/label.
  * Note: It is suspected that backend data is already sent this way from the endpoint, but when testing using dummy data, this is a problem
  * that can occur.
- * 
-*/
+ *
+ */
 export interface IUserParticipants {
   userId: string;
   användarnamn: string;
