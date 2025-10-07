@@ -65,7 +65,7 @@ export async function fetchCourseWithModules(
 }
 
 /**
- * Fetches a course along with its related modules (Full version).
+ * Fetches a single course along with its related modules (Full version).
  * Converts all date fields (course and modules) into Date objects.
  *
  * @param {string} guid - The unique course ID.
