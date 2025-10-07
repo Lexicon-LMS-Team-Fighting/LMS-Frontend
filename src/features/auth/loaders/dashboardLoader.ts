@@ -28,7 +28,7 @@ export interface IDashboardDifferedLoader {
  */
 export async function DashboardDifferedLoader(): Promise<IDashboardDifferedLoader> {
   const user: IUserExtended = await fetchUserFromToken();
-
+  const isTeacher = getCurrentUserRole()?.includes("Teacher");
 
   const modules: Promise<IModule[]> = fetchAllModules().then(list =>
     list.map(m => ({
@@ -39,7 +39,7 @@ export async function DashboardDifferedLoader(): Promise<IDashboardDifferedLoade
   );
 
 
-  if (!user?.courses?.length) {
+  if (!user?.courses?.length && !isTeacher) {
     return {
       userCourses: Promise.resolve(null),
       modules, 
