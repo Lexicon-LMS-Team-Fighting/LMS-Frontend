@@ -32,10 +32,7 @@ export interface IModule {
   name: string;
   description?: string;
   startDate: Date;
-  endDate?: Date | null;
-  // Placeholders, should get removed when these are provided along with the implementation of Activity component.
-  totalActivities?: number; // Do we even use these?
-  completedActivities?: number;
+  endDate?: Date;
 }
 
 /**
@@ -134,4 +131,3 @@ export interface IUserParticipants {
   //Add more optional fields for multipurpose use, for example for Teachers View
   test?: string;
 }
-
