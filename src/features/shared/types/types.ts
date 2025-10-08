@@ -103,10 +103,21 @@ export interface IUser {
   id: string;
   userName: string;
   email: string;
+  role?: string;
   firstName: string;
   lastName: string;
   refreshToken: string;
   refreshTokenExpireTime: Date;
+}
+
+export interface IUserCreate {
+  id: string;
+  userName: string;
+  email: string;
+  role: "Student" | "Teacher";
+  firstName: string;
+  lastName: string;
+  password: string;
 }
 
 /**
@@ -131,6 +142,39 @@ export interface IDocument {
   timeStamp: Date;
 }
 
+/**=====================================================================
+ * Types for teacher courses view
+ ======================================================================*/
+
+export interface IModulePreview {
+  id: string;
+  name: string;
+  startDate: Date;
+  endDate: Date;
+  progress: number; 
+}
+
+export interface ICoursePreview {
+  id: string;
+  name: string;
+  startDate: Date;
+  endDate: Date;
+  progress: number; 
+}
+
+export interface IPaginatedResponseMetadata {
+  totalItems: number;
+  totalPages: number;
+  currentPage: number;
+  pageSize: number;
+  hasPreviousPage: boolean;
+  hasNextPage: boolean;
+}
+
+export interface IPaginatedResponse<T> {
+  items: T[];
+  metadata: IPaginatedResponseMetadata;
+}
 /** Interface type for the User data, used in UserList.tsx and UserInfo.tsx to plot the user for said list.
  * Use the field name approptiate to what is wanted in the header label for UserList.tsx here as these are used as header labels aswell.
  * Also note that since UserList.tsx and UserInfo.tsx uses the first index in the array as reference for which header/label names are used
