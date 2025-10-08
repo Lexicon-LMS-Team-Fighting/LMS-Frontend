@@ -32,13 +32,6 @@ export function HeaderNav(): ReactElement {
         </div>
 
         <div className="d-flex align-items-center justify-content-center gap-3">
-          <button className="btn btn-link text-secondary p-0 d-flex">
-            {/* <!-- bell icon --> */}
-            <span className="material-symbols-outlined">
-              notifications
-            </span>
-          </button>
-
           {/* <!-- User dropdown --> If it will be a dropdown*/}
           <div className="dropdown">
             <button className="btn d-flex align-items-center text-secondary" data-bs-toggle="dropdown">
