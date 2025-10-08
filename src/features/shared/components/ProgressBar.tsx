@@ -17,7 +17,6 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
 }) => {
   const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
 
-  console.log(preCalcPercentage);
   // Notify parent if completed through callback
   if (percentage === 100 && onComplete) {
     onComplete();
@@ -26,13 +25,15 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   return (
     <div className={`progress-bar-container ${fullSize ? "full-size" : ""}`}>
       <span className="progress-bar-text">
-        {percentage}% <p>avklarat</p>
+        {preCalcPercentage ? preCalcPercentage : percentage}% <p>avklarat</p>
       </span>
       <div className={`progress-bar`}>
         <div
           className={`current-progress`}
           style={{
-            width: `${preCalcPercentage ? preCalcPercentage : percentage}%`,
+            width: `${
+              preCalcPercentage ? preCalcPercentage * 100 : percentage
+            }%`,
           }}
         />
       </div>
