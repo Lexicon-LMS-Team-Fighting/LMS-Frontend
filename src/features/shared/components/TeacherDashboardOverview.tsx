@@ -1,11 +1,12 @@
 import { ReactElement } from "react";
 import "../css/TeacherDashboardOverview.css"
-import { Link } from "react-router";
+import { Link, useLoaderData } from "react-router";
+import { UpcomingActivities } from "./UpcomingActivities";
 
 //TODO, If needed, send down props to used components
 export default function TeacherDashboardOverview(): ReactElement{
  
-
+  const { userCourses, upcomingActivities } = useLoaderData();
 
   return (
     <section>
@@ -41,7 +42,7 @@ export default function TeacherDashboardOverview(): ReactElement{
           </h3>
 
           <div className="upcoming-activities-content">
-              <span>Activity components goes here</span>
+              <UpcomingActivities activities={upcomingActivities} count={5}/>
           </div>
         </div>
       </section>
