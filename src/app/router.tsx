@@ -33,7 +33,6 @@ export const router = createBrowserRouter(
           element={<Navigate to="/dashboard" replace />}
         />
         <Route
-          index
           element={<RoleSwitch />}
           path="dashboard"
           loader={DashboardDifferedLoader}

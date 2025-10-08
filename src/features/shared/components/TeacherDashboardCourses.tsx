@@ -7,11 +7,11 @@ import UpdateForm from './UpdateForm';
 import { updateCourse } from '../../auth/api/course';
 import { CustomError } from '../../shared/classes';
 import type { CourseDraft } from './CourseCreatePage';
-import { ICourse } from "../types/types";
+import { ICourse, ICourseWithCounts } from "../types/types";
 
 type Draft = CourseDraft
 type Props = {
-  courses: ICourse[];
+  courses: ICourseWithCounts[];
   onChange: (t: Tab) => void;
 };
 //TODO, receive course array as prop from parent instead
@@ -21,14 +21,14 @@ export default function TeacherDashboardCourses({
   courses,
   onChange,
 }: Props): ReactElement {
-  const [courseArr, setCourseArr] = useState<ICourse[] | null>(courses);
+  const [courseArr, setCourseArr] = useState<ICourseWithCounts[] | null>(courses);
   const [searchQuery, setSearchQuery] = useState("");
   const [editing, setEditing] = useState<ICourse | null>(null);
   const [draft, setDraft] = useState<Draft | null>(null);
   const [saving, setSaving] = useState(false);
   const [modalMsg, setModalMsg] = useState<string | null>(null);
 
-  console.log(courses,courseArr)
+  console.log(courseArr)
 
   function openEdit(course: ICourse) {
     setEditing(course);
@@ -61,11 +61,10 @@ export default function TeacherDashboardCourses({
             <td className="text-gray">
               {course.startDate.toLocaleDateString()} - {" "}
               {course.endDate.toLocaleDateString()}
+
             </td>
-            {/* Activate when modules and students get added. */}
-            {/* <td>{course.students.length}</td> */}
-            {/* <td>{course.modules.length}</td> */}
-            {/*TODO, make sure we have the correct routes*/}
+            <td>{course.studentCount}</td>
+            <td>{course.moduleCount}</td>
             <td className="table-links">
               <Link to={`/teacher/course/${course.id}`}>Visa</Link>{" "}
               <button className="edit-course-button" onClick={() => openEdit(course)}>Redigera</button>

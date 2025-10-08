@@ -89,6 +89,16 @@ export interface ICourse {
   endDate: Date;
 }
 
+export interface ICourseWithCounts {
+  id: string;
+  name: string;
+  description?: string;
+  moduleCount: number;
+  studentCount: number;
+  startDate: Date;
+  endDate: Date;
+}
+
 /**
  * Represents a course with basic details and related modules.
  */
