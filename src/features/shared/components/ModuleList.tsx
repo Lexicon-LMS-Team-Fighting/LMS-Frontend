@@ -1,12 +1,12 @@
 import { ProgressBar } from "./ProgressBar";
-import { IModule } from "../types/types";
+import { IModuleFull } from "../types/types";
 import { TitleDate } from "./TitleDate";
 import { useModuleList } from "../hooks/useModuleList";
 import { ActivitiesForModule } from "./ActivitiesForModule";
 import { useIsTeacher } from "../hooks/useIsTeacher";
 
 interface IModuleListProps {
-  modules: IModule[];
+  modules: IModuleFull[];
   progress: Record<string, { completed: number; total: number }>;
   onProgressChange: (
     moduleId: string,
@@ -78,9 +78,11 @@ export const ModuleList: React.FC<IModuleListProps> = ({
                 </div>
               </button>
 
-              {/* Since we need to fetch the activity.status for the progress bar to render properly when loading this component, we need to put this outside with a isOpen hook to track it */}
+              {/* Since we need to fetch the activity.status for the progress bar to render properly 
+              when loading this component, we need to put this outside with a isOpen hook to track it */}
               <ActivitiesForModule
-                moduleId={mod.id}
+                //moduleId={mod.id}
+                module={mod}
                 isOpen={isOpen}
                 moduleDescription={mod.description}
                 onProgressChange={onProgressChange}

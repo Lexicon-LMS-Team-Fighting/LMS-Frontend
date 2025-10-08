@@ -33,6 +33,7 @@ export interface IModule {
   description?: string;
   startDate: Date;
   endDate?: Date;
+  progress?: number;
 }
 
 /**
@@ -51,13 +52,20 @@ export interface IModuleFull extends IModule {
 export interface IActivity {
   id: string;
   moduleId: string;
-  activityType: string;
+  activityTypeId: string;
   description?: string;
+  activityTypeName: string;
   name: string;
-  startDate: string;
-  endDate?: string;
-  status?: "Genomförd" | "Försenad" | "Godkänd";
-  feedback?: string;
+  startDate: Date;
+  endDate?: Date;
+  feedbacks: IFeedbacks;
+}
+
+export interface IFeedbacks {
+  userId: string;
+  feedback: string;
+  lmsActivityId: string;
+  status: "Genomförd" | "Försenad" | "Godkänd";
 }
 
 /**
@@ -103,7 +111,7 @@ export interface ICourseWithCounts {
  * Represents a course with basic details and related modules.
  */
 export interface ICourseWithModules extends ICourse {
-  modules?: IModule[];
+  modules?: IModuleFull[];
 }
 
 /**
@@ -161,7 +169,7 @@ export interface IModulePreview {
   name: string;
   startDate: Date;
   endDate: Date;
-  progress: number; 
+  progress: number;
 }
 
 export interface ICoursePreview {
@@ -169,7 +177,7 @@ export interface ICoursePreview {
   name: string;
   startDate: Date;
   endDate: Date;
-  progress: number; 
+  progress: number;
 }
 
 export interface IPaginatedResponseMetadata {

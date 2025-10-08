@@ -31,6 +31,7 @@ export const MyCourse = () => {
   );
 
   function renderCourse(course: ICourseWithModules) {
+    console.log(course);
     return (
       <main className="course-page">
         <h1 className="course-title">{course.name}</h1>
