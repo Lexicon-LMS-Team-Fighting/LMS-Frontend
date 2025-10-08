@@ -1,0 +1,65 @@
+.teacher-courses-page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.course-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.course-item {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  background-color: rgb(249, 250, 251);
+  width: 100%;
+  padding: 1rem;
+}
+
+  .course-item .modules-container {
+    width: 100%;
+  }
+
+.course-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+section.course-progress {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  background-color: white;
+  border-radius: var(--standard-radius);
+  padding: 1.5rem;
+  width: 100%;
+}
+
+h2.course-progress-title {
+  font-size: 18px;
+}
+
+@media screen and (max-width: 768px) {
+  main.course-page {
+    padding: 0.5rem;
+  }
+
+  h1.course-title {
+    font-size: 20px;
+  }
+
+  p.course-description {
+    font-size: 14px;
+  }
+
+  h2.course-progress-title {
+    font-size: 16px;
+  }
+}

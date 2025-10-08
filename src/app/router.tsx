@@ -12,7 +12,11 @@ import RoleSwitch from "../pages/RoleSwitch";
 import { MyCourse } from "../pages/course/MyCourse";
 import { MyCourseDifferedLoader } from "../features/auth/loaders/myCourseLoader";
 import { RouterError } from "../features/shared/components/RouterError";
+import { TeacherCourses } from "../pages/teacherCourses";
+import { TeacherCoursesDifferedLoader } from "../features/auth/loaders/coursesLoader";
 import { CourseParticipants } from "../pages/courseparticipant";
+import Users from "../pages/Users";
+import { usersDeferredLoader } from "../features/auth/loaders/UsersLoader";
 import { participantsLoader } from "../features/auth/loaders/participantsLoader";
 import CourseOverview from "../pages/CourseOverview";
 import { courseByIdLoader } from "../features/auth/loaders/courseByIdLoader";
@@ -30,6 +34,12 @@ export const router = createBrowserRouter(
           loader={DashboardDifferedLoader}
           errorElement={<RouterError />}
         />
+                <Route
+          element={<Users />}
+          path="users"
+          loader={usersDeferredLoader}
+          errorElement={<RouterError />}
+        />
         {/* TODO: remove this in a production enviroment TestArea */}
         <Route element={<TestArea />} path="/testarea" />
         {/* TODO: Edit this when everything else is properly implemented (Login, Header, Side Menu etc.) */}
@@ -39,10 +49,15 @@ export const router = createBrowserRouter(
           loader={MyCourseDifferedLoader}
           errorElement={<RouterError />}
         />
-
+        <Route
+          element={<TeacherCourses />}
+          path="/teacher-courses"
+          loader={TeacherCoursesDifferedLoader}
+          errorElement={<RouterError />}
+        />
         <Route
           element={<CourseParticipants />}
-          path="participants"
+          path="/participants"
           loader={participantsLoader}
           errorElement={<RouterError />}
         />
@@ -57,7 +72,7 @@ export const router = createBrowserRouter(
 
 
       </Route>
-
+      
     </>
   )
 );

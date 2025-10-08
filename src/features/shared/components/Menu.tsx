@@ -36,15 +36,18 @@ export default function Menu(): ReactElement{
 
             Dashboard</Link>
 
-
-
+            {isTeacher ? (
+             <Link to="/teacher-courses" className={`menu-item ${isTabActive("/teacher-courses", true) ? "active" : ""}`}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="menu-icon" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+              Mina kurser</Link>
+            ) : (
              <Link to="/courses" className={`menu-item ${isTabActive("/courses", true) ? "active" : ""}`}>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="menu-icon" aria-hidden="true" data-id="element-248"><path d="M12 7v14"></path><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z">
                 </path></svg>
-               {isTeacher ? "Kurser" : "Min kurs"} </Link>
+               Min kurs</Link>
+            )}
 
-
-             <Link to="/assignments" className={`menu-item ${isTabActive("/assignments", true) ? "active" : ""}`}>
+            <Link to="/assignments" className={`menu-item ${isTabActive("/assignments", true) ? "active" : ""}`}>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="menu-icon" aria-hidden="true" data-id="element-34"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8">
                 </path><path d="M16 17H8">
                 </path></svg>
