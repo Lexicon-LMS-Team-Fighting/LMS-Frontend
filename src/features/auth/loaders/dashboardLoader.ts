@@ -24,45 +24,39 @@ async function fetchAllCoursesAllPages(): Promise<ICourse[]> {
 }
 
 export async function DashboardDifferedLoader(): Promise<IDashboardDifferedLoader> {
-  const isTeacher = getCurrentUserRole()?.includes("Teacher") ?? false;
-
-
-  const modulesP: Promise<IModule[]> = fetchAllModules().then(list =>
-    list.map<IModule>(m => ({
+  const modulesP: Promise<IModule[]> = fetchAllModules().then((list) =>
+    list.map<IModule>((m) => ({
       ...m,
       startDate: new Date(m.startDate),
-      endDate: m.endDate ? new Date(m.endDate) : new Date(""), 
+      endDate: m.endDate ? new Date(m.endDate) : new Date(""),
     }))
   );
 
-  
-  const coursesP: Promise<ICourse[]> = fetchAllCoursesAllPages().then(list =>
-    list.map<ICourse>(c => ({
+  const coursesP: Promise<ICourse[]> = fetchAllCoursesAllPages().then((list) =>
+    list.map<ICourse>((c) => ({
       ...c,
       startDate: new Date(c.startDate),
-      endDate: c.endDate ? new Date(c.endDate) : new Date(""), 
+      endDate: c.endDate ? new Date(c.endDate) : new Date(""),
     }))
   );
 
-
-  const upcomingActivities: IUpcomingActivity[] | null =
-    isTeacher ? await fetchUpcomingActivities() : null;
+  const upcomingActivities: IUpcomingActivity[] = await fetchUpcomingActivities();
 
   const userCourses: Promise<ICourseWithCounts[] | null> = Promise.all([modulesP, coursesP]).then(
     ([mods, courses]) => {
       if (!courses?.length) return null;
 
       const modCounts = mods.reduce<Record<string, number>>((acc, m: any) => {
-        const cid = m.courseId as string | undefined; 
+        const cid = m.courseId as string | undefined;
         if (!cid) return acc;
         acc[cid] = (acc[cid] ?? 0) + 1;
         return acc;
       }, {});
 
-      return courses.map<ICourseWithCounts>(c => ({
+      return courses.map<ICourseWithCounts>((c) => ({
         ...c,
         moduleCount: modCounts[c.id] ?? 0,
-        studentCount: 0, 
+        studentCount: 0,
       }));
     }
   );

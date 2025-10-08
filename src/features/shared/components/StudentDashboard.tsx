@@ -1,11 +1,11 @@
 import { ReactElement } from "react";
 import "../css/StudentDashboard.css";
+import { UpcomingActivities } from "./UpcomingActivities";
+import { useLoaderData } from "react-router";
 
 //TODO, take fetch data when implemented and send it down to the different components
 const getWeek = (date = new Date()): { week: number; year: number } => {
-  const dateObj = new Date(
-    Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
-  );
+  const dateObj = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
   const day = dateObj.getUTCDay() || 7;
   dateObj.setUTCDate(dateObj.getUTCDate() + 4 - day);
   const isoYear = dateObj.getUTCFullYear();
@@ -16,13 +16,15 @@ const getWeek = (date = new Date()): { week: number; year: number } => {
 
 export default function StudentDashboard(): ReactElement {
   const { week } = getWeek();
+  const { upcomingActivities } = useLoaderData();
 
   return (
     <main className="main-wrapper">
       <h1 className="fs-3 mb-4">Välkommen tillbaka!</h1>
-
-      <section className="row-space-between mb-3">
-        <h2 className="fs-5">Veckans Aktiviteter</h2>
+      <h2 className="fs-5">Kommande aktiviteter</h2>
+      <UpcomingActivities activities={upcomingActivities} count={5} />
+      <section className="row-space-between mb-3 mt-4">
+        <h2 className="fs-5 ">Veckans Aktiviteter</h2>
         <div className="week-banner">
           <img id="calender-icon" src="calender-icon.svg" alt="Calender" />
           <span>Vecka {week}</span>
