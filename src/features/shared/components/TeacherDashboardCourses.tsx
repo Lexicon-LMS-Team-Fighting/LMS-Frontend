@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, useState, useEffect } from "react";
 import { Link } from "react-router";
 import "../css/TeacherDashboardCourses.css";
 import { Tab } from "./DashboardNavBar";
@@ -21,14 +21,14 @@ export default function TeacherDashboardCourses({
   courses,
   onChange,
 }: Props): ReactElement {
-  const [courseArr, setCourseArr] = useState<ICourseWithCounts[] | null>(courses);
+  const [courseArr, setCourseArr] = useState<ICourseWithCounts[] | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [editing, setEditing] = useState<ICourse | null>(null);
   const [draft, setDraft] = useState<Draft | null>(null);
   const [saving, setSaving] = useState(false);
   const [modalMsg, setModalMsg] = useState<string | null>(null);
 
-  console.log(courseArr)
+
 
   function openEdit(course: ICourse) {
     setEditing(course);
@@ -40,22 +40,25 @@ export default function TeacherDashboardCourses({
     });
     setModalMsg(null);
   }
-  courses = courses.filter((c) => {
-    const query = searchQuery.trim().toLowerCase();
 
-    if (!query) return true;
-
+  const filteredArr = (courseArr ?? []).filter((c) => {
+    const q = searchQuery.trim().toLowerCase();
+    if (!q) return true;
     return (
-      c.name.toLowerCase().includes(query) ||
-      c.startDate.toISOString().toLowerCase().includes(query) ||
-      c.endDate.toISOString().toLowerCase().includes(query)
+      c.name.toLowerCase().includes(q) ||
+      new Date(c.startDate).toISOString().toLowerCase().includes(q) ||
+      new Date(c.endDate).toISOString().toLowerCase().includes(q)
     );
   });
+
+    useEffect(() => {
+    setCourseArr(courses)
+  },[courses])
 
   function renderCourse() {
     return (
       <tbody>
-        {courseArr?.map((course, i) => (
+        {filteredArr?.map((course, i) => (
           <tr key={`${course.name}-${i}`} className="table-row-white">
             <td className="bold">{course.name}</td>
             <td className="text-gray">
