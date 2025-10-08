@@ -13,16 +13,20 @@ export function HeaderNav(): ReactElement {
 
   const handleOnLogout = () => {
     logout();
-    console.log('clicked');
     navigate('/login');
   };
+
+  const handleOnClick = () => {
+    navigate('/');
+  }
 
   return (
     <>
   {/* <!-- NAV --> */}
-      <nav className="navbar navbar-expand-lg bg-white shadow-sm px-4 d-flex justify-content-between align-items-center">
+      <nav className="navbar-container navbar navbar-expand-lg bg-white shadow-sm px-4 d-flex justify-content-between align-items-center">
         <div className="d-flex align-items-center">
-          <button className="book-logo btn btn-link text-secondary me-3 p-0 d-flex justify-content-center align-items-center">
+          <button className="book-logo btn btn-link text-secondary me-3 p-0 d-flex justify-content-center align-items-center"
+            onClick={handleOnClick} aria-label="Home">
             {/* <!-- menu icon --> */}
             <span className="material-symbols-outlined">
               menu_book
@@ -32,16 +36,10 @@ export function HeaderNav(): ReactElement {
         </div>
 
         <div className="d-flex align-items-center justify-content-center gap-3">
-          <button className="btn btn-link text-secondary p-0 d-flex">
-            {/* <!-- bell icon --> */}
-            <span className="material-symbols-outlined">
-              notifications
-            </span>
-          </button>
-
           {/* <!-- User dropdown --> If it will be a dropdown*/}
           <div className="dropdown">
-            <button className="btn d-flex align-items-center text-secondary" data-bs-toggle="dropdown">
+            <button className="btn d-flex align-items-center text-secondary" data-bs-toggle="dropdown"
+              onClick={handleOnClick} aria-label="Home">
               <div className="rounded-circle bg-light d-flex align-items-center justify-content-center">
                 <span className="material-symbols-outlined">
                   account_circle

@@ -54,8 +54,8 @@ export default function AddNewCourseForm({
                       id="startDate"
                       type="date"
                       className="form-control date-input"
-                      value={value.startDate}
-                      onChange={(e) => set({ startDate: e.target.value })}
+                      value={value.startDate.toLocaleDateString()}
+                      onChange={(e) => set({ startDate: new Date(e.target.value) })}
                     />
                   </div>
 
@@ -65,8 +65,8 @@ export default function AddNewCourseForm({
                       id="endDate"
                       type="date"
                       className="form-control date-input"
-                      value={value.endDate}
-                      onChange={(e) => set({ endDate: e.target.value })}
+                      value={value.endDate.toLocaleDateString()}
+                      onChange={(e) => set({ endDate: new Date(e.target.value) })}
                     />
                   </div>
                   </div>

@@ -33,3 +33,21 @@ section.course-progress {
 h2.course-progress-title {
   font-size: 18px;
 }
+
+@media screen and (max-width: 768px) {
+  main.course-page {
+    padding: 0.5rem;
+  }
+
+  h1.course-title {
+    font-size: 20px;
+  }
+
+  p.course-description {
+    font-size: 14px;
+  }
+
+  h2.course-progress-title {
+    font-size: 16px;
+  }
+}
