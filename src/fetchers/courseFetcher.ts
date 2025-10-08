@@ -3,12 +3,11 @@ import {
   ICourse,
   ICourseWithModules,
   IModuleFull,
-  PagedResponse,
 } from "../features/shared/types/types";
 import { fetchWithToken } from "../features/shared/utilities";
 import { fetchActivityByModuleId } from "./activityFetcher";
 import { catchFetchErrors } from "./fetchErrorsCatcher";
-import { fetchFullModuleById, fetchModulesByCourseId } from "./moduleFetcher";
+import { fetchModulesByCourseId } from "./moduleFetcher";
 import { PagedResponse } from "../features/shared/types/types";
 
 /**
