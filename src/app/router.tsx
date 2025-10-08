@@ -1,6 +1,7 @@
 import {
   createBrowserRouter,
   createRoutesFromElements,
+  Navigate,
   Route,
 } from "react-router";
 import { App } from ".";
@@ -28,12 +29,17 @@ export const router = createBrowserRouter(
       <Route element={<Login />} path="/login" />
       <Route element={<App />} loader={requireAuthLoader} path="/">
         <Route
+          index
+          element={<Navigate to="/dashboard" replace />}
+        />
+        <Route
+          index
           element={<RoleSwitch />}
           path="dashboard"
           loader={DashboardDifferedLoader}
           errorElement={<RouterError />}
         />
-                <Route
+        <Route
           element={<Users />}
           path="users"
           loader={usersDeferredLoader}
