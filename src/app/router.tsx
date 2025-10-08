@@ -1,6 +1,7 @@
 import {
   createBrowserRouter,
   createRoutesFromElements,
+  Navigate,
   Route,
 } from "react-router";
 import { App } from ".";
@@ -20,6 +21,7 @@ import { usersDeferredLoader } from "../features/auth/loaders/UsersLoader";
 import { participantsLoader } from "../features/auth/loaders/participantsLoader";
 import CourseOverview from "../pages/CourseOverview";
 import { courseByIdLoader } from "../features/auth/loaders/courseByIdLoader";
+import { UpcomingActivities } from "../features/shared/components/UpcomingActivities";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,12 +31,16 @@ export const router = createBrowserRouter(
       <Route element={<Login />} path="/login" />
       <Route element={<App />} loader={requireAuthLoader} path="/">
         <Route
+          index
+          element={<Navigate to="/dashboard" replace />}
+        />
+        <Route
           element={<RoleSwitch />}
           path="dashboard"
           loader={DashboardDifferedLoader}
           errorElement={<RouterError />}
         />
-                <Route
+        <Route
           element={<Users />}
           path="users"
           loader={usersDeferredLoader}
