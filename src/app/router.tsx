@@ -19,6 +19,8 @@ import { CourseParticipants } from "../pages/courseparticipant";
 import Users from "../pages/Users";
 import { usersDeferredLoader } from "../features/auth/loaders/UsersLoader";
 import { participantsLoader } from "../features/auth/loaders/participantsLoader";
+import CourseOverview from "../pages/CourseOverview";
+import { courseByIdLoader } from "../features/auth/loaders/courseByIdLoader";
 import { UpcomingActivities } from "../features/shared/components/UpcomingActivities";
 
 export const router = createBrowserRouter(
@@ -65,6 +67,16 @@ export const router = createBrowserRouter(
           loader={participantsLoader}
           errorElement={<RouterError />}
         />
+
+        
+      <Route
+          element={<CourseOverview />}
+          path="teacher/course/:id"
+          loader={courseByIdLoader}
+          errorElement={<RouterError />}
+        />
+
+
       </Route>
       
     </>

@@ -145,7 +145,7 @@ const isValid =
         <table className="courses-table">
           <thead>
             <tr className="table-header">
-              <th>KURSNAMN</th>
+              <th>MODULNAMN</th>
               <th>PERIOD</th>
             </tr>
           </thead>

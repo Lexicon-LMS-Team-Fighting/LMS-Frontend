@@ -3,7 +3,7 @@
 interface ITitleDateProps {
   title?: string;
   startDate: Date;
-  endDate?: Date;
+  endDate: Date;
   activityType?: string;
 }
 
