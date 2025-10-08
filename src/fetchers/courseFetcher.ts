@@ -3,6 +3,7 @@ import { ICourse, ICourseWithModules } from "../features/shared/types/types";
 import { fetchWithToken } from "../features/shared/utilities";
 import { catchFetchErrors } from "./fetchErrorsCatcher";
 import { fetchFullModuleById } from "./moduleFetcher";
+import { PagedResponse } from "../features/shared/types/types";
 
 /**
  * Fetches a course by its unique identifier.
@@ -26,6 +27,14 @@ export async function fetchCourseById(guid: string): Promise<ICourse> {
   }
 }
 
+export async function fetchAllCourses(page: number): Promise<PagedResponse<ICourse>> {
+  try {
+    return await fetchWithToken<PagedResponse<ICourse>>(`${BASE_URL}/course?Page=${page}&include=modules`);
+  } catch (e) {
+    console.error(e);
+    throw e; 
+  }
+}
 /**
  * Fetches a course along with its related modules (preview version).
  * Converts all date fields (course and modules) into Date objects.
