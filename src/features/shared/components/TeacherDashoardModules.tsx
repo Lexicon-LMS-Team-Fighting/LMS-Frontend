@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, useState,useEffect } from "react";
 import { Link } from "react-router";
 import "../css/TeacherDashboardCourses.css";
 import { Tab } from "./DashboardNavBar";
@@ -21,7 +21,7 @@ export default function TeacherDashboardModules({
   modules,
   onChange,
 }: Props): ReactElement {
-  const [moduleArr, setModuleArr] = useState<IModule[] | null>(modules);
+  const [moduleArr, setModuleArr] = useState<IModule[] | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [editing, setEditing] = useState<IModule | null>(null);
   const [draft, setDraft] = useState<Draft | null>(null);
@@ -39,22 +39,25 @@ export default function TeacherDashboardModules({
     });
     setModalMsg(null);
   }
-  modules = modules.filter((m) => {
-    const query = searchQuery.trim().toLowerCase();
 
-    if (!query) return true;
-
+    const filteredArr = (moduleArr ?? []).filter((m) => {
+    const q = searchQuery.trim().toLowerCase();
+    if (!q) return true;
     return (
-      m.name.toLowerCase().includes(query) ||
-      m.startDate.toISOString().toLowerCase().includes(query) ||
-      m.endDate?.toISOString().toLowerCase().includes(query)
+      m.name.toLowerCase().includes(q) ||
+      new Date(m.startDate).toISOString().toLowerCase().includes(q) ||
+      new Date(m.endDate).toISOString().toLowerCase().includes(q)
     );
   });
+
+     useEffect(() => {
+    setModuleArr(modules)
+  },[modules])
 
   function renderModule() {
     return (
       <tbody>
-        {moduleArr?.map((module, i) => (
+        {filteredArr?.map((module, i) => (
           <tr key={`${module.name}-${i}`} className="table-row-white">
             <td className="bold">{module.name}</td>
             <td className="text-gray">
