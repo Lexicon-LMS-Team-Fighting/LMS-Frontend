@@ -28,6 +28,7 @@ export const ActivitiesForModule: React.FC<IActivitiesForModuleProps> = ({
     module.activities ?? []
   );
 
+  // console.log("moduleDESC", moduleDescription);
   // useEffect(() => {
   //   // The API call should be similar to this when backend gets implemented
   //   // const fetchActivities = async () => {
