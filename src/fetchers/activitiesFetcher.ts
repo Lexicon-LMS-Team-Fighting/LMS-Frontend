@@ -23,7 +23,7 @@ export async function fetchUpcomingActivities(): Promise<IUpcomingActivity[]>
     const response = await fetchWithToken<PagedResponse<IUpcomingActivity[]>>(
       //We need to fetch all activities so we set a high pageSize.
       // This could be improved by implementing a specific date filter in the backend.
-      `${BASE_URL}/lms-activities/?page=1&pageSize=100`
+      `${BASE_URL}/lms-activities/?page=1&pageSize=100000`
     );
 
     //Convert date strings to Date objects so we can sort them.

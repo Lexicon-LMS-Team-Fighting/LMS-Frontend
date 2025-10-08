@@ -29,7 +29,7 @@ export async function fetchCourseById(guid: string): Promise<ICourse> {
 
 export async function fetchAllCourses(page: number): Promise<PagedResponse<ICourse>> {
   try {
-    return await fetchWithToken<PagedResponse<ICourse>>(`${BASE_URL}/course?Page=${page}&include=modules`);
+    return await fetchWithToken<PagedResponse<ICourse>>(`${BASE_URL}/course?Page=${page}`);
   } catch (e) {
     console.error(e);
     throw e; 
