@@ -6,8 +6,9 @@ import {
   PagedResponse,
 } from "../features/shared/types";
 import { fetchWithToken } from "../features/shared/utilities/fetchWithToken";
-import { fetchActivityById } from "./activityFetcher";
+import { fetchActivityByModuleId } from "./activityFetcher";
 import { catchFetchErrors } from "./fetchErrorsCatcher";
+import { fetchUserFromToken } from "./userFetcher";
 
 /**
  * Fetches all modules for a given course by its unique identifier.
@@ -59,21 +60,50 @@ export async function fetchFullModuleById(guid: string): Promise<IModuleFull> {
   if (!guid) throw new Response("module id missing", { status: 400 });
 
   try {
-    const module = await fetchWithToken<IModuleFull>(
-      `${BASE_URL}/modules/${guid}?include=activitiesparticipantsdocuments`
+    const user = await fetchUserFromToken();
+
+    const modules = await fetchWithToken<IModuleFull[]>(
+      `${BASE_URL}/modules?include=progress`
     );
 
-    module.startDate = new Date(module.startDate);
-    module.endDate = new Date(module.endDate ?? "");
+    // console.log(modules);
+    // const module = await fetchWithToken<IModuleFull>(
+    //   `${BASE_URL}/modules/${guid}?include=progress`
+    // );
 
-    const activities: IActivity[] = await Promise.all(
-      module.activities!.map((a) => fetchActivityById(a.id))
+    // const activities = await fetchActivityByModuleId(
+    //   "c0df3f9a-a639-43a5-ad58-294d70e3102d" /*m.id*/
+    // );
+    // console.log("hard", activities);
+
+    const mappedModules = await Promise.all(
+      modules.map(async (m) => {
+        console.log("before", m.id);
+        const activities = await fetchActivityByModuleId(m.id);
+        console.log("soft", activities);
+        return {
+          ...m,
+          startDate: new Date(m.startDate),
+          endDate: new Date(m.endDate ?? ""),
+          activities,
+        };
+      })
     );
+    console.log("haeeloo", mappedModules);
+    // const moduleActivities = await fetchActivityByModuleId(module.id);
+    // console.log(moduleActivities);
+    // `${BASE_URL}/modules/${guid}?include=activitiesparticipantsdocuments`;
 
-    return {
-      ...module,
-      activities,
-    };
+    // const activities: IActivity[] = await Promise.all(
+    //   moduleActivities!.map((a) => fetchActivityByUserId(a.id))
+    // );
+
+    // console.log(activities);
+    return modules;
+    // {
+    //   ...modules,
+    //   // activities,
+    // };
   } catch (e) {
     catchFetchErrors(e, "module", guid);
   }

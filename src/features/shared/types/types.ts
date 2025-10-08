@@ -82,7 +82,7 @@ export interface ICourse {
  * Represents a course with basic details and related modules.
  */
 export interface ICourseWithModules extends ICourse {
-  modules?: IModule[];
+  modules?: IModuleFull[];
 }
 
 /**
@@ -140,7 +140,7 @@ export interface IModulePreview {
   name: string;
   startDate: Date;
   endDate: Date;
-  progress: number; 
+  progress: number;
 }
 
 export interface ICoursePreview {
@@ -148,7 +148,7 @@ export interface ICoursePreview {
   name: string;
   startDate: Date;
   endDate: Date;
-  progress: number; 
+  progress: number;
 }
 
 export interface IPaginatedResponseMetadata {
