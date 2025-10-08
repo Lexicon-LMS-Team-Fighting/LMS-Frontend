@@ -8,8 +8,6 @@ interface IUpcomingProps {
 }
 
 export const UpcomingActivities: React.FC<IUpcomingProps> = ({ activities, count }) => {
-
-
   if (!activities || activities.length === 0) {
     return <p>Inga kommande aktiviteter</p>;
   }
@@ -24,7 +22,9 @@ export const UpcomingActivities: React.FC<IUpcomingProps> = ({ activities, count
           return (
             <li
               key={activity.id}
-              className={`uc-activity-list-item list-group ${activity.description ? "clickable" : ""}`}
+              className={`uc-activity-list-item list-group ${
+                activity.description ? "clickable" : ""
+              }`}
             >
               <div className="uc-activity-list-box">
                 <TitleCourse
@@ -35,7 +35,7 @@ export const UpcomingActivities: React.FC<IUpcomingProps> = ({ activities, count
                 />
 
                 <div className="date-container">
-                  <TitleCourse startDate={activity.startDate.toISOString().split("T")[0]}/>
+                  <TitleCourse startDate={activity.startDate.toISOString().split("T")[0]} />
                 </div>
               </div>
             </li>
