@@ -1,8 +1,14 @@
 import { BASE_URL } from "../features/shared/constants";
-import { ICourse, ICourseWithModules } from "../features/shared/types/types";
+import {
+  ICourse,
+  ICourseWithModules,
+  IModuleFull,
+  PagedResponse,
+} from "../features/shared/types/types";
 import { fetchWithToken } from "../features/shared/utilities";
+import { fetchActivityByModuleId } from "./activityFetcher";
 import { catchFetchErrors } from "./fetchErrorsCatcher";
-import { fetchFullModuleById } from "./moduleFetcher";
+import { fetchFullModuleById, fetchModulesByCourseId } from "./moduleFetcher";
 
 /**
  * Fetches a course by its unique identifier.
@@ -65,11 +71,15 @@ export async function fetchCourseWithModules(
 }
 
 /**
- * Fetches a single course along with its related modules (Full version).
- * Converts all date fields (course and modules) into Date objects.
+ * Fetches a single course along with its related modules and their activities (full version).
  *
- * @param {string} guid - The unique course ID.
- * @returns {Promise<ICourseWithModules>} A promise resolving to the course with its modules.
+ * Each course and module returned will have its `startDate` and `endDate` converted to `Date` objects.
+ * Additionally, each module will include its activities, with activity dates also converted and
+ * each activity including the current user's feedback.
+ *
+ * @param {string} guid - The unique ID of the course to fetch.
+ * @returns {Promise<ICourseWithModules>} A promise resolving to the course with its full modules
+ *   and activities.
  *
  * @throws {Response} 400 - If the course ID is missing.
  * @throws {Response} 401 - If the request is unauthorized.
@@ -84,14 +94,19 @@ export async function fetchCourseWithFullModules(
 
   try {
     const courseDate = await fetchWithToken<ICourseWithModules>(
-      `${BASE_URL}/course/${guid}?include=modules`
+      `${BASE_URL}/course/${guid}?include=progress`
     );
 
     const startDate = new Date(courseDate.startDate);
     const endDate = new Date(courseDate.endDate);
 
-    const fullModules = await Promise.all(
-      courseDate.modules!.map((m) => fetchFullModuleById(m.id))
+    const modules: IModuleFull[] = await fetchModulesByCourseId(guid);
+
+    const fullModules: IModuleFull[] = await Promise.all(
+      modules!.map(async (m) => ({
+        ...m,
+        activities: await fetchActivityByModuleId(m.id),
+      }))
     );
 
     return {

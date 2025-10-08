@@ -58,12 +58,13 @@ export interface IActivity {
   name: string;
   startDate: Date;
   endDate?: Date;
-  feedbacks: IFeedbacks[];
+  feedbacks: IFeedbacks;
 }
 
 export interface IFeedbacks {
   userId: string;
   feedback: string;
+  lmsActivityId: string;
   status: "Genomförd" | "Försenad" | "Godkänd";
 }
 

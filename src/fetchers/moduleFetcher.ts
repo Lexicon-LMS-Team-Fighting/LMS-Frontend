@@ -56,31 +56,21 @@ export async function fetchModulesForCourseById(
  * @throws {Response} 404 - If no modules are found for the given course ID.
  * @throws {Response} 502 - If the request fails for another reason.
  */
-export async function fetchFullModuleById(guid: string): Promise<IModuleFull> {
+export async function fetchFullModuleById(
+  guid: string
+): Promise<IModuleFull[]> {
   if (!guid) throw new Response("module id missing", { status: 400 });
 
   try {
-    const user = await fetchUserFromToken();
-
-    const modules = await fetchWithToken<IModuleFull[]>(
-      `${BASE_URL}/modules?include=progress`
-    );
-
-    // console.log(modules);
-    // const module = await fetchWithToken<IModuleFull>(
-    //   `${BASE_URL}/modules/${guid}?include=progress`
-    // );
-
-    // const activities = await fetchActivityByModuleId(
-    //   "c0df3f9a-a639-43a5-ad58-294d70e3102d" /*m.id*/
-    // );
-    // console.log("hard", activities);
+    const modules = (
+      await fetchWithToken<PagedResponse<IModuleFull[]>>(
+        `${BASE_URL}/modules?include=progress`
+      )
+    ).items;
 
     const mappedModules = await Promise.all(
       modules.map(async (m) => {
-        console.log("before", m.id);
         const activities = await fetchActivityByModuleId(m.id);
-        console.log("soft", activities);
         return {
           ...m,
           startDate: new Date(m.startDate),
@@ -89,24 +79,40 @@ export async function fetchFullModuleById(guid: string): Promise<IModuleFull> {
         };
       })
     );
-    console.log("haeeloo", mappedModules);
-    // const moduleActivities = await fetchActivityByModuleId(module.id);
-    // console.log(moduleActivities);
-    // `${BASE_URL}/modules/${guid}?include=activitiesparticipantsdocuments`;
 
-    // const activities: IActivity[] = await Promise.all(
-    //   moduleActivities!.map((a) => fetchActivityByUserId(a.id))
-    // );
-
-    // console.log(activities);
-    return modules;
-    // {
-    //   ...modules,
-    //   // activities,
-    // };
+    return mappedModules;
   } catch (e) {
     catchFetchErrors(e, "module", guid);
   }
+}
+
+/**
+ * Fetches all modules associated with a specific course.
+ * Converts `startDate` and `endDate` fields of each module into Date objects.
+ *
+ * @param {string} courseId - The unique ID of the course.
+ * @returns {Promise<IModule[]>} A promise resolving to an array of modules with converted date fields.
+ *
+ * @throws {Response} 400 - If the course ID is missing.
+ * @throws {Response} 401 - If the request is unauthorized.
+ * @throws {Response} 403 - If access is forbidden.
+ * @throws {Response} 404 - If no modules are found for the given course ID.
+ * @throws {Response} 502 - If the request fails for another reason.
+ */
+export async function fetchModulesByCourseId(
+  courseId: string
+): Promise<IModuleFull[]> {
+  const modules = (
+    await fetchWithToken<PagedResponse<IModuleFull[]>>(
+      `${BASE_URL}/course/${courseId}/modules?include=progress`
+    )
+  ).items;
+
+  return modules.map((m) => ({
+    ...m,
+    startDate: new Date(m.startDate),
+    endDate: m.endDate ? new Date(m.endDate) : undefined,
+  }));
 }
 
 //TODO, This function only gets the first page of modules. Either fetch all or implement paging in ui

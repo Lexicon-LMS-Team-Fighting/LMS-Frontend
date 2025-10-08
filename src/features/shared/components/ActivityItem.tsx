@@ -24,20 +24,17 @@ export function ActivityItem({ activity }: IActivityItemProps): ReactElement {
   const getShowInfo = isExpanded ? "Click to show less" : "Click to show more";
 
   const getStatusColor =
-    activity.feedbacks[0]?.status === "Försenad"
-      ? "status-red"
-      : "status-green";
+    activity.feedbacks.status === "Försenad" ? "status-red" : "status-green";
 
   function renderFeedback(activity: IActivity): ReactNode {
-    if (!activity.feedbacks[0].feedback) return null;
-
-    return <FeedbackItem feedback={activity.feedbacks[0]} />;
+    if (!activity.feedbacks.feedback) return null;
+    return <FeedbackItem feedback={activity.feedbacks.feedback} />;
   }
 
   function renderIcon(activity: IActivity): ReactNode {
     return (
       <>
-        {activity.feedbacks[0]?.status === "Försenad" ? (
+        {activity.feedbacks?.status === "Försenad" ? (
           <span className="material-symbols-outlined">error</span>
         ) : (
           <span className="material-symbols-outlined">task_alt</span>
@@ -49,10 +46,10 @@ export function ActivityItem({ activity }: IActivityItemProps): ReactElement {
   function renderStatus(activity: IActivity): ReactNode {
     return (
       <>
-        {activity.feedbacks[0]?.status && (
+        {activity.feedbacks?.status && (
           <span className={`status-container ${getStatusColor}`}>
             {renderIcon(activity)}
-            {activity.feedbacks[0]?.status}
+            {activity.feedbacks?.status}
           </span>
         )}
       </>
