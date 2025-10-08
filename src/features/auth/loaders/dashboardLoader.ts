@@ -1,7 +1,9 @@
 import { fetchCourseById } from "../../../fetchers/courseFetcher";
 import { fetchAllModules } from "../../../fetchers/moduleFetcher";
 import { fetchUserFromToken } from "../../../fetchers/userFetcher";
-import { ICourse, IUserExtended, IModule } from "../../shared/types/types";
+import { fetchUpcomingActivities } from "../../../fetchers/activitiesFetcher";
+import { ICourse, IUserExtended, IModule, IUpcomingActivity } from "../../shared/types/types";
+import { getCurrentUserRole } from "../../shared/utilities/jwtDecoder";
 
 /**
  * Represents the shape of the loader result for a user's courses.
@@ -9,6 +11,7 @@ import { ICourse, IUserExtended, IModule } from "../../shared/types/types";
 export interface IDashboardDifferedLoader {
   userCourses: Promise<ICourse[] | null>;
   modules: Promise<IModule[]>
+  upcomingActivities? : IUpcomingActivity[] | null;
 }
 
 
@@ -26,7 +29,7 @@ export interface IDashboardDifferedLoader {
  */
 export async function DashboardDifferedLoader(): Promise<IDashboardDifferedLoader> {
   const user: IUserExtended = await fetchUserFromToken();
-
+  const isTeacher = getCurrentUserRole()?.includes("Teacher");
 
   const modules: Promise<IModule[]> = fetchAllModules().then(list =>
     list.map(m => ({
@@ -37,12 +40,16 @@ export async function DashboardDifferedLoader(): Promise<IDashboardDifferedLoade
   );
 
 
-  if (!user?.courses?.length) {
+  if (!user?.courses?.length && !isTeacher) {
     return {
       userCourses: Promise.resolve(null),
       modules, 
     };
   }
+
+
+  //load activities for teacher dashboard
+  const upcomingActivities: IUpcomingActivity[] = await fetchUpcomingActivities();
 
   const userCourses: Promise<ICourse[]> = Promise.all(
     user.courses.map(async (c) => {
@@ -55,5 +62,7 @@ export async function DashboardDifferedLoader(): Promise<IDashboardDifferedLoade
     })
   );
 
-  return { userCourses, modules };
+
+
+  return { userCourses, modules, upcomingActivities};
 }

@@ -13,6 +13,7 @@ import { AwaitError } from "./AwaitError";
 
 
 export default function TeacherDashboard(): ReactElement {
+  //TODO: const { userCourses, upcomingActivities } = useLoaderData<IDashboardDifferedLoader>();
   const { userCourses, modules } = useLoaderData<IDashboardDifferedLoader>();
   const [tab, setTab] = useState<Tab>("overview"); //setting default tab to "overview"
 

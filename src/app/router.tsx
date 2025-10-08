@@ -18,6 +18,7 @@ import { CourseParticipants } from "../pages/courseparticipant";
 import Users from "../pages/Users";
 import { usersDeferredLoader } from "../features/auth/loaders/UsersLoader";
 import { participantsLoader } from "../features/auth/loaders/participantsLoader";
+import { UpcomingActivities } from "../features/shared/components/UpcomingActivities";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
