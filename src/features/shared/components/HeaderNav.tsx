@@ -13,7 +13,6 @@ export function HeaderNav(): ReactElement {
 
   const handleOnLogout = () => {
     logout();
-    console.log('clicked');
     navigate('/login');
   };
 
