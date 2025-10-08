@@ -14,7 +14,7 @@ async function fetchAllCoursesAllPages(): Promise<ICourse[]> {
   let page = 1;
   const all: ICourse[] = [];
   while (true) {
-    const res: any = await fetchAllCourses(page);         // OBS: se till att fetchern använder '?Page=${page}'
+    const res: any = await fetchAllCourses(page);
     const items: ICourse[] = res?.items ?? [];
     all.push(...items);
     if (!res?.metadata?.hasNextPage) break;
