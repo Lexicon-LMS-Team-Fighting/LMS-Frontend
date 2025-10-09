@@ -23,9 +23,7 @@ import { fetchUserFromToken } from "./userFetcher";
  * @throws {Response} 404 - If no modules are found for the given course ID.
  * @throws {Response} 502 - If the request fails for another reason.
  */
-export async function fetchModulesForCourseById(
-  guid: string
-): Promise<IModule[]> {
+export async function fetchModulesForCourseById(guid: string): Promise<IModule[]> {
   if (!guid) throw new Response("Course id missing", { status: 400 });
 
   try {
@@ -118,7 +116,7 @@ export async function fetchModulesByCourseId(
 //TODO, This function only gets the first page of modules. Either fetch all or implement paging in ui
 export async function fetchAllModules(): Promise<IModule[]> {
   const res = await fetchWithToken<PagedResponse<IModule> | IModule[]>(
-    `${BASE_URL}/modules`,
+    `${BASE_URL}/modules?PageSize=10000`,
     { method: "GET" }
   );
 
