@@ -25,8 +25,10 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   return (
     <div className={`progress-bar-container ${fullSize ? "full-size" : ""}`}>
       <span className="progress-bar-text">
-        {preCalcPercentage ? preCalcPercentage * 100 : percentage}%{" "}
-        <p>avklarat</p>
+        {preCalcPercentage
+          ? (preCalcPercentage * 100).toPrecision(3)
+          : percentage}
+        % <p>avklarat</p>
       </span>
       <div className={`progress-bar`}>
         <div
