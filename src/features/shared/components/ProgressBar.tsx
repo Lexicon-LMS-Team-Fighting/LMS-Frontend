@@ -5,6 +5,7 @@ interface ProgressBarProps {
   completed: number;
   onComplete?: () => void;
   fullSize?: boolean;
+  preCalcPercentage?: number;
 }
 
 export const ProgressBar: React.FC<ProgressBarProps> = ({
@@ -12,6 +13,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   completed,
   onComplete,
   fullSize,
+  preCalcPercentage,
 }) => {
   const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
 
@@ -23,10 +25,20 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   return (
     <div className={`progress-bar-container ${fullSize ? "full-size" : ""}`}>
       <span className="progress-bar-text">
-        {percentage}% <p>avklarat</p>
+        {preCalcPercentage
+          ? (preCalcPercentage * 100).toPrecision(3)
+          : percentage}
+        % <p>avklarat</p>
       </span>
       <div className={`progress-bar`}>
-        <div className={`current-progress`} style={{ width: `${percentage}%` }} />
+        <div
+          className={`current-progress`}
+          style={{
+            width: `${
+              preCalcPercentage ? preCalcPercentage * 100 : percentage
+            }%`,
+          }}
+        />
       </div>
     </div>
   );

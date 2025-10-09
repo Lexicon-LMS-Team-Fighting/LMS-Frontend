@@ -73,17 +73,17 @@ export interface IFeedbacks {
  * Used in the UpcomingActivity.tsx component to display activity details.
  */
 export interface IUpcomingActivity {
-  id : string;
-  name : string;
-  courseName : string;
-  courseId : string;
-  moduleId : string;
-  activityTypeName : string;
-  startDate : Date;
-  endDate? : Date;
-  status? : "Genomförd" | "Försenad" | "Godkänd";
-  feedback? : string;
-  description? : string;
+  id: string;
+  name: string;
+  courseName: string;
+  courseId: string;
+  moduleId: string;
+  activityTypeName: string;
+  startDate: Date;
+  endDate?: Date;
+  status?: "Genomförd" | "Försenad" | "Godkänd";
+  feedback?: string;
+  description?: string;
 }
 
 /**
@@ -95,6 +95,7 @@ export interface ICourse {
   description?: string;
   startDate: Date;
   endDate: Date;
+  progress?: number;
 }
 
 export interface ICourseWithCounts {

@@ -21,7 +21,7 @@ export const ModuleList: React.FC<IModuleListProps> = ({
   onProgressChange,
 }) => {
   const { openModules, toggleModule } = useModuleList();
-  const isTeacher = useIsTeacher()
+  const isTeacher = useIsTeacher();
 
   return (
     <section className="module-list-container">
@@ -60,12 +60,13 @@ export const ModuleList: React.FC<IModuleListProps> = ({
 
                 <div className="progress-arrow-container">
                   {/*If teacher, remove the progress bar for now*/}
-                  {!isTeacher &&
-                  <ProgressBar
-                    total={moduleProgress.total || 1}
-                    completed={moduleProgress.completed}
-                  />
-                  }
+                  {!isTeacher && (
+                    <ProgressBar
+                      total={moduleProgress.total || 1}
+                      completed={moduleProgress.completed}
+                      preCalcPercentage={mod.progress}
+                    />
+                  )}
                   {isOpen ? (
                     <span className="material-symbols-outlined">
                       keyboard_arrow_down
